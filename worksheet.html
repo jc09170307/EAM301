@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EAM301 · Worksheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@500;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+\
+:root {
+  /* Warm "night market / rice paper" palette — light by default */
+  --ink: #FFF8EC;
+  --ink-2: #FFEFD6;
+  --gold: #C9821A;
+  --gold-light: #A66A15;
+  --gold-dim: rgba(201,130,26,0.10);
+  --cinnabar: #D64541;
+  --cinnabar-light: #B23330;
+  --jade: #2F8F72;
+  --jade-light: #1F6E56;
+  --bamboo: #6FA050;
+  --plum: #B85C86;
+  --text: #2E2418;
+  --text-dim: #5B4A36;
+  --muted: #8A7860;
+  --border: rgba(201,130,26,0.28);
+  --card: rgba(201,130,26,0.055);
+  font-synthesis: none;
+}
+body.dark {
+  --ink: #1B1410;
+  --ink-2: #241A14;
+  --gold: #F0B349;
+  --gold-light: #F5C878;
+  --gold-dim: rgba(240,179,73,0.15);
+  --cinnabar: #FF6B5B;
+  --cinnabar-light: #FF9186;
+  --jade: #5FCBA6;
+  --jade-light: #8AD9BC;
+  --bamboo: #9AC97A;
+  --plum: #E893BC;
+  --text: #F5E9D6;
+  --text-dim: #C9B79C;
+  --muted: #9C8A70;
+  --border: rgba(240,179,73,0.24);
+  --card: rgba(255,255,255,0.045);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--ink);
+  background-image:
+    radial-gradient(ellipse 900px 500px at 15% -10%, var(--gold-dim), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 100% 20%, rgba(47,143,114,0.06), transparent 60%);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  line-height: 1.6;
+}
+h1, h2, h3, h4 { font-family: 'ZCOOL XiaoWei', 'Noto Serif SC', serif; font-weight: 700; letter-spacing: 0.005em; margin: 0 0 0.5rem; }
+.brush { font-family: 'Ma Shan Zheng', cursive; }
+.hanzi { font-family: 'Noto Serif SC', serif; font-weight: 700; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+
+.seal {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; flex-shrink: 0;
+  background: var(--cinnabar); color: #fff;
+  font-family: 'Noto Serif SC', serif; font-size: 15px; font-weight: 700;
+  border-radius: 6px; transform: rotate(-4deg);
+  box-shadow: 0 2px 6px rgba(214,69,65,0.35);
+  border: 1.5px solid rgba(255,255,255,0.35);
+}
+
+.brush-divider { width: 100%; height: 14px; opacity: 0.6; margin: 1.2rem 0; }
+.brush-divider path { stroke: var(--gold); stroke-width: 2; fill: none; stroke-linecap: round; }
+
+.bamboo-wrap { display: flex; align-items: center; gap: 2px; margin: 0.6rem 0 1rem; }
+.bamboo-node {
+  flex: 1; height: 22px; background: rgba(111,160,80,0.12);
+  border: 1px solid rgba(111,160,80,0.35); border-radius: 5px;
+  position: relative; overflow: hidden;
+}
+.bamboo-node.filled { background: linear-gradient(180deg, var(--bamboo), var(--jade)); border-color: var(--bamboo); }
+.bamboo-node::after {
+  content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px;
+  background: rgba(0,0,0,0.12);
+}
+
+.taiji-toggle {
+  width: 30px; height: 30px; border-radius: 50%; cursor: pointer; flex-shrink: 0;
+  background: linear-gradient(90deg, #fff 50%, #1a1a1a 50%);
+  border: 2px solid var(--gold); position: relative; overflow: hidden;
+}
+.taiji-toggle::before, .taiji-toggle::after {
+  content: ''; position: absolute; width: 15px; height: 15px; border-radius: 50%; left: 7.5px;
+}
+.taiji-toggle::before { background: #fff; top: -0.5px; }
+.taiji-toggle::after { background: #1a1a1a; bottom: -0.5px; }
+
+.callout { display: flex; gap: 0.75rem; padding: 0.9rem 1rem; border-radius: 12px; margin-bottom: 1rem; border: 1px solid; }
+.callout.sifu { background: var(--gold-dim); border-color: var(--gold); }
+.callout.exam { background: rgba(214,69,65,0.09); border-color: var(--cinnabar); }
+.callout.jade { background: rgba(47,143,114,0.09); border-color: var(--jade); }
+.callout-icon { font-size: 1.3rem; flex-shrink: 0; }
+.callout-body strong { color: var(--gold-light); display: block; margin-bottom: 0.2rem; font-family: 'ZCOOL XiaoWei', serif; font-size: 0.95rem; letter-spacing: 0.01em; }
+.callout.exam .callout-body strong { color: var(--cinnabar-light); }
+.callout.jade .callout-body strong { color: var(--jade-light); }
+.callout-body { font-size: 0.86rem; color: var(--text-dim); }
+
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 1.1rem 1.2rem; margin-bottom: 1rem; }
+.rank-badge {
+  display: inline-block; font-family: 'Noto Serif SC', serif; font-size: 0.72rem;
+  padding: 0.15rem 0.55rem; border-radius: 20px; border: 1px solid var(--gold);
+  color: var(--gold-light); background: var(--gold-dim); letter-spacing: 0.02em;
+}
+
+table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+th { font-family: 'ZCOOL XiaoWei', serif; font-size: 0.75rem; letter-spacing: 0.03em; text-transform: uppercase; padding: 0.6rem 0.7rem; text-align: left; background: var(--gold-dim); color: var(--gold-light); border-bottom: 2px solid var(--gold); }
+td { padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--border); color: var(--text-dim); vertical-align: top; }
+tr:nth-child(even) td { background: rgba(0,0,0,0.015); }
+
+body { background: #fff; color: #2a2418; }
+.controls { position: sticky; top:0; z-index:20; background: var(--ink); padding: 0.8rem 1.2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; }
+.ctrl-btn { background: var(--gold); color:#1a1408; border:none; padding:0.55rem 1.1rem; border-radius:8px; font-weight:700; cursor:pointer; font-family:'Inter',sans-serif; }
+.ctrl-label { color: var(--text-dim); font-size:0.75rem; }
+.ctrl-back { color: var(--gold-light); font-size:0.75rem; text-decoration:none; border:1px solid var(--border); padding:0.35rem 0.7rem; border-radius:20px; }
+.ctrl-back:hover { border-color: var(--gold); }
+
+.page {
+  max-width: 800px; margin: 1.5rem auto; background: #fdfaf1;
+  border: 1px solid #d8cfae; border-radius: 4px; padding: 2cm 2cm 1.4cm;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35); color: #2a2418;
+  overflow-wrap: break-word;
+}
+.hdr { display:flex; justify-content:space-between; align-items:flex-start; border-bottom:2px solid #c9a84c; padding-bottom:0.8rem; margin-bottom:1rem; gap:0.8rem; }
+.hdr-hanzi { font-size: 2rem; color:#b7472a; }
+.hdr-title { font-family:'ZCOOL XiaoWei',serif; font-weight:700; font-size:1.15rem; color:#6b4f1a; }
+.hdr-sub { font-size:0.78rem; color:#5a5142; margin-top:0.15rem; }
+.hdr-meta { text-align:right; font-size:0.72rem; color:#7a715e; white-space:nowrap; }
+h3 { color:#6b4f1a; font-size:0.95rem; margin-top:1.1rem; font-family:'ZCOOL XiaoWei',serif; }
+
+.term-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.7rem 1.2rem; margin-bottom:0.6rem; }
+.term-box { font-size:0.8rem; overflow-wrap:break-word; }
+.term-label { color:#4a4230; margin-bottom:0.25rem; font-weight:600; overflow-wrap:break-word; }
+
+.qa-item { margin-bottom:0.9rem; page-break-inside: avoid; }
+.question { font-size:0.83rem; margin: 0 0 0.35rem; color:#2a2418; overflow-wrap:break-word; }
+.q-num { color:#b7472a; font-weight:700; margin-right:0.3rem; }
+.fill-line { border-bottom:1px solid #a89a70; height:1.4rem; display:block; margin-bottom:0.25rem; }
+
+.match-cols { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; font-size:0.82rem; }
+.match-list { padding-left:1.1rem; overflow-wrap:break-word; }
+.match-list.no-marker { list-style:none; padding-left:0; }
+.match-list li { margin-bottom:0.9rem; }
+.num-l { color:#b7472a; }
+.num-r { color:#4e8d7c; }
+.answers-line { margin-top:1.2rem; font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:#6b4f1a; border-top:1px dashed #c9a84c; padding-top:0.8rem; line-height:1.9; }
+
+.key-page { background: #fbf3df; }
+.key-page .hdr-title { color:#a83a2e; }
+.key-matching { font-size:0.85rem; line-height:2.1; color:#4a4230; }
+.key-term { font-size:0.82rem; color:#4a4230; margin-bottom:0.5rem; overflow-wrap:break-word; }
+.key-term strong { color:#1f6e56; }
+.key-hint { font-size:0.8rem; color:#4a4230; margin-bottom:0.6rem; line-height:1.55; overflow-wrap:break-word; }
+
+.page-footer { margin-top:1.5rem; display:flex; justify-content:space-between; font-size:0.62rem; color:#9a8f6e; border-top:1px solid #d8cfae; padding-top:0.35rem; font-family:'JetBrains Mono',monospace; gap:0.5rem; }
+
+.sloth-banner { display:flex; align-items:center; justify-content:center; gap:1rem; margin: 0.8rem 0 1.2rem; }
+.sloth-icon-md { width:52px; height:52px; color:#a83a2e; flex-shrink:0; }
+.sloth-banner-text { font-size:1.15rem; color:#a83a2e; text-align:center; line-height:1.4; }
+.mn-blank-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap:0.9rem; }
+.mn-blank-item { border:1px solid #e3d9b8; border-radius:8px; padding:0.6rem 0.7rem; page-break-inside: avoid; }
+.mn-blank-word { font-size:0.7rem; color:#8a7860; }
+.mn-blank-line { margin:0.3rem 0; }
+.mn-blank-dates { font-size:0.6rem; color:#a89a70; }
+
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .controls { display:none; }
+  .page { box-shadow:none; border-radius:0; max-width:100%; margin:0; padding:1.6cm 1.9cm; page-break-after: always; }
+  .page:last-child { page-break-after: avoid; }
+  .qa-item, .term-box, .mn-blank-item, .key-term, .key-hint, table, tr, .hdr { page-break-inside: avoid; }
+  h3 { page-break-after: avoid; }
+  @page { size: letter; margin: 0; }
+}
+</style>
+</head>
+<body>
+<div class="controls">
+  <button class="ctrl-btn" onclick="window.print()">🖨️ Print Worksheet</button>
+  <span class="ctrl-label brush" style="font-size:1rem;color:var(--gold-light)">問 EAM301 Active-Recall Worksheet — now with Answer Key</span>
+  <a href="index.html" class="ctrl-back">← Back to Study App</a>
+</div>
+
+<div class="page">
+  <div class="hdr">
+    <div><div class="hdr-hanzi brush">問診</div>
+    <div class="hdr-title">EAM301 · Active-Recall Worksheet</div>
+    <div class="hdr-sub">One page per section · Key terms + short answer, no peeking at notes</div></div>
+    <div class="hdr-meta mono">Name: ________________<br>Date: ________________</div>
+  </div>
+  <p style="font-size:0.85rem;color:#4a4230">How to use this: complete each chapter page from memory <em>before</em> checking the Study App, Study Guide, or Workbook. Retrieval practice — forcing your brain to produce the answer rather than recognize it — is the single best-evidenced way to prepare for Choi's Socratic questioning and for the two high-stakes exams.</p>
+  <p style="font-size:0.8rem;color:#7a715e">Every chapter page below is self-contained — a term-definition warm-up (Part A) plus five short-answer prompts pulled from the Study App's full 22-question set (Part B). A complete <strong>Answer Key</strong> for both parts sits at the very end of this document — matching answers, term definitions, and model-answer starting points for every short-answer prompt.</p>
+  <div class="page-footer"><span>EAM301 Worksheet</span><span>Cover</span></div>
+</div>
+
+
+<div class="page">
+  <div class="hdr">
+    <div><div class="hdr-hanzi brush">序論</div>
+    <div class="hdr-title">Prologue & Appendix</div>
+    <div class="hdr-sub">Week 1 · Active-Recall Worksheet</div></div>
+    <div class="hdr-meta mono">Name: ________________<br>Date: ________________</div>
+  </div>
+  <h3>Part A — Key Terms (define in your own words)</h3>
+  <div class="term-grid">
+    <div class="term-box"><div class="term-label">Unbroken chain</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Naked history</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">CO1–CO4</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Worship or Ignore? (preview)</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Appendix character reference</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Mythos to Logos (preview)</div><span class="fill-line"></span></div>
+  </div>
+  <h3>Part B — Short Answer (own words, 2–3 sentences each)</h3>
+  
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">1.</span> The syllabus calls students "a link in the unbroken chain" of this healing tradition. What responsibility, if any, does that framing place on you as a future practitioner?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">2.</span> Is East Asian Medicine one continuous tradition, or many related but distinct traditions (Chinese, Korean, Japanese, Vietnamese) flattened together under one label?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">3.</span> Consider the phrase "unbroken chain." Historically, transmission of texts was sometimes broken, lost, or nearly lost. Does "unbroken" oversell the continuity of this tradition?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">4.</span> What's the difference between reverence for a tradition and uncritical acceptance of everything claimed about it?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">5.</span> A syllabus is itself a historical document reflecting a program's values — what does EAM301's structure (2 exams = 90% of grade, Socratic method) tell you about what VUIM prioritizes?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+  <div class="page-footer"><span>EAM301 Worksheet</span><span>Prologue & Appendix · Answer key on p. 9+</span></div>
+</div>
+
+<div class="page">
+  <div class="hdr">
+    <div><div class="hdr-hanzi brush">醫學史</div>
+    <div class="hdr-title">Chapter 1 — History of AHM</div>
+    <div class="hdr-sub">Week 2 · Active-Recall Worksheet</div></div>
+    <div class="hdr-meta mono">Name: ________________<br>Date: ________________</div>
+  </div>
+  <h3>Part A — Key Terms (define in your own words)</h3>
+  <div class="term-grid">
+    <div class="term-box"><div class="term-label">Mythos to Logos</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Three Sovereigns & Five Emperors</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Pan Gu</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Huang Di (legendary)</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Bian Que</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Warring States Period</div><span class="fill-line"></span></div>
+  </div>
+  <h3>Part B — Short Answer (own words, 2–3 sentences each)</h3>
+  
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">1.</span> The book's own mnemonic for the dynasty sequence is "Happy Sloths Travel Slowly, Yearning Meditative Quietness" (Han–Sui–Tang–Song–Yuan–Ming–Qing). Why might a memory device like this matter more for a Socratic exam than for a multiple-choice one?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">2.</span> Why does medicine's "mythos to logos" shift often track the same shift in Greek philosophy? Coincidence, parallel development, or something else?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">3.</span> Why might it matter, for later clinical authority, whether the earliest medical knowledge came from direct observation of the body versus philosophical reasoning about cosmic principles?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">4.</span> The book explicitly compares the Sui-Tang dynasties to Korea's Three Kingdoms period, and the Song Dynasty to Korea's Goryeo period. Why teach Chinese and Korean history as parallel timelines rather than two separate stories?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">5.</span> What does the survival of certain legendary accounts, and the loss of others, tell you about which stories a culture chooses to preserve?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+  <div class="page-footer"><span>EAM301 Worksheet</span><span>Chapter 1 · Answer key on p. 9+</span></div>
+</div>
+
+<div class="page">
+  <div class="hdr">
+    <div><div class="hdr-hanzi brush">哲學背景</div>
+    <div class="hdr-title">Chapter 2 — Upon a Time in China: Philosophical Background</div>
+    <div class="hdr-sub">Weeks 3–4 · Active-Recall Worksheet</div></div>
+    <div class="hdr-meta mono">Name: ________________<br>Date: ________________</div>
+  </div>
+  <h3>Part A — Key Terms (define in your own words)</h3>
+  <div class="term-grid">
+    <div class="term-box"><div class="term-label">Yin-Yang</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Five Phases (Wu Xing)</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Sheng cycle</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Ke cycle</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Wu Wei</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Legalism 法家</div><span class="fill-line"></span></div>
+  </div>
+  <h3>Part B — Short Answer (own words, 2–3 sentences each)</h3>
+  
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">1.</span> The book explains Wu Xing with an analogy: dividing a company into five departments, where what matters is each department's function and relationships, not its name. Where does this analogy work well for the Five Phases, and where does it break down?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">2.</span> Compare Daoist, Confucian, and Legalist views of human nature. Which view best supports the idea that the body has a self-regulating natural order medicine should support, not override?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">3.</span> If the sun rising and setting is a common early illustration of yin-yang, what happens to the theory once you consider phenomena without a clear diurnal cycle?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">4.</span> Compare Five Phase "correspondence thinking" to modern systems-biology thinking, where one system affects many others. Where are the real parallels, and where does the comparison break down?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">5.</span> CO2 asks you to compare and contrast Daoist, Confucian, and Legalist contributions. Which of the three gets the least credit in most modern TCM education, and why?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+  <div class="page-footer"><span>EAM301 Worksheet</span><span>Chapter 2 · Answer key on p. 9+</span></div>
+</div>
+
+<div class="page">
+  <div class="hdr">
+    <div><div class="hdr-hanzi brush">基石</div>
+    <div class="hdr-title">Chapter 3 — Cornerstones of AHM</div>
+    <div class="hdr-sub">Weeks 5–6 · Active-Recall Worksheet</div></div>
+    <div class="hdr-meta mono">Name: ________________<br>Date: ________________</div>
+  </div>
+  <h3>Part A — Key Terms (define in your own words)</h3>
+  <div class="term-grid">
+    <div class="term-box"><div class="term-label">Huang Di Nei Jing</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Su Wen</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Ling Shu</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Shang Han Lun</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Six Stages theory</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Shen Nong Ben Cao Jing</div><span class="fill-line"></span></div>
+  </div>
+  <h3>Part B — Short Answer (own words, 2–3 sentences each)</h3>
+  
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">1.</span> Excavated pre-Nei Jing medical texts describe only moxibustion, name meridian lines but no acupoints, and list roughly eleven meridians instead of twelve — with only two or three connected to organs at all. What does this evidence change about the standard story that channel theory arrived fully formed?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">2.</span> Shen Nong Ben Cao Jing organizes 365 medicinals into three grades based on toxicity and long-term use rather than by illness treated. What does this reveal about the compilers' priorities — safety, longevity, or something else?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">3.</span> The Korean Chimgugyeongheombang describes a dry-needling technique in colloquial rather than classical language, and its needle depth roughly matches modern ultrasound measurements of Korean patients. What does agreement between a centuries-old text and modern anatomy suggest about how these techniques were originally developed?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">4.</span> If the "cornerstones" of AHM are herbal classification, pulse diagnosis, disease-stage theory, and channel theory, which cornerstone do you think has changed the most since its origin, and which the least?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">5.</span> If you had to argue that acupuncture theory (Ling Shu) is more foundational to EAM than herbal medicine (Shen Nong Ben Cao), what would be your strongest argument — and the strongest counterargument?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+  <div class="page-footer"><span>EAM301 Worksheet</span><span>Chapter 3 · Answer key on p. 9+</span></div>
+</div>
+
+<div class="page">
+  <div class="hdr">
+    <div><div class="hdr-hanzi brush">今與未來</div>
+    <div class="hdr-title">Chapter 4 — Now and Future</div>
+    <div class="hdr-sub">Week 7 · Active-Recall Worksheet</div></div>
+    <div class="hdr-meta mono">Name: ________________<br>Date: ________________</div>
+  </div>
+  <h3>Part A — Key Terms (define in your own words)</h3>
+  <div class="term-grid">
+    <div class="term-box"><div class="term-label">TCM (modern)</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Worship or Ignore?</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Integrated medicine</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">CO4</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Modernization of AHM</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Acupuncture research</div><span class="fill-line"></span></div>
+  </div>
+  <h3>Part B — Short Answer (own words, 2–3 sentences each)</h3>
+  
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">1.</span> The book names Manfred Porkert, Ted Kaptchuk, and Giovanni Maciocia as the Western scholars whose books first introduced systematic AHM theory to English-speaking audiences. What does relying on a handful of named individuals to translate an entire tradition risk losing or distorting?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">2.</span> Acupuncture research in biomedical journals often explains mechanism through neurophysiology rather than qi and channels. Is this translation a legitimate modern development of the tradition, or a fundamentally different project wearing the same name?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">3.</span> How does the existence of licensing exams, accredited programs, and insurance billing codes change what counts as "legitimate" practice compared to master-apprentice transmission in earlier centuries?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">4.</span> What role should research funding priorities play in shaping which parts of EAM get modern scientific validation and which remain unexamined?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">5.</span> Given how much this tradition has already changed across dynasties and countries, is today's modernization different in kind, not just degree, from earlier historical adaptations?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+  <div class="page-footer"><span>EAM301 Worksheet</span><span>Chapter 4 · Answer key on p. 9+</span></div>
+</div>
+
+<div class="page">
+  <div class="hdr">
+    <div><div class="hdr-hanzi brush">中國以外</div>
+    <div class="hdr-title">Chapter 5 — Besides China</div>
+    <div class="hdr-sub">Week 8 · Active-Recall Worksheet</div></div>
+    <div class="hdr-meta mono">Name: ________________<br>Date: ________________</div>
+  </div>
+  <h3>Part A — Key Terms (define in your own words)</h3>
+  <div class="term-grid">
+    <div class="term-box"><div class="term-label">Dongui Bogam</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Heo Jun</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Sasang Constitutional Medicine</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Lee Je-ma</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Kampo</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Korean Oriental Medicine (KOM)</div><span class="fill-line"></span></div>
+  </div>
+  <h3>Part B — Short Answer (own words, 2–3 sentences each)</h3>
+  
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">1.</span> Is the Dongui Bogam better understood as a Korean synthesis of Chinese medicine, or as the founding document of a genuinely distinct Korean medical tradition? Defend your answer.</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">2.</span> Compare how Korea (Dongui Bogam, Sasang medicine) and Japan (Kampo) each responded to receiving Chinese medical knowledge. What does each country's adaptation reveal about its own cultural and political priorities?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">3.</span> Prof. Choi is a Korean Medicine Doctor (KMD). How might his professional training and background shape which parts of "besides China" history get emphasized most heavily in this course — and in your exams?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">4.</span> What role did the tribute system and diplomatic relationships between China and its neighbors play in controlling access to medical texts and training?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">5.</span> How should modern U.S. practitioners, trained mostly on Chinese-derived TCM curricula, handle clinically relevant Korean or Japanese variations they may never have been formally taught?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+  <div class="page-footer"><span>EAM301 Worksheet</span><span>Chapter 5 · Answer key on p. 9+</span></div>
+</div>
+
+<div class="page">
+  <div class="hdr">
+    <div><div class="hdr-hanzi brush">東與西</div>
+    <div class="hdr-title">Chapter 6 — East and West</div>
+    <div class="hdr-sub">Week 9 · Active-Recall Worksheet</div></div>
+    <div class="hdr-meta mono">Name: ________________<br>Date: ________________</div>
+  </div>
+  <h3>Part A — Key Terms (define in your own words)</h3>
+  <div class="term-grid">
+    <div class="term-box"><div class="term-label">Wen Bing school</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Ye Tian Shi</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Four Levels (Wei/Qi/Ying/Xue)</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Qing Dynasty</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Western anatomy</div><span class="fill-line"></span></div><div class="term-box"><div class="term-label">Zang-Fu theory</div><span class="fill-line"></span></div>
+  </div>
+  <h3>Part B — Short Answer (own words, 2–3 sentences each)</h3>
+  
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">1.</span> The AHM organ "Pi" (脾) is conventionally translated "Spleen," but the book argues it functionally aligns much more closely with the modern pancreas — blood sugar regulation, digestive enzymes — than with the anatomical spleen's actual job. If a patient had a real, anatomical spleen problem, would you treat their Pi? What does your answer reveal about what "Pi" actually refers to?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">2.</span> Western anatomical knowledge began entering China more directly during and after the Qing dynasty. How did dissection-based anatomy challenge or coexist with the functional, channel-based body model of the Nei Jing?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">3.</span> Pettenkofer's survival is now credited to prior partial immunity and stomach acid, not to Miasma theory being correct. Why is it important to distinguish "the experiment's outcome" from "the theory it was supposed to prove"?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">4.</span> The book closes by arguing that "absence of evidence is not evidence of absence," tracing Evidence-Based Medicine's own history through Descartes' clockwork-body metaphor and the Flexner Report. Does this argument excuse AHM from needing modern evidence, or does it just explain why the evidence has been slow to arrive?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+    <div class="qa-item">
+      <p class="question"><span class="q-num mono">5.</span> If you had practiced during the Qing dynasty, trained in both Wen Bing theory and newly-arriving Western anatomy, which approach would you have trusted more for an epidemic fever, and why?</p>
+      <span class="fill-line"></span><span class="fill-line"></span>
+    </div>
+  <div class="page-footer"><span>EAM301 Worksheet</span><span>Chapter 6 · Answer key on p. 9+</span></div>
+</div>
+
+
+<div class="page">
+  <div class="hdr">
+    <div><div class="hdr-hanzi brush">記憶法</div>
+    <div class="hdr-title">The Dynasty Mnemonic — Fill It In From Memory</div>
+    <div class="hdr-sub">The book's own mnemonic (Chapter 1). Don't peek — write the dynasty name from the first letter alone.</div></div>
+    <div class="hdr-meta mono">Name: ________________</div>
+  </div>
+  <div class="sloth-banner">
+    <div class="sloth-icon-md"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="50" cy="60" rx="30" ry="26" fill="currentColor" opacity="0.14"/>
+<path d="M28 70 Q50 90 72 70 Q68 82 50 84 Q32 82 28 70 Z" fill="currentColor" opacity="0.22"/>
+<circle cx="50" cy="42" r="24" fill="currentColor" opacity="0.9"/>
+<circle cx="41" cy="40" r="3" fill="#FFF8EC"/>
+<circle cx="59" cy="40" r="3" fill="#FFF8EC"/>
+<path d="M44 50 Q50 54 56 50" fill="none" stroke="#FFF8EC" stroke-width="2" stroke-linecap="round"/>
+<path d="M30 34 Q22 30 24 20" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+<path d="M70 34 Q78 30 76 20" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+<path d="M33 66 Q50 78 67 66" fill="none" stroke="#FFF8EC" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+<circle cx="50" cy="68" r="5" fill="none" stroke="#FFF8EC" stroke-width="2" opacity="0.7"/>
+</svg></div>
+    <div class="sloth-banner-text brush">Happy Sloths Travel Slowly, Yearning Meditative Quietness</div>
+  </div>
+  <div class="mn-blank-grid">
+    <div class="mn-blank-item">
+      <div class="mn-blank-word">H______</div>
+      <div class="mn-blank-line"><span class="fill-line" style="width:100%"></span></div>
+      <div class="mn-blank-dates mono">202 BC – 220 AD</div>
+    </div>
+    <div class="mn-blank-item">
+      <div class="mn-blank-word">S______</div>
+      <div class="mn-blank-line"><span class="fill-line" style="width:100%"></span></div>
+      <div class="mn-blank-dates mono">581 – 618 AD</div>
+    </div>
+    <div class="mn-blank-item">
+      <div class="mn-blank-word">T______</div>
+      <div class="mn-blank-line"><span class="fill-line" style="width:100%"></span></div>
+      <div class="mn-blank-dates mono">618 – 907 AD</div>
+    </div>
+    <div class="mn-blank-item">
+      <div class="mn-blank-word">S______</div>
+      <div class="mn-blank-line"><span class="fill-line" style="width:100%"></span></div>
+      <div class="mn-blank-dates mono">960 – 1279 AD</div>
+    </div>
+    <div class="mn-blank-item">
+      <div class="mn-blank-word">Y______</div>
+      <div class="mn-blank-line"><span class="fill-line" style="width:100%"></span></div>
+      <div class="mn-blank-dates mono">1271 – 1368 AD</div>
+    </div>
+    <div class="mn-blank-item">
+      <div class="mn-blank-word">M______</div>
+      <div class="mn-blank-line"><span class="fill-line" style="width:100%"></span></div>
+      <div class="mn-blank-dates mono">1368 – 1644 AD</div>
+    </div>
+    <div class="mn-blank-item">
+      <div class="mn-blank-word">Q______</div>
+      <div class="mn-blank-line"><span class="fill-line" style="width:100%"></span></div>
+      <div class="mn-blank-dates mono">1644 – 1912 AD</div>
+    </div></div>
+  <p style="font-size:0.78rem;color:#7a715e;margin-top:1rem">Once you can write all seven dynasty names and rough date ranges from the mnemonic alone, cover this page and say the whole sequence out loud — that's the version Choi can actually call on you for.</p>
+  <div class="page-footer"><span>EAM301 Worksheet</span><span>Dynasty Mnemonic</span></div>
+</div>
+
+
+<div class="page">
+  <div class="hdr">
+    <div><div class="hdr-title">Matching — Texts to Figures &amp; Contributions</div>
+    <div class="hdr-sub">Write the correct letter next to each number</div></div>
+    <div class="hdr-meta mono">Name: ________________</div>
+  </div>
+  <div class="match-cols">
+    <ol class="match-list"><li><span class="mono num-l">1.</span> Huang Di Nei Jing 黄帝内经</li><li><span class="mono num-l">2.</span> Shen Nong Ben Cao 神农本草经</li><li><span class="mono num-l">3.</span> Shang Han Lun 伤寒论</li><li><span class="mono num-l">4.</span> Mai Jing 脉经</li><li><span class="mono num-l">5.</span> Bei Ji Qian Jin 备急千金要方</li><li><span class="mono num-l">6.</span> Ben Cao Gang Mu 本草纲目</li><li><span class="mono num-l">7.</span> Dongui Bogam 동의보감</li><li><span class="mono num-l">8.</span> Dongui Susebowon 동의수세보원</li></ol>
+    <ol class="match-list no-marker"><li><span class="mono num-r">A.</span> Heo Jun (Korea) — Korean herbal synthesis; accessible medicine; UNESCO heritage</li><li><span class="mono num-r">B.</span> Lee Je-ma (Korea) — Sasang Constitutional Medicine — four constitutional types</li><li><span class="mono num-r">C.</span> Zhang Zhong Jing — Six Stages, clinical protocols — first systematic clinical manual</li><li><span class="mono num-r">D.</span> Sun Si Miao — Medical ethics, gynecology, pediatrics, dietetics</li><li><span class="mono num-r">E.</span> Attrib. Yellow Emperor + Qi Bo — Su Wen (theory) + Ling Shu (acupuncture) — foundational cosmology, organ theory, channels</li><li><span class="mono num-r">F.</span> Wang Shu He — 24 pulse qualities systematized; preserved Zhang Zhong Jing's texts</li><li><span class="mono num-r">G.</span> Attrib. Shen Nong — 365 medicinals, 3-grade classification — foundation of herbal medicine</li><li><span class="mono num-r">H.</span> Li Shi Zhen — 1,892 medicinals; greatest materia medica in Chinese history</li></ol>
+  </div>
+  <div class="answers-line">Answers: 1.___ 2.___ 3.___ 4.___ 5.___ 6.___ 7.___ 8.___</div>
+  <div class="page-footer"><span>EAM301 Worksheet</span><span>Matching · Answer key on next page</span></div>
+</div>
+
+
+<div class="page key-page">
+  <div class="hdr">
+    <div><div class="hdr-title">🔑 Answer Key — Matching</div>
+    <div class="hdr-sub">Correct letter for each numbered text</div></div>
+    <div class="hdr-meta mono">EAM301</div>
+  </div>
+  <p class="key-matching mono">1 → E · 2 → G · 3 → C · 4 → F · 5 → D · 6 → H · 7 → A · 8 → B</p>
+  <div class="page-footer"><span>EAM301 Worksheet — Answer Key</span><span>1 of 8</span></div>
+</div>
+
+<div class="page key-page">
+  <div class="hdr">
+    <div><div class="hdr-hanzi brush">序論</div>
+    <div class="hdr-title">🔑 Answer Key — Prologue & Appendix</div>
+    <div class="hdr-sub">Term definitions + short-answer model starting points</div></div>
+    <div class="hdr-meta mono">EAM301</div>
+  </div>
+  <h3>Part A — Key Terms</h3>
+  <div class="key-term"><strong>Unbroken chain</strong> — The syllabus's framing of students as a continuous link in EAM's clinical lineage.</div><div class="key-term"><strong>Naked history</strong> — Choi's method of stripping legend/attribution away to find the verifiable author, date, and context.</div><div class="key-term"><strong>CO1–CO4</strong> — The four course learning outcomes: context, philosophy comparison, dynasty significance, cultural adaptation.</div><div class="key-term"><strong>Worship or Ignore? (preview)</strong> — The central modern-practitioner dilemma developed fully in Chapter 4.</div><div class="key-term"><strong>Appendix character reference</strong> — The hanzi/pinyin (and later hanja) glossary meant to be used all quarter, not just Week 1.</div><div class="key-term"><strong>Mythos to Logos (preview)</strong> — The shift from legendary to reasoned explanation, developed fully in Chapter 1.</div>
+  <h3>Part B — Short Answer: what a strong answer includes</h3>
+  <p style="font-size:0.76rem;color:#7a715e;margin-top:-0.3rem">These are starting points, not full model answers — these are Socratic discussion questions, so a complete answer should be in your own words and go further than the hint below.</p>
+  <div class="key-hint"><span class="mono num-l">1.</span> Framing you as a "link in the chain" implies accountability for how faithfully and skillfully the tradition is carried forward — not just personal skill-building.</div><div class="key-hint"><span class="mono num-l">2.</span> Naming EAM's journey into the U.S. positions this course, and your own training, as the tradition's next chapter, not a separate offshoot.</div><div class="key-hint"><span class="mono num-l">3.</span> Transmission history includes real gaps and near-losses (e.g., Wang Shu He almost losing the Shang Han Lun) — "unbroken" is aspirational framing, not a literal claim.</div><div class="key-hint"><span class="mono num-l">4.</span> Reverence keeps you humble and curious; uncritical acceptance stops you from asking "why" — which is exactly what a Socratic classroom demands.</div><div class="key-hint"><span class="mono num-l">5.</span> A syllabus putting 90% of the grade on 2 exams and naming the Socratic method tells you VUIM values active, on-the-spot command of material over passive familiarity.</div>
+  <div class="page-footer"><span>EAM301 Worksheet — Answer Key</span><span>2 of 8</span></div>
+</div>
+
+<div class="page key-page">
+  <div class="hdr">
+    <div><div class="hdr-hanzi brush">醫學史</div>
+    <div class="hdr-title">🔑 Answer Key — Chapter 1 — History of AHM</div>
+    <div class="hdr-sub">Term definitions + short-answer model starting points</div></div>
+    <div class="hdr-meta mono">EAM301</div>
+  </div>
+  <h3>Part A — Key Terms</h3>
+  <div class="key-term"><strong>Mythos to Logos</strong> — The historical shift from legend-based to systematic, reasoned medical explanation.</div><div class="key-term"><strong>Three Sovereigns & Five Emperors</strong> — Legendary god-kings credited with founding civilization and medicine; not verified history.</div><div class="key-term"><strong>Pan Gu</strong> — Cosmogonic creation figure whose myth establishes the cosmic order later medical theory assumes.</div><div class="key-term"><strong>Huang Di (legendary)</strong> — The "Yellow Emperor" — a literary/attributional device giving authority to later compiled texts, not a verified person.</div><div class="key-term"><strong>Bian Que</strong> — Semi-legendary physician, possibly a title used by multiple itinerant physicians across generations.</div><div class="key-term"><strong>Warring States Period</strong> — Era of near-constant conflict (with the Spring & Autumn Period) that produced major philosophical and medical innovation.</div>
+  <h3>Part B — Short Answer: what a strong answer includes</h3>
+  <p style="font-size:0.76rem;color:#7a715e;margin-top:-0.3rem">These are starting points, not full model answers — these are Socratic discussion questions, so a complete answer should be in your own words and go further than the hint below.</p>
+  <div class="key-hint"><span class="mono num-l">1.</span> Creation myths establish the cosmic order everything else — including the body — is assumed to follow; medicine's origin story needs a universe to exist in first.</div><div class="key-hint"><span class="mono num-l">2.</span> Constant war destabilizes existing authority structures, which is exactly when new philosophical alternatives, like Daoist balance and withdrawal, gain traction.</div><div class="key-hint"><span class="mono num-l">3.</span> Divination and ritual gave early medicine cultural authority even before it had systematic theory — that authority was real, even if the theory came later.</div><div class="key-hint"><span class="mono num-l">4.</span> You can discard the literal claim while preserving the legend as cultural memory and a shorthand for the tradition's values — most historians do exactly this.</div><div class="key-hint"><span class="mono num-l">5.</span> Emphasize that separating myth from history is itself a modern historical skill worth learning, regardless of whether ancient Chinese medicine happens to be the subject.</div>
+  <div class="page-footer"><span>EAM301 Worksheet — Answer Key</span><span>3 of 8</span></div>
+</div>
+
+<div class="page key-page">
+  <div class="hdr">
+    <div><div class="hdr-hanzi brush">哲學背景</div>
+    <div class="hdr-title">🔑 Answer Key — Chapter 2 — Upon a Time in China: Philosophical Background</div>
+    <div class="hdr-sub">Term definitions + short-answer model starting points</div></div>
+    <div class="hdr-meta mono">EAM301</div>
+  </div>
+  <h3>Part A — Key Terms</h3>
+  <div class="key-term"><strong>Yin-Yang</strong> — Paired, relative, mutually-transforming opposites — never fixed categories.</div><div class="key-term"><strong>Five Phases (Wu Xing)</strong> — Wood, Fire, Earth, Metal, Water — a correspondence system modeling relationships and change.</div><div class="key-term"><strong>Sheng cycle</strong> — The Five Phase generating cycle (e.g., Wood feeds Fire).</div><div class="key-term"><strong>Ke cycle</strong> — The Five Phase controlling/restraining cycle (e.g., Wood parts Earth).</div><div class="key-term"><strong>Wu Wei</strong> — Daoist principle of non-forcing, effortless action aligned with natural order.</div><div class="key-term"><strong>Legalism 法家</strong> — Philosophy of codified law and centralized control; EAM's faintest, most indirect philosophical influence.</div>
+  <h3>Part B — Short Answer: what a strong answer includes</h3>
+  <p style="font-size:0.76rem;color:#7a715e;margin-top:-0.3rem">These are starting points, not full model answers — these are Socratic discussion questions, so a complete answer should be in your own words and go further than the hint below.</p>
+  <div class="key-hint"><span class="mono num-l">1.</span> Treating a patient as permanently "yin type" ignores how presentation shifts with season, time of day, and disease stage — you'd miss the moment treatment needs to change too.</div><div class="key-hint"><span class="mono num-l">2.</span> A cyclical model lets you predict knock-on effects (a weak Kidney affecting the Liver, which affects the Spleen) that a straight-line cause-effect model would miss entirely.</div><div class="key-hint"><span class="mono num-l">3.</span> The sun example works for a simple day/night cycle, but breaks down for anything without a clean periodic rhythm — which describes most of the body most of the time.</div><div class="key-hint"><span class="mono num-l">4.</span> Both frameworks describe how change propagates through interconnected parts, but Five Phase relationships are fixed and symbolic while systems-biology feedback loops are measured and mechanistic.</div><div class="key-hint"><span class="mono num-l">5.</span> Legalism usually gets the least classroom time because its influence on EAM is more indirect (standardization, state medicine) than the more visible Daoist and Confucian threads.</div>
+  <div class="page-footer"><span>EAM301 Worksheet — Answer Key</span><span>4 of 8</span></div>
+</div>
+
+<div class="page key-page">
+  <div class="hdr">
+    <div><div class="hdr-hanzi brush">基石</div>
+    <div class="hdr-title">🔑 Answer Key — Chapter 3 — Cornerstones of AHM</div>
+    <div class="hdr-sub">Term definitions + short-answer model starting points</div></div>
+    <div class="hdr-meta mono">EAM301</div>
+  </div>
+  <h3>Part A — Key Terms</h3>
+  <div class="key-term"><strong>Huang Di Nei Jing</strong> — The foundational classic, compiled over centuries — not a single author or era.</div><div class="key-term"><strong>Su Wen</strong> — "Simple Questions" — the Nei Jing's theory and cosmology half.</div><div class="key-term"><strong>Ling Shu</strong> — "Spiritual Pivot" — the Nei Jing's acupuncture technique and channel half.</div><div class="key-term"><strong>Shang Han Lun</strong> — Zhang Zhong Jing's clinical text on cold-induced disease, written after a devastating epidemic.</div><div class="key-term"><strong>Six Stages theory</strong> — Zhang Zhong Jing's staged framework for how cold-induced disease progresses through the body.</div><div class="key-term"><strong>Shen Nong Ben Cao Jing</strong> — First materia medica; 365 medicinals organized into three toxicity/safety grades.</div>
+  <h3>Part B — Short Answer: what a strong answer includes</h3>
+  <p style="font-size:0.76rem;color:#7a715e;margin-top:-0.3rem">These are starting points, not full model answers — these are Socratic discussion questions, so a complete answer should be in your own words and go further than the hint below.</p>
+  <div class="key-hint"><span class="mono num-l">1.</span> Splitting theory from technique suggests the compilers saw understanding "why" and knowing "how" as two distinct, both-necessary skill sets — not one continuous lesson.</div><div class="key-hint"><span class="mono num-l">2.</span> Surgery requires infrastructure (anesthesia, sterility, recovery care) that herbal medicine and acupuncture don't — without that infrastructure, the technique couldn't scale even if it worked.</div><div class="key-hint"><span class="mono num-l">3.</span> A first-aid manual has to work without a trained reader present to interpret it, so it favors simple, single-symptom instructions over layered diagnostic reasoning.</div><div class="key-hint"><span class="mono num-l">4.</span> Herbal classification (grades, toxicity) has probably changed least over the centuries; channel theory and clinical staging have likely been reinterpreted the most.</div><div class="key-hint"><span class="mono num-l">5.</span> There's no single right answer here — build your case on which text later physicians actually had to master first, then let the counterargument show how little EAM would resemble itself without the other.</div>
+  <div class="page-footer"><span>EAM301 Worksheet — Answer Key</span><span>5 of 8</span></div>
+</div>
+
+<div class="page key-page">
+  <div class="hdr">
+    <div><div class="hdr-hanzi brush">今與未來</div>
+    <div class="hdr-title">🔑 Answer Key — Chapter 4 — Now and Future</div>
+    <div class="hdr-sub">Term definitions + short-answer model starting points</div></div>
+    <div class="hdr-meta mono">EAM301</div>
+  </div>
+  <h3>Part A — Key Terms</h3>
+  <div class="key-term"><strong>TCM (modern)</strong> — The standardized, government-organized curriculum built in the 20th century — not an ancient monolith.</div><div class="key-term"><strong>Worship or Ignore?</strong> — The two failure modes for modern practitioners relating to this tradition's history.</div><div class="key-term"><strong>Integrated medicine</strong> — Clinical settings combining EAM and biomedical approaches, requiring theory to fit biomedical research designs.</div><div class="key-term"><strong>CO4</strong> — Course outcome on the desirability and necessity of cultural adaptation outside Asia.</div><div class="key-term"><strong>Modernization of AHM</strong> — 20th-century institutionalization: licensing, accredited programs, standardized terminology.</div><div class="key-term"><strong>Acupuncture research</strong> — Modern clinical trials attempting to validate/explain EAM techniques in biomedical terms.</div>
+  <h3>Part B — Short Answer: what a strong answer includes</h3>
+  <p style="font-size:0.76rem;color:#7a715e;margin-top:-0.3rem">These are starting points, not full model answers — these are Socratic discussion questions, so a complete answer should be in your own words and go further than the hint below.</p>
+  <div class="key-hint"><span class="mono num-l">1.</span> "Worship" risks refusing anything that updates or challenges the tradition; "Ignore" risks practicing techniques as empty motions stripped of the reasoning that makes them coherent.</div><div class="key-hint"><span class="mono num-l">2.</span> You can honor a patient's framework (results, not belief) while still practicing from your own trained understanding of why the technique works — those aren't mutually exclusive.</div><div class="key-hint"><span class="mono num-l">3.</span> Licensing formalizes a baseline of competence across many practitioners at once, where master-apprentice transmission depended entirely on one teacher's judgment and availability.</div><div class="key-hint"><span class="mono num-l">4.</span> Funding tends to flow toward mechanisms and outcomes that are easiest to measure with existing tools, which quietly shapes what gets called "evidence-based" regardless of what actually works.</div><div class="key-hint"><span class="mono num-l">5.</span> Build your answer around whether earlier adaptations (into Korea, Japan) preserved the internal logic of the medicine, while today's adaptation risks replacing that logic with a different one entirely.</div>
+  <div class="page-footer"><span>EAM301 Worksheet — Answer Key</span><span>6 of 8</span></div>
+</div>
+
+<div class="page key-page">
+  <div class="hdr">
+    <div><div class="hdr-hanzi brush">中國以外</div>
+    <div class="hdr-title">🔑 Answer Key — Chapter 5 — Besides China</div>
+    <div class="hdr-sub">Term definitions + short-answer model starting points</div></div>
+    <div class="hdr-meta mono">EAM301</div>
+  </div>
+  <h3>Part A — Key Terms</h3>
+  <div class="key-term"><strong>Dongui Bogam</strong> — Heo Jun's 1613 synthesis using Korean herbs after the Imjin War; UNESCO Memory of the World, 2009.</div><div class="key-term"><strong>Heo Jun</strong> — Author of the Dongui Bogam; often called "the Zhang Zhong Jing of Korea."</div><div class="key-term"><strong>Sasang Constitutional Medicine</strong> — Lee Je-ma's system of four constitutional types requiring different treatment for the same disease.</div><div class="key-term"><strong>Lee Je-ma</strong> — Author of the Dongui Susebowon (1894); considered a uniquely Korean theoretical contribution.</div><div class="key-term"><strong>Kampo</strong> — Japan's own historical simplification and standardization of Chinese herbal formulas.</div><div class="key-term"><strong>Korean Oriental Medicine (KOM)</strong> — Korea's modern, legally and clinically distinct medical system, institutionalized from 1965 (Kyung Hee University).</div>
+  <h3>Part B — Short Answer: what a strong answer includes</h3>
+  <p style="font-size:0.76rem;color:#7a715e;margin-top:-0.3rem">These are starting points, not full model answers — these are Socratic discussion questions, so a complete answer should be in your own words and go further than the hint below.</p>
+  <div class="key-hint"><span class="mono num-l">1.</span> Look at what changed (ingredients, accessibility, organization) versus what stayed the same (core theory, cosmology) to decide how much genuine independence the text represents.</div><div class="key-hint"><span class="mono num-l">2.</span> Vietnam's tradition is often left out simply because most English-language EAM curricula were built around Chinese and, secondarily, Korean and Japanese sources — not because Đông y is less developed.</div><div class="key-hint"><span class="mono num-l">3.</span> A chapter title admitting "everyone else" comes after China is itself evidence of how the field's historical narrative has traditionally been organized, and whose story gets centered.</div><div class="key-hint"><span class="mono num-l">4.</span> International heritage recognition is as much a diplomatic and cultural-identity statement as a historical one — it signals how a nation wants its medical history seen abroad.</div><div class="key-hint"><span class="mono num-l">5.</span> The honest answer is you'll need to actively seek out that training yourself, since it likely won't appear in a standard TCM-centered curriculum unless a program specifically teaches it.</div>
+  <div class="page-footer"><span>EAM301 Worksheet — Answer Key</span><span>7 of 8</span></div>
+</div>
+
+<div class="page key-page">
+  <div class="hdr">
+    <div><div class="hdr-hanzi brush">東與西</div>
+    <div class="hdr-title">🔑 Answer Key — Chapter 6 — East and West</div>
+    <div class="hdr-sub">Term definitions + short-answer model starting points</div></div>
+    <div class="hdr-meta mono">EAM301</div>
+  </div>
+  <h3>Part A — Key Terms</h3>
+  <div class="key-term"><strong>Wen Bing school</strong> — Ye Tian Shi's Warm Disease school, distinguishing febrile epidemic disease from cold-induced disease.</div><div class="key-term"><strong>Ye Tian Shi</strong> — Qing-dynasty physician who formulated Four Levels theory; studied under 17 teachers.</div><div class="key-term"><strong>Four Levels (Wei/Qi/Ying/Xue)</strong> — Staged model tracking how warm/febrile disease penetrates progressively deeper into the body.</div><div class="key-term"><strong>Qing Dynasty</strong> — The era of Wen Bing school innovation and early sustained contact with Western medicine.</div><div class="key-term"><strong>Western anatomy</strong> — Dissection-based structural body model that challenged Chinese medicine's function-based channel theory.</div><div class="key-term"><strong>Zang-Fu theory</strong> — Chinese organ theory describing function and relationship more than fixed anatomical structure.</div>
+  <h3>Part B — Short Answer: what a strong answer includes</h3>
+  <p style="font-size:0.76rem;color:#7a715e;margin-top:-0.3rem">These are starting points, not full model answers — these are Socratic discussion questions, so a complete answer should be in your own words and go further than the hint below.</p>
+  <div class="key-hint"><span class="mono num-l">1.</span> Both are staged, deepening-penetration models — the real difference is what triggers the progression (cold vs. warm pathogens) and therefore where in the sequence a physician intervenes.</div><div class="key-hint"><span class="mono num-l">2.</span> A tradition's survival can depend more on political will and institutional funding than on its clinical track record — worth remembering before assuming today's boundaries are purely evidence-based.</div><div class="key-hint"><span class="mono num-l">3.</span> Chinese medical theory prioritized function and relationship (how organs affect each other) over fixed structure, so detailed anatomy answered fewer of the questions the theory actually needed answered.</div><div class="key-hint"><span class="mono num-l">4.</span> Argue based on which change proved more durable in actual clinical practice over the following century — internal refinements tend to get absorbed quietly; external challenges tend to force visible, lasting adaptation.</div><div class="key-hint"><span class="mono num-l">5.</span> There's no single correct answer — build your case on which framework better matched the epidemiological pattern actually being observed, then acknowledge what the other approach would have caught that yours might miss.</div>
+  <div class="page-footer"><span>EAM301 Worksheet — Answer Key</span><span>8 of 8</span></div>
+</div>
+
+</body>
+</html>

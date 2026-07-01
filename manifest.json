@@ -1,0 +1,21 @@
+{
+  "name": "EAM301 Scholar's Study App",
+  "short_name": "EAM301",
+  "description": "Interactive Socratic study app for EAM301: History of Eastern Medicine",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#FFF8EC",
+  "theme_color": "#C9821A",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22192%22%20height%3D%22192%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22%23FFF8EC%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2236%22%20fill%3D%22%23FFF8EC%22%20stroke%3D%22%232E2418%22%20stroke-width%3D%222.5%22/%3E%3Cpath%20d%3D%22M50%2C14%20A18%2C18%200%200%2C1%2050%2C50%20A18%2C18%200%200%2C0%2050%2C86%20A36%2C36%200%200%2C1%2050%2C14%20Z%22%20fill%3D%22%232E2418%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2232%22%20r%3D%225.5%22%20fill%3D%22%23FFF8EC%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2268%22%20r%3D%225.5%22%20fill%3D%22%232E2418%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2212.5%22%20fill%3D%22%23D64541%22%20stroke%3D%22%23FFF8EC%22%20stroke-width%3D%221.6%22/%3E%3Cpath%20d%3D%22M41.5%2C42%20Q37%2C38.5%2038%2C33.5%22%20fill%3D%22none%22%20stroke%3D%22%23D64541%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22/%3E%3Cpath%20d%3D%22M58.5%2C42%20Q63%2C38.5%2062%2C33.5%22%20fill%3D%22none%22%20stroke%3D%22%23D64541%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22/%3E%3Ccircle%20cx%3D%2245.5%22%20cy%3D%2248%22%20r%3D%221.8%22%20fill%3D%22%23FFF8EC%22/%3E%3Ccircle%20cx%3D%2254.5%22%20cy%3D%2248%22%20r%3D%221.8%22%20fill%3D%22%23FFF8EC%22/%3E%3Cpath%20d%3D%22M46%2C53.5%20Q50%2C56.5%2054%2C53.5%22%20fill%3D%22none%22%20stroke%3D%22%23FFF8EC%22%20stroke-width%3D%221.7%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22512%22%20height%3D%22512%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2218%22%20fill%3D%22%23FFF8EC%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2236%22%20fill%3D%22%23FFF8EC%22%20stroke%3D%22%232E2418%22%20stroke-width%3D%222.5%22/%3E%3Cpath%20d%3D%22M50%2C14%20A18%2C18%200%200%2C1%2050%2C50%20A18%2C18%200%200%2C0%2050%2C86%20A36%2C36%200%200%2C1%2050%2C14%20Z%22%20fill%3D%22%232E2418%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2232%22%20r%3D%225.5%22%20fill%3D%22%23FFF8EC%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2268%22%20r%3D%225.5%22%20fill%3D%22%232E2418%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2212.5%22%20fill%3D%22%23D64541%22%20stroke%3D%22%23FFF8EC%22%20stroke-width%3D%221.6%22/%3E%3Cpath%20d%3D%22M41.5%2C42%20Q37%2C38.5%2038%2C33.5%22%20fill%3D%22none%22%20stroke%3D%22%23D64541%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22/%3E%3Cpath%20d%3D%22M58.5%2C42%20Q63%2C38.5%2062%2C33.5%22%20fill%3D%22none%22%20stroke%3D%22%23D64541%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22/%3E%3Ccircle%20cx%3D%2245.5%22%20cy%3D%2248%22%20r%3D%221.8%22%20fill%3D%22%23FFF8EC%22/%3E%3Ccircle%20cx%3D%2254.5%22%20cy%3D%2248%22%20r%3D%221.8%22%20fill%3D%22%23FFF8EC%22/%3E%3Cpath%20d%3D%22M46%2C53.5%20Q50%2C56.5%2054%2C53.5%22%20fill%3D%22none%22%20stroke%3D%22%23FFF8EC%22%20stroke-width%3D%221.7%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EAM301 · Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@500;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+\
+:root {
+  /* Warm "night market / rice paper" palette — light by default */
+  --ink: #FFF8EC;
+  --ink-2: #FFEFD6;
+  --gold: #C9821A;
+  --gold-light: #A66A15;
+  --gold-dim: rgba(201,130,26,0.10);
+  --cinnabar: #D64541;
+  --cinnabar-light: #B23330;
+  --jade: #2F8F72;
+  --jade-light: #1F6E56;
+  --bamboo: #6FA050;
+  --plum: #B85C86;
+  --text: #2E2418;
+  --text-dim: #5B4A36;
+  --muted: #8A7860;
+  --border: rgba(201,130,26,0.28);
+  --card: rgba(201,130,26,0.055);
+  font-synthesis: none;
+}
+body.dark {
+  --ink: #1B1410;
+  --ink-2: #241A14;
+  --gold: #F0B349;
+  --gold-light: #F5C878;
+  --gold-dim: rgba(240,179,73,0.15);
+  --cinnabar: #FF6B5B;
+  --cinnabar-light: #FF9186;
+  --jade: #5FCBA6;
+  --jade-light: #8AD9BC;
+  --bamboo: #9AC97A;
+  --plum: #E893BC;
+  --text: #F5E9D6;
+  --text-dim: #C9B79C;
+  --muted: #9C8A70;
+  --border: rgba(240,179,73,0.24);
+  --card: rgba(255,255,255,0.045);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--ink);
+  background-image:
+    radial-gradient(ellipse 900px 500px at 15% -10%, var(--gold-dim), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 100% 20%, rgba(47,143,114,0.06), transparent 60%);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  line-height: 1.6;
+}
+h1, h2, h3, h4 { font-family: 'ZCOOL XiaoWei', 'Noto Serif SC', serif; font-weight: 700; letter-spacing: 0.005em; margin: 0 0 0.5rem; }
+.brush { font-family: 'Ma Shan Zheng', cursive; }
+.hanzi { font-family: 'Noto Serif SC', serif; font-weight: 700; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+
+.seal {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; flex-shrink: 0;
+  background: var(--cinnabar); color: #fff;
+  font-family: 'Noto Serif SC', serif; font-size: 15px; font-weight: 700;
+  border-radius: 6px; transform: rotate(-4deg);
+  box-shadow: 0 2px 6px rgba(214,69,65,0.35);
+  border: 1.5px solid rgba(255,255,255,0.35);
+}
+
+.brush-divider { width: 100%; height: 14px; opacity: 0.6; margin: 1.2rem 0; }
+.brush-divider path { stroke: var(--gold); stroke-width: 2; fill: none; stroke-linecap: round; }
+
+.bamboo-wrap { display: flex; align-items: center; gap: 2px; margin: 0.6rem 0 1rem; }
+.bamboo-node {
+  flex: 1; height: 22px; background: rgba(111,160,80,0.12);
+  border: 1px solid rgba(111,160,80,0.35); border-radius: 5px;
+  position: relative; overflow: hidden;
+}
+.bamboo-node.filled { background: linear-gradient(180deg, var(--bamboo), var(--jade)); border-color: var(--bamboo); }
+.bamboo-node::after {
+  content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px;
+  background: rgba(0,0,0,0.12);
+}
+
+.taiji-toggle {
+  width: 30px; height: 30px; border-radius: 50%; cursor: pointer; flex-shrink: 0;
+  background: linear-gradient(90deg, #fff 50%, #1a1a1a 50%);
+  border: 2px solid var(--gold); position: relative; overflow: hidden;
+}
+.taiji-toggle::before, .taiji-toggle::after {
+  content: ''; position: absolute; width: 15px; height: 15px; border-radius: 50%; left: 7.5px;
+}
+.taiji-toggle::before { background: #fff; top: -0.5px; }
+.taiji-toggle::after { background: #1a1a1a; bottom: -0.5px; }
+
+.callout { display: flex; gap: 0.75rem; padding: 0.9rem 1rem; border-radius: 12px; margin-bottom: 1rem; border: 1px solid; }
+.callout.sifu { background: var(--gold-dim); border-color: var(--gold); }
+.callout.exam { background: rgba(214,69,65,0.09); border-color: var(--cinnabar); }
+.callout.jade { background: rgba(47,143,114,0.09); border-color: var(--jade); }
+.callout-icon { font-size: 1.3rem; flex-shrink: 0; }
+.callout-body strong { color: var(--gold-light); display: block; margin-bottom: 0.2rem; font-family: 'ZCOOL XiaoWei', serif; font-size: 0.95rem; letter-spacing: 0.01em; }
+.callout.exam .callout-body strong { color: var(--cinnabar-light); }
+.callout.jade .callout-body strong { color: var(--jade-light); }
+.callout-body { font-size: 0.86rem; color: var(--text-dim); }
+
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 1.1rem 1.2rem; margin-bottom: 1rem; }
+.rank-badge {
+  display: inline-block; font-family: 'Noto Serif SC', serif; font-size: 0.72rem;
+  padding: 0.15rem 0.55rem; border-radius: 20px; border: 1px solid var(--gold);
+  color: var(--gold-light); background: var(--gold-dim); letter-spacing: 0.02em;
+}
+
+table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+th { font-family: 'ZCOOL XiaoWei', serif; font-size: 0.75rem; letter-spacing: 0.03em; text-transform: uppercase; padding: 0.6rem 0.7rem; text-align: left; background: var(--gold-dim); color: var(--gold-light); border-bottom: 2px solid var(--gold); }
+td { padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--border); color: var(--text-dim); vertical-align: top; }
+tr:nth-child(even) td { background: rgba(0,0,0,0.015); }
+
+body { background: #fff; color: #2a2418; }
+.controls { position: sticky; top:0; z-index:20; background: var(--ink); padding: 0.8rem 1.2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; }
+.ctrl-btn { background: var(--gold); color:#1a1408; border:none; padding:0.55rem 1.1rem; border-radius:8px; font-weight:700; cursor:pointer; font-family:'Inter',sans-serif; }
+.ctrl-label { color: var(--text-dim); font-size:0.75rem; }
+.ctrl-back { color: var(--gold-light); font-size:0.75rem; text-decoration:none; border:1px solid var(--border); padding:0.35rem 0.7rem; border-radius:20px; }
+.ctrl-back:hover { border-color: var(--gold); }
+
+.page {
+  max-width: 800px; margin: 1.5rem auto; background: #fdfaf1;
+  border: 1px solid #d8cfae; border-radius: 4px; padding: 2cm 2cm 1.4cm;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35); color: #2a2418;
+  overflow-wrap: break-word;
+}
+.page h2, .page h4 { color: #6b4f1a; font-family:'ZCOOL XiaoWei',serif; }
+.page .keypoints { color:#4a4230; }
+.page table td { color:#4a4230; border-bottom-color:#e3d9b8; }
+.page table th { background:#eee0b8; color:#6b4f1a; border-bottom-color:#c9a84c; }
+
+.toc-cover { text-align:center; }
+.toc-cover .hanzi { font-size: 3rem; color: #b7472a; display:block; margin-bottom:0.4rem; }
+.toc-cover h1 { font-size: 1.9rem; color:#6b4f1a; margin-bottom:0.3rem; }
+.toc-cover .sub { color: #7a715e; font-size:0.9rem; margin-bottom:1.2rem; }
+.taiji-deco { width:70px; height:70px; margin: 0.6rem auto 1.4rem; color:#c9a84c; opacity:0.75; }
+
+.toc { display:flex; flex-direction:column; gap:0.5rem; border:1px solid #e3d9b8; border-radius:12px; padding:1rem 1.2rem; margin-top:1.2rem; background: rgba(201,168,76,0.06); }
+.toc-item { color: #4a4230; text-decoration:none; font-size:0.88rem; display:flex; gap:0.6rem; align-items:center; padding:0.3rem 0; border-bottom: 1px dashed #e3d9b8; }
+.toc-item:last-child { border-bottom:none; }
+.toc-item .hanzi { color: #b7472a; width:1.4rem; font-size:1.1rem; }
+
+.sg-head { display:flex; gap:1rem; align-items:center; margin-bottom:0.9rem; border-bottom:2px solid #c9a84c; padding-bottom:0.9rem; }
+.sg-hanzi { font-size: 2.4rem; color: #b7472a; }
+.sg-weeks { font-size:0.68rem; color:#8a7860; text-transform:uppercase; letter-spacing:0.06em; }
+.sg-subtitle { font-size:0.82rem; color:#5a5142; margin-top:0.15rem; }
+.sg-body { font-size:0.92rem; color: #4a4230; line-height:1.75; margin-bottom:1rem; }
+.sg-page h4 { font-size:0.82rem; color: #a66a15; text-transform:uppercase; letter-spacing:0.04em; margin-top:1rem; }
+
+.mnemonic-block { display:flex; align-items:center; gap:1.2rem; justify-content:center; margin: 1rem 0 1.2rem; }
+.sloth-icon { width:64px; height:64px; color:#a83a2e; flex-shrink:0; }
+.mnemonic-phrase { font-size:1.4rem; color:#a83a2e; text-align:center; line-height:1.35; }
+.mn-row { display:grid; grid-template-columns: repeat(7, 1fr); gap: 0.4rem; }
+.mn-item { background:#fff; border:1px solid #e3d9b8; border-radius:8px; padding:0.5rem 0.2rem; text-align:center; page-break-inside: avoid; }
+.mn-word { font-size:0.68rem; font-weight:700; color:#a83a2e; }
+.mn-dyn { font-size:0.62rem; color:#4a4230; margin-top:0.15rem; }
+.mn-dates { font-size:0.55rem; color:#8a7860; margin-top:0.1rem; }
+
+.gloss-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 0.8rem 1.2rem; margin-top:0.6rem; }
+.gloss-item { border-left: 2px solid #2f8f72; padding-left: 0.7rem; page-break-inside: avoid; }
+.gloss-term { font-size: 1rem; color: #1f6e56; }
+.gloss-def { font-size: 0.78rem; color: #4a4230; margin-top:0.15rem; }
+
+.page-footer { margin-top:1.5rem; display:flex; justify-content:space-between; font-size:0.62rem; color:#9a8f6e; border-top:1px solid #d8cfae; padding-top:0.35rem; font-family:'JetBrains Mono',monospace; }
+
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { background:#fff; }
+  .controls { display:none; }
+  .page { box-shadow:none; border-radius:0; max-width:100%; margin:0; padding:1.8cm 2cm; page-break-after: always; }
+  .page:last-child { page-break-after: avoid; }
+  .sg-head, .mn-item, .gloss-item, table, li { page-break-inside: avoid; }
+  @page { size: letter; margin: 0; }
+}
+@media (max-width:600px) {
+  .gloss-grid { grid-template-columns:1fr; }
+  .mn-row { grid-template-columns: repeat(2,1fr); }
+  .mnemonic-block { flex-direction:column; }
+}
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <button class="ctrl-btn" onclick="window.print()">🖨️ Print Study Guide</button>
+  <span class="ctrl-label brush" style="font-size:1rem;color:var(--gold-light)">師父之道 EAM301 Study Guide</span>
+  <a href="index.html" class="ctrl-back">← Back to Study App</a>
+</div>
+
+<div class="page toc-cover">
+  <span class="hanzi brush">師父之道</span>
+  <h1>EAM301 · Study Guide</h1>
+  <div class="sub">History of Eastern Medicine · Prof. Hyungsuk Choi · Prologue + 6 Chapters, kept separate</div>
+  <div class="taiji-deco"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<circle cx="50" cy="18" r="9" fill="none" stroke="currentColor" stroke-width="3"/>
+<path d="M50 27 L50 55" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+<path d="M50 34 C 30 34, 24 20, 20 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+<path d="M50 40 C 72 40, 78 55, 82 66" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+<path d="M50 55 C 40 66, 34 80, 30 92" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+<path d="M50 55 C 62 64, 66 78, 64 92" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+<circle cx="50" cy="46" r="6" fill="none" stroke="currentColor" stroke-width="1.6" opacity="0.55"/>
+<path d="M50 40 a6 6 0 0 1 0 12 a3 3 0 0 1 0 -6 a3 3 0 0 0 0 -6 z" fill="currentColor" opacity="0.55"/>
+</svg></div>
+  <div class="callout sifu" style="text-align:left">
+    <div class="callout-icon">🎋</div>
+    <div class="callout-body"><strong>How to use this guide</strong>Read each chapter's summary and key-point list <em>before</em> the assigned class, not the night before an exam. Then move to the Study App's Socratic Dojo (22 questions per chapter) to test whether you can actually explain these ideas out loud.</div>
+  </div>
+  <div class="toc"><a href="#sg-prologue" class="toc-item"><span class="hanzi">序</span>Prologue & Appendix</a><a href="#sg-ch1" class="toc-item"><span class="hanzi">一</span>Chapter 1 — History of AHM</a><a href="#sg-ch2" class="toc-item"><span class="hanzi">二</span>Chapter 2 — Upon a Time in China: Philosophical Background</a><a href="#sg-ch3" class="toc-item"><span class="hanzi">三</span>Chapter 3 — Cornerstones of AHM</a><a href="#sg-ch4" class="toc-item"><span class="hanzi">四</span>Chapter 4 — Now and Future</a><a href="#sg-ch5" class="toc-item"><span class="hanzi">五</span>Chapter 5 — Besides China</a><a href="#sg-ch6" class="toc-item"><span class="hanzi">六</span>Chapter 6 — East and West</a></div>
+  <div class="page-footer"><span>EAM301 · Study Guide</span><span>Contents</span></div>
+</div>
+
+
+<div class="page sg-page">
+  <div class="sg-head">
+    <span class="sg-hanzi brush">記憶法</span>
+    <div><div class="sg-weeks mono">Chapter 1</div><h2>The Dynasty Mnemonic</h2>
+    <div class="sg-subtitle">Straight from the book — memorize this cold</div></div>
+  </div>
+  <div class="mnemonic-block">
+    <div class="sloth-icon"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="50" cy="60" rx="30" ry="26" fill="currentColor" opacity="0.14"/>
+<path d="M28 70 Q50 90 72 70 Q68 82 50 84 Q32 82 28 70 Z" fill="currentColor" opacity="0.22"/>
+<circle cx="50" cy="42" r="24" fill="currentColor" opacity="0.9"/>
+<circle cx="41" cy="40" r="3" fill="#FFF8EC"/>
+<circle cx="59" cy="40" r="3" fill="#FFF8EC"/>
+<path d="M44 50 Q50 54 56 50" fill="none" stroke="#FFF8EC" stroke-width="2" stroke-linecap="round"/>
+<path d="M30 34 Q22 30 24 20" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+<path d="M70 34 Q78 30 76 20" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+<path d="M33 66 Q50 78 67 66" fill="none" stroke="#FFF8EC" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+<circle cx="50" cy="68" r="5" fill="none" stroke="#FFF8EC" stroke-width="2" opacity="0.7"/>
+</svg></div>
+    <div class="mnemonic-phrase brush">Happy Sloths Travel Slowly, Yearning Meditative Quietness</div>
+  </div>
+  <div class="mn-row"><div class="mn-item"><div class="mn-word">Happy</div><div class="mn-dyn">Han Dynasty</div><div class="mn-dates mono">202 BC – 220 AD</div></div><div class="mn-item"><div class="mn-word">Sloths</div><div class="mn-dyn">Sui Dynasty</div><div class="mn-dates mono">581 – 618 AD</div></div><div class="mn-item"><div class="mn-word">Travel</div><div class="mn-dyn">Tang Dynasty</div><div class="mn-dates mono">618 – 907 AD</div></div><div class="mn-item"><div class="mn-word">Slowly</div><div class="mn-dyn">Song Dynasty</div><div class="mn-dates mono">960 – 1279 AD</div></div><div class="mn-item"><div class="mn-word">Yearning</div><div class="mn-dyn">Yuan Dynasty</div><div class="mn-dates mono">1271 – 1368 AD</div></div><div class="mn-item"><div class="mn-word">Meditative</div><div class="mn-dyn">Ming Dynasty</div><div class="mn-dates mono">1368 – 1644 AD</div></div><div class="mn-item"><div class="mn-word">Quietness</div><div class="mn-dyn">Qing Dynasty</div><div class="mn-dates mono">1644 – 1912 AD</div></div></div>
+  <p class="sg-body" style="margin-top:1.2rem">This is the book's own memory device (Chapter 1) for the seven dynasties that carry EAM's clinical history forward — Han through Qing. Say it out loud until the dynasty order is automatic; Choi's Socratic questions assume you already have this sequence cold.</p>
+  <div class="page-footer"><span>EAM301 · Study Guide</span><span>Dynasty Mnemonic</span></div>
+</div>
+
+
+<div class="page sg-page" id="sg-prologue">
+  <div class="sg-head">
+    <span class="sg-hanzi brush">序論</span>
+    <div>
+      <div class="sg-weeks mono">Week 1</div>
+      <h2>Prologue & Appendix</h2>
+      <div class="sg-subtitle">Why We Learn History · Reference & Chinese Characters</div>
+    </div>
+  </div>
+  <p class="sg-body">The book opens with something more personal than a typical syllabus: the author explains that his own love of history came from his father, a history teacher who told stories rather than drilling dates, and who passed away from cancer during the author's own studies — the book is written, in part, to pass that same storytelling instinct on. From there it turns practical: for English-speaking or Western-trained students, the historical and philosophical gap can't be closed by memorizing terms alone, any more than you could understand Shakespeare well without the historical context around him. The Prologue also raises a harder identity question worth sitting with all quarter: what actually makes something "acupuncture and herbal medicine"? Is a doctor using licorice or cinnamon twig inside a Western biomedical framework still practicing AHM — and if identity depends on more than the tools used, history is the only way to find out. That same identity question is not just a Week 1 throat-clear — the book deliberately circles back to it at the very end of Chapter 4, and again as the explicit thesis of Chapter 6. It's the spine of the entire book.</p>
+  <h4>Specific topics in this section</h4>
+  <ul class="keypoints"><li>The author's personal motivation for teaching history — passed down from his own father</li><li>Why history is not optional context but foundational to identity as a practitioner</li><li>The Western-student vs. Asian-student knowledge gap, and the Shakespeare analogy</li><li>"Understanding the Identity of AHM through History" — what actually makes something AHM</li><li>"Naked history" as a method — stripping myth from verified fact</li><li>Course learning outcomes CO1–CO4 and what each will actually be tested on</li><li>The identity question this opens with is revisited at the close of Chapter 4 and as Chapter 6's explicit thesis</li></ul>
+  <h4>What to walk into class already able to explain</h4>
+  <ul class="keypoints"><li>Frames students as a living link in an unbroken clinical lineage</li><li>Sets up the course's central tension, developed later: "Worship or Ignore?"</li><li>Chinese character appendix is reference material — return to it weekly</li><li>History-first sequencing is a deliberate pedagogical choice, not filler</li></ul>
+  <div class="page-footer"><span>EAM301 · Study Guide</span><span>Prologue & Appendix</span></div>
+</div>
+
+<div class="page sg-page" id="sg-ch1">
+  <div class="sg-head">
+    <span class="sg-hanzi brush">醫學史</span>
+    <div>
+      <div class="sg-weeks mono">Week 2</div>
+      <h2>Chapter 1 — History of AHM</h2>
+      <div class="sg-subtitle">Mythos to Logos · Three Sovereigns & Five Emperors · Pan Gu · Huang Di · Bian Que</div>
+    </div>
+  </div>
+  <p class="sg-body">Chapter 1 ("History of AHM") opens by defining AHM's identity, then walks the mythos-to-logos shift: Fuxi, Nuwa, and Shennong as cultural-hero myths from the Longshan Neolithic period, through the Xia/Shang/Zhou bronze-age states, into the Spring & Autumn and Warring States periods and the "Hundred Schools of Thought." From there the book marches dynasty by dynasty — Qin, Han, Sui-Tang, Song, Yuan, Ming, Qing — and for each one gives a short narrative, an "In the World" section comparing what was happening elsewhere on the planet at the same time, and a Key Characteristics / Key Publications summary. The book leans hard on pop-culture hooks to anchor each era (The Mummy for Qin Shi Huang, Journey to the West and Dragon Ball for Tang-dynasty Buddhism and the Silk Road, Marco Polo for the Yuan, Ip Man for Qing-era foreign conflict) and closes the chapter with an explicit mnemonic for the dynasty sequence.</p>
+  <h4>Specific topics in this section</h4>
+  <ul class="keypoints"><li>Definition and historical origins of AHM — where the "identity" question from the Prologue gets answered</li><li>Fuxi, Nuwa, Shennong, and the Longshan Neolithic culture</li><li>Xia, Shang, Zhou dynasties and the Spring & Autumn / Warring States periods</li><li>Qin Shi Huang's unification and the short, harsh Qin Dynasty</li><li>Han Dynasty: Huang Di Nei Jing, Shang Han Lun, Shen Nong Ben Cao, Jia Yi Jing, Mai Jing</li><li>Sui–Tang, Song, Yuan, Ming, Qing — each dynasty's medical "Key Publications"</li><li>The dynasty mnemonic: "Happy Sloths Travel Slowly, Yearning Meditative Quietness" (Han–Sui–Tang–Song–Yuan–Ming–Qing)</li><li>Pop-culture anchors the book itself uses per dynasty (The Mummy, Journey to the West, Marco Polo, Ip Man)</li></ul>
+  <h4>What to walk into class already able to explain</h4>
+  <ul class="keypoints"><li>Mythos → logos: legendary founders give way to systematic theory</li><li>Three Sovereigns & Five Emperors as an attribution strategy, not verified history</li><li>Bian Que may represent a title passed across generations of itinerant physicians</li><li>Warring States instability as fertile ground for new philosophy and medicine</li></ul>
+  <div class="page-footer"><span>EAM301 · Study Guide</span><span>Chapter 1</span></div>
+</div>
+
+<div class="page sg-page" id="sg-ch2">
+  <div class="sg-head">
+    <span class="sg-hanzi brush">哲學背景</span>
+    <div>
+      <div class="sg-weeks mono">Weeks 3–4</div>
+      <h2>Chapter 2 — Upon a Time in China: Philosophical Background</h2>
+      <div class="sg-subtitle">Yin-Yang · Five Phases (the "five departments" analogy) · Daoism, Confucianism, Legalism</div>
+    </div>
+  </div>
+  <p class="sg-body">Titled "Upon a Time in China: Philosophical Background" in the book itself, and it runs longer than its two assigned weeks suggest — deep into what a syllabus-level view would call Chapter 3 territory. Yin-yang is presented as relative and mutually transforming, never fixed. The Five Phases (Wu Xing) get an especially clear teaching device: imagine dividing a company into five departments — what matters isn't the department's name but its function and relationships to the others. The book is explicit that its own correspondence tables (organs/tastes/pathology) are "flexible tools rather than fixed entities," not absolute law. It also covers Liu Qi and Liu Yin (the Six Qi and Six Excesses/pathogenic influences), drawing a direct, sourced comparison to the modern "host-pathogen relationship" debate in microbiology — citing real research on the West African Ebola epidemic. And it names the underlying logical method AHM itself runs on: Bi Lei Qu Xiang, "obtaining an image by comparing types" — analogical reasoning, the same kind of thinking that let engineers managing the Yellow River's waterways become a model for meridian theory.</p>
+  <h4>Specific topics in this section</h4>
+  <ul class="keypoints"><li>Yin-Yang theory: relativity, interdependence, and mutual transformation</li><li>The Four Movements of Yin-Yang mapped onto the Five Phases (Wu Xing)</li><li>The "five departments in a company" analogy for understanding Wu Xing as function, not substance</li><li>The book's own caveat: Five Element correspondence tables are "flexible tools," not fixed entities</li><li>Liu Qi and Liu Yin (Six Qi / Six Excesses) compared directly to the modern host-pathogen debate</li><li>Bi Lei Qu Xiang — analogical reasoning as AHM's core epistemological method</li><li>Daoist philosophy: the Dao, wu wei, and natural self-regulating order</li><li>Confucian philosophy: hierarchy, duty, and correct relationships applied to the body</li><li>Legalist philosophy: codified law and centralized control — EAM's faintest influence</li><li>CO2 directly: comparing and contrasting all three schools' medical contributions</li></ul>
+  <h4>What to walk into class already able to explain</h4>
+  <ul class="keypoints"><li>Yin-yang: relative, interdependent, mutually transforming — never fixed categories</li><li>Five Phases: generating (Sheng) and controlling (Ke) cycles work together</li><li>Daoism → natural order, wu wei; Confucianism → hierarchy, duty; Legalism → codified control</li><li>Philosophy precedes clinical text — theory came before the Nei Jing and Shang Han Lun</li></ul>
+  <div class="page-footer"><span>EAM301 · Study Guide</span><span>Chapter 2</span></div>
+</div>
+
+<div class="page sg-page" id="sg-ch3">
+  <div class="sg-head">
+    <span class="sg-hanzi brush">基石</span>
+    <div>
+      <div class="sg-weeks mono">Weeks 5–6</div>
+      <h2>Chapter 3 — Cornerstones of AHM</h2>
+      <div class="sg-subtitle">Nei Jing · Shen Nong Ben Cao · Shang Han Lun · Hua Tuo · Sun Si Miao · Early Acupuncture</div>
+    </div>
+  </div>
+  <p class="sg-body">The clinical foundation chapter — where philosophy turns into text you could actually practice from. It doesn't just present acupuncture channel theory as a finished system; it shows the archaeological evidence for how gradually it actually formed. Early excavated medical texts (the Mawangdui-era literature catalogued by scholars like Donald Harper) describe only moxibustion, not needling; they name meridian lines but no actual acupoints; they describe roughly eleven meridians rather than the twelve used today; and only two or three of those meridians were even connected to internal organs. The now-familiar unified, organ-linked, twelve-channel circulatory system was not a circular system in its early days — it was assembled over centuries. The book also gives pulse diagnosis a genuinely global history — ancient Egyptian physicians were palpating and timing the pulse with a water-clock as early as the Ebers Papyrus, alongside independent traditions in Greek, Persian, and Ayurvedic medicine — and the author adds his own opinionated aside that "pulse diagnosis is not omnipotent, [but] it is useful," pushing back on the idea that a skilled pulse-reader can diagnose pregnancy or cancer by feel alone. A close look at the word "Lun" (treatise) versus "Jing" (canon) in text titles shows that some of AHM's most influential works — including the Shang Han Lun itself — never claimed scriptural authority to begin with. And the chapter includes a genuinely startling figure: Wang Qingren, a Qing-dynasty physician who spent 42 years dissecting executed prisoners' and abandoned corpses to correct anatomical errors in classical texts — enduring ridicule from colleagues who preferred inherited theory over direct observation, in a story the book explicitly likens to Vesalius correcting Galen in the West.</p>
+  <h4>Specific topics in this section</h4>
+  <ul class="keypoints"><li>Huang Di Nei Jing: Su Wen (theory) and Ling Shu (acupuncture technique)</li><li>Archaeological evidence for how channel theory actually formed — moxibustion before needling, no acupoints yet, only ~11 meridians</li><li>Why the unified twelve-channel, organ-linked system was a gradual construction, not an original design</li><li>Zhang Zhong Jing, the Shang Han Lun, and the Six Stages framework</li><li>"Lun" (treatise) vs. "Jing" (canon) — what a text's title implies about its claimed authority</li><li>A global history of pulse diagnosis: ancient Egypt's water-clock method, Greek, Persian, and Ayurvedic parallels</li><li>The author's own take: pulse diagnosis is useful but not omnipotent — a corrective to over-mystification</li><li>Wang Qingren — 42 years of corpse dissection to correct anatomical errors, and the book's direct Vesalius comparison</li><li>The Jin-Yuan Four Great Masters, including Zhu Danxi (Nourishing Yin) and Li Gao (Spleen-Stomach)</li><li>Direct comparison to Japan's Kohoha school of Kampo and Yoshimasu Todo</li><li>Korean dry-needling technique described in the Chimgugyeongheombang, cross-checked against modern ultrasound needle-depth research</li><li>Sun Si Miao's medical ethics, gynecology, and pediatrics</li></ul>
+  <h4>What to walk into class already able to explain</h4>
+  <ul class="keypoints"><li>Nei Jing is two compiled texts, not one author, one era</li><li>Zhang Zhong Jing's Six Stages theory emerged directly from epidemic tragedy</li><li>Shen Nong Ben Cao's three-grade system prioritizes long-term safety, not just efficacy</li><li>Wang Shu He's editorial work is why Shang Han Lun survived at all</li></ul>
+  <div class="page-footer"><span>EAM301 · Study Guide</span><span>Chapter 3</span></div>
+</div>
+
+<div class="page sg-page" id="sg-ch4">
+  <div class="sg-head">
+    <span class="sg-hanzi brush">今與未來</span>
+    <div>
+      <div class="sg-weeks mono">Week 7</div>
+      <h2>Chapter 4 — Now and Future</h2>
+      <div class="sg-subtitle">TCM · Modernization of AHM · Worship or Ignore? · Integrated Medicine · Acupuncture Research</div>
+    </div>
+  </div>
+  <p class="sg-body">The chapter pivots hard into the present tense — and gives a specific, citable anchor most students never learn: in 1959, China formally decided to standardize a national curriculum for what would become "Traditional Chinese Medicine," fusing 15 subjects that blended classical theory (Nei Jing, Shang Han Lun, Wen Bing, case studies) with modern clinical specialties (internal medicine, surgery, gynecology, pediatrics, ophthalmology). That standardized curriculum is also explicitly what carried AHM to the West: the book names Manfred Porkert, Ted Kaptchuk, and Giovanni Maciocia as the Western scholars whose books introduced systematic AHM theory to English-speaking audiences. A striking research timeline shows China, Korea, Japan, and Taiwan all abolished traditional medicine around the same early-20th-century window — and all later revived it, with Japanese physician Wada Keijuro's 1915 book comparing Kampo to Western medicine credited as an early spark of that revival. Choi frames the modern dilemma as "Worship or Ignore?" and the chapter's final page closes the loop the Prologue opened: the author, an AHM doctor practicing in California, reflects that whether you call yourself an AHM doctor or an apothecary, you're doing essentially the same work as physicians of the past — and that in South Korea, "Western doctor" and "AHM doctor" are still used side by side, with equal legal standing.</p>
+  <h4>Specific topics in this section</h4>
+  <ul class="keypoints"><li>1959: the specific year China standardized the national "TCM" curriculum — 15 fused traditional + modern subjects</li><li>"TCM" as a 20th-century standardized institutional construction, not an ancient monolith</li><li>Named Western scholars who brought AHM to the U.S.: Manfred Porkert, Ted Kaptchuk, Giovanni Maciocia</li><li>China, Korea, Japan, and Taiwan all abolished traditional medicine in the same era, then all revived it</li><li>Wada Keijuro's 1915 book comparing Kampo to Western medicine as an early spark of Japan's revival</li><li>"Worship or Ignore?" — the two failure modes of modern practice</li><li>The chapter's closing page returns directly to the Prologue's "what makes something AHM" question</li><li>CO4 directly: cultural adaptation of EAM outside Asia — necessary, desirable, or both</li></ul>
+  <h4>What to walk into class already able to explain</h4>
+  <ul class="keypoints"><li>"TCM" is a 20th-century standardized curriculum, not an ancient monolith</li><li>"Worship or Ignore" names two failure modes for modern practitioners</li><li>Integrated medicine forces classical theory into biomedical research designs</li><li>CO4: desirability and necessity of cultural adaptation outside Asia</li></ul>
+  <div class="page-footer"><span>EAM301 · Study Guide</span><span>Chapter 4</span></div>
+</div>
+
+<div class="page sg-page" id="sg-ch5">
+  <div class="sg-head">
+    <span class="sg-hanzi brush">中國以外</span>
+    <div>
+      <div class="sg-weeks mono">Week 8</div>
+      <h2>Chapter 5 — Besides China</h2>
+      <div class="sg-subtitle">Korea · Heo Jun & Dongui Bogam · Lee Je-ma & Sasang Medicine · Japan's Kampo</div>
+    </div>
+  </div>
+  <p class="sg-body">Most EAM history survey courses are quietly China-centered, with everything else reduced to a footnote — this chapter is the correction, and it's very likely where Prof. Choi's own training and specialty (he's a Korean Medicine Doctor) shows up most heavily on your exams. Heo Jun's Dongui Bogam emerges directly from crisis: after the Imjin War devastated Korea's medical infrastructure and cut off imported Chinese materials, he compiled a synthesis built on domestic Korean herbs — genuinely democratizing medicine. Three centuries later, Lee Je-ma's Sasang Constitutional Medicine breaks even further from Chinese theoretical assumptions, arguing treatment should vary by constitutional type even for identical symptoms. Japan's Kampo tradition isn't treated as one thing, either — the book splits it into two competing schools: Yoshimasu Todo's 18th-century Koho-ha, which rejected abstract yin-yang and Five Phase theory in favor of a pragmatic "one poison" approach to disease; and the early-20th-century Kokan Igaku of Yumoto Kyushin, which tried to re-verify Kampo's old formulas using Western pathology and physiology. Even the name "Kokan" carries nationalist symbolism — combining the character for the Japanese Empire with the character for the Han dynasty of China.</p>
+  <h4>Specific topics in this section</h4>
+  <ul class="keypoints"><li>Heo Jun and the Dongui Bogam — post-Imjin War synthesis using Korean herbs</li><li>Lee Je-ma and Sasang Constitutional Medicine — four constitutional types</li><li>Why Sasang medicine is considered uniquely Korean, not derived from Chinese sources</li><li>Koho-ha (Yoshimasu Todo) — pragmatic, anti-abstraction Kampo built on a "one poison" theory</li><li>Kokan Igaku (Yumoto Kyushin) — re-verifying Kampo formulas through Western pathology and physiology</li><li>The nationalist symbolism embedded in the name "Kokan Igaku" itself</li><li>Korean Oriental Medicine (KOM) as a legally and clinically distinct modern system</li><li>Kyung Hee University (1965) and the institutional modernization of Korean medicine</li><li>How geography, war, and diplomacy shaped which texts reached which countries, and when</li></ul>
+  <h4>What to walk into class already able to explain</h4>
+  <ul class="keypoints"><li>Dongui Bogam: crisis-driven innovation using domestic Korean herbs post-Imjin War</li><li>Sasang Constitutional Medicine: uniquely Korean, not derived from Chinese sources</li><li>Kampo: Japan's own simplification/standardization of Chinese formulas</li><li>Korean Oriental Medicine (KOM) is legally and clinically distinct from Chinese medicine today</li></ul>
+  <div class="page-footer"><span>EAM301 · Study Guide</span><span>Chapter 5</span></div>
+</div>
+
+<div class="page sg-page" id="sg-ch6">
+  <div class="sg-head">
+    <span class="sg-hanzi brush">東與西</span>
+    <div>
+      <div class="sg-weeks mono">Week 9</div>
+      <h2>Chapter 6 — East and West</h2>
+      <div class="sg-subtitle">Qing Dynasty · Wen Bing School · Malaria · Anatomy · Kampo in Japan · West Meets East</div>
+    </div>
+  </div>
+  <p class="sg-body">The book states this chapter's thesis outright on its title page: modernity has left "the West" and "the East" in constant, ongoing tension, and comparing them directly is meant to give you "a clearer identity of Acupuncture and Herbal Medicine" — the same identity question the Prologue opened with. The Qing dynasty brings two disruptions at once: an internal theoretical breakthrough (Wen Bing Tiao Bian, the systematic differentiation of warm diseases) and an external cultural collision with Western biomedicine, anchored in the true story of Max von Pettenkofer drinking live cholera bacteria in 1892 to defend Miasma theory against Koch's Germ Theory — and surviving, largely by luck. But the chapter's sharpest point may be a translation problem hiding in plain sight: the AHM organ "Pi" (脾), conventionally translated as "Spleen," functionally aligns far more closely with the modern pancreas — blood sugar regulation, digestive enzyme secretion — than with the anatomical spleen's actual job (filtering blood, immune response). The book poses the question directly: if a patient had an anatomical spleen problem, would you treat their Pi? It closes with a similar cross-civilization pairing — Greek "thrombos" and Chinese 瘀血 (yūxuè, stagnant blood) independently arriving at strikingly similar concepts — and a critique of Evidence-Based Medicine's own history, from Descartes' clockwork-body metaphor through the Flexner Report, arguing that "absence of evidence is not evidence of absence."</p>
+  <h4>Specific topics in this section</h4>
+  <ul class="keypoints"><li>The chapter's opening thesis: comparing East and West is meant to sharpen your identity as an AHM practitioner</li><li>Ye Tian Shi's Wen Bing school and Wu Jutong's Wen Bing Tiao Bian (Systematic Differentiation of Warm Diseases)</li><li>The Four Levels theory (Wei/Qi/Ying/Xue) vs. the older Six Stages model</li><li>Max von Pettenkofer's 1892 self-experiment drinking cholera bacteria to defend Miasma theory against Robert Koch's Germ Theory</li><li>How the Germ vs. Miasma debate eventually synthesized into a "balance" model — echoing EAM's own logic</li><li>The "Pi" (脾) / pancreas mistranslation — a centuries-old translation gap between AHM function and modern anatomy</li><li>Thrombo (Greek) vs. 瘀血 (Chinese) — independent civilizations converging on a similar medical concept</li><li>A critique of Evidence-Based Medicine's own history: Descartes' clockwork body, Freud, and the Flexner Report</li><li>Kampo's near-abolition during Japan's Meiji-era modernization</li><li>"West meets East" as a genuinely two-way exchange, not one-directional transmission</li></ul>
+  <h4>What to walk into class already able to explain</h4>
+  <ul class="keypoints"><li>Wen Bing's Four Levels (Wei/Qi/Ying/Xue) vs. Shang Han's Six Stages</li><li>Western anatomy challenges a function-based, channel-based body model</li><li>Japan's Meiji-era near-abolition of Kampo shows institutional status is fragile</li><li>"East and West" as genuine two-way exchange, not one-directional transmission</li></ul>
+  <div class="page-footer"><span>EAM301 · Study Guide</span><span>Chapter 6</span></div>
+</div>
+
+
+<div class="page sg-page">
+  <div class="sg-head">
+    <span class="sg-hanzi brush">參考</span>
+    <div><div class="sg-weeks mono">Reference</div><h2>Essential Texts &amp; Philosophy</h2></div>
+  </div>
+  <h4>Essential Texts</h4>
+  <table><thead><tr><th>Text</th><th>Date</th><th>Figure</th><th>Contribution</th></tr></thead><tbody><tr><td><strong>Huang Di Nei Jing 黄帝内经</strong></td><td>c. 100 BCE</td><td>Attrib. Yellow Emperor + Qi Bo</td><td>Su Wen (theory) + Ling Shu (acupuncture) — foundational cosmology, organ theory, channels</td></tr><tr><td><strong>Shen Nong Ben Cao 神农本草经</strong></td><td>c. 100 BCE</td><td>Attrib. Shen Nong</td><td>365 medicinals, 3-grade classification — foundation of herbal medicine</td></tr><tr><td><strong>Shang Han Lun 伤寒论</strong></td><td>c. 220 AD</td><td>Zhang Zhong Jing</td><td>Six Stages, clinical protocols — first systematic clinical manual</td></tr><tr><td><strong>Mai Jing 脉经</strong></td><td>c. 280 AD</td><td>Wang Shu He</td><td>24 pulse qualities systematized; preserved Zhang Zhong Jing's texts</td></tr><tr><td><strong>Bei Ji Qian Jin 备急千金要方</strong></td><td>652 AD</td><td>Sun Si Miao</td><td>Medical ethics, gynecology, pediatrics, dietetics</td></tr><tr><td><strong>Ben Cao Gang Mu 本草纲目</strong></td><td>1596 AD</td><td>Li Shi Zhen</td><td>1,892 medicinals; greatest materia medica in Chinese history</td></tr><tr><td><strong>Dongui Bogam 동의보감</strong></td><td>1613 AD</td><td>Heo Jun (Korea)</td><td>Korean herbal synthesis; accessible medicine; UNESCO heritage</td></tr><tr><td><strong>Dongui Susebowon 동의수세보원</strong></td><td>1894 AD</td><td>Lee Je-ma (Korea)</td><td>Sasang Constitutional Medicine — four constitutional types</td></tr></tbody></table>
+  <h4 style="margin-top:1.2rem">Philosophy Comparison (CO2)</h4>
+  <table><thead><tr><th>School</th><th>Core Idea</th><th>Medical Expression</th></tr></thead><tbody><tr><td><strong>Daoism 道家</strong></td><td>The Dao (natural order); wu wei (non-forcing action); balance</td><td>Body as self-regulating natural system; treatment supports, doesn't override, innate order</td></tr><tr><td><strong>Confucianism 儒家</strong></td><td>Hierarchy, duty, correct relationships, filial piety</td><td>Organs as a ruler/minister hierarchy; family duty shapes care of the aged, gynecology, pediatrics</td></tr><tr><td><strong>Legalism 法家</strong></td><td>Codified law, centralized control, strict standardization</td><td>Weakest direct influence — but arguably visible in standardized formulas and fixed protocols</td></tr></tbody></table>
+  <div class="page-footer"><span>EAM301 · Study Guide</span><span>Texts &amp; Philosophy</span></div>
+</div>
+
+
+<div class="page sg-page">
+  <div class="sg-head">
+    <span class="sg-hanzi brush">字彙</span>
+    <div><div class="sg-weeks mono">Reference</div><h2>Glossary of Recurring Terms</h2></div>
+  </div>
+  <div class="gloss-grid"><div class="gloss-item"><div class="gloss-term hanzi">氣 Qi</div><div class="gloss-def">Vital energy/functional activity; the animating force EAM theory tracks through the body.</div></div><div class="gloss-item"><div class="gloss-term hanzi">陰陽 Yin-Yang</div><div class="gloss-def">Paired, relative, mutually-transforming opposites — never fixed, always contextual.</div></div><div class="gloss-item"><div class="gloss-term hanzi">五行 Wu Xing (Five Phases)</div><div class="gloss-def">Wood, Fire, Earth, Metal, Water — a generating (Sheng) and controlling (Ke) cycle model.</div></div><div class="gloss-item"><div class="gloss-term hanzi">道 Dao</div><div class="gloss-def">The underlying, unnameable natural order Daoism holds all things follow.</div></div><div class="gloss-item"><div class="gloss-term hanzi">無為 Wu Wei</div><div class="gloss-def">Non-forcing, effortless action — letting the natural order do the work.</div></div><div class="gloss-item"><div class="gloss-term hanzi">經絡 Jing Luo</div><div class="gloss-def">Channels/meridians connecting internal organs to the body surface.</div></div><div class="gloss-item"><div class="gloss-term hanzi">臟腑 Zang-Fu</div><div class="gloss-def">The organ-function system — describes function more than fixed anatomical structure.</div></div><div class="gloss-item"><div class="gloss-term hanzi">傷寒 Shang Han</div><div class="gloss-def">Cold-induced disease; Zhang Zhong Jing's Six Stages framework.</div></div><div class="gloss-item"><div class="gloss-term hanzi">溫病 Wen Bing</div><div class="gloss-def">Warm/febrile epidemic disease; Ye Tian Shi's Four Levels framework.</div></div></div>
+  <div class="page-footer"><span>EAM301 · Study Guide</span><span>Glossary</span></div>
+</div>
+
+</body>
+</html>
