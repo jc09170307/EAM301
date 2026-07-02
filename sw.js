@@ -1,5 +1,5 @@
-const CACHE_NAME = "eam301-v1";
-const CORE_FILES = ["./", "./index.html", "./workbook.html", "./worksheet.html", "./studyguide.html", "./manifest.json"];
+const CACHE_NAME = "eam301-v3";
+const CORE_FILES = ["./", "./index.html", "./workbook.html", "./worksheet.html", "./studyguide.html", "./manifest.json", "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png", "./favicon-32.png"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -20,17 +20,14 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      const network = fetch(event.request)
-        .then((response) => {
-          if (response && response.status === 200) {
-            const copy = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
-          }
-          return response;
-        })
-        .catch(() => cached);
-      return cached || network;
-    })
+    fetch(event.request)
+      .then((response) => {
+        if (response && response.status === 200) {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+        }
+        return response;
+      })
+      .catch(() => caches.match(event.request))
   );
 });
