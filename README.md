@@ -6,12 +6,13 @@ of Acupuncture and Herbal Medicine*) and the photographed course schedule.
 - **index.html** — the interactive Study App (Socratic Dojo with 154 questions,
   reading tracker, timeline, exam prep, installable as a real offline-capable app)
 - **studyguide.html** — narrative study guide, one section per chapter
-- **workbook.html** — print-friendly reference workbook (24 pages)
+- **workbook.html** — print-friendly reference workbook (25 pages)
 - **worksheet.html** — active-recall practice worksheet with a full answer key
 - **manifest.json** and **sw.js** — what make the Study App an actual installable,
-  offline-capable PWA once hosted. Upload these two alongside the HTML files —
-  don't skip them, the app works without them but loses offline support and the
-  one-tap Android install prompt.
+  offline-capable PWA once hosted.
+- **icon-192.png**, **icon-512.png**, **apple-touch-icon.png**, **favicon-32.png** —
+  the app icon, built from your own uploaded artwork. Required for the home-screen
+  icon and browser tab icon to work correctly once hosted.
 
 All four HTML files are cross-linked, so once hosted you can click between them.
 
@@ -23,8 +24,9 @@ All four HTML files are cross-linked, so once hosted you can click between them.
    Don't add a README from GitHub's side — you already have one. Click **Create repository**.
 4. On the new repo's page, click **uploading an existing file** (or drag files
    into the box that says "Drag files here to add them to your repository").
-5. Drag in **all six files** from this folder — `index.html`, `studyguide.html`,
-   `workbook.html`, `worksheet.html`, `manifest.json`, `sw.js` — plus this `README.md`.
+5. Drag in **all ten files** from this folder — `index.html`, `studyguide.html`,
+   `workbook.html`, `worksheet.html`, `manifest.json`, `sw.js`, `icon-192.png`,
+   `icon-512.png`, `apple-touch-icon.png`, `favicon-32.png` — plus this `README.md`.
    Click **Commit changes**.
 6. Go to the repo's **Settings** tab → **Pages** (left sidebar).
 7. Under "Build and deployment," set **Source** to **Deploy from a branch**,
