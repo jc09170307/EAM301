@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EAM301 · History of Eastern Medicine · Summer 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&family=Hachi+Maru+Pop&family=DotGothic16&family=Shippori+Mincho+B1:wght@400;700;800&family=Noto+Sans+SC:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0f1117">
 <style>
@@ -52,11 +52,12 @@ body {
   display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
 }
 .topbar-title {
-  font-family: 'Ma Shan Zheng', cursive;
-  font-size: 1.15rem;
+  font-family: 'Zen Tokyo Zoo', cursive;
+  font-size: 1.1rem;
   color: var(--gold-light);
   display: flex; align-items: center; gap: 0.5rem;
-  text-shadow: 0 0 20px rgba(201,168,76,0.4);
+  text-shadow: 0 0 20px rgba(201,168,76,0.5), 0 0 40px rgba(201,168,76,0.2);
+  letter-spacing: 0.05em;
 }
 .topbar-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--muted); }
 
@@ -73,8 +74,8 @@ body {
   font-size: 0.73rem; font-weight: 500; white-space: nowrap;
   color: var(--muted); border-bottom: 2px solid transparent;
   transition: all 0.15s;
-  font-family: 'ZCOOL XiaoWei', serif;
-  letter-spacing: 0.03em;
+  font-family: 'DotGothic16', monospace;
+  letter-spacing: 0.04em;
 }
 .tab:hover { color: var(--text); }
 .tab.active { color: var(--gold-light); border-bottom-color: var(--amber); }
@@ -85,25 +86,28 @@ body {
 
 /* ─── TYPOGRAPHY ─── */
 h1 {
-  font-family: 'Ma Shan Zheng', cursive;
-  font-size: 1.7rem; color: var(--gold-light);
+  font-family: 'Zen Tokyo Zoo', cursive;
+  font-size: 1.65rem; color: var(--gold-light);
   margin-bottom: 0.25rem;
-  text-shadow: 0 0 30px rgba(201,168,76,0.3);
+  text-shadow: 0 0 30px rgba(201,168,76,0.45), 0 0 60px rgba(201,168,76,0.18);
+  letter-spacing: 0.07em;
 }
 h2 {
-  font-family: 'ZCOOL XiaoWei', serif;
-  font-size: 1.15rem; color: var(--gold);
+  font-family: 'Shippori Mincho B1', serif;
+  font-size: 1.12rem; color: var(--gold);
   margin: 1.6rem 0 0.75rem;
   display: flex; align-items: center; gap: 0.5rem;
+  font-weight: 800;
 }
 h2::before { content: ''; display: inline-block; width: 4px; height: 1em; background: var(--amber); border-radius: 2px; flex-shrink: 0; }
 h3 {
-  font-family: 'Noto Serif SC', serif;
-  font-size: 0.94rem; font-weight: 600; color: var(--text); margin: 1rem 0 0.5rem;
+  font-family: 'Shippori Mincho B1', serif;
+  font-size: 0.95rem; font-weight: 700; color: var(--text); margin: 1rem 0 0.5rem;
 }
 h4 {
-  font-family: 'ZCOOL XiaoWei', serif;
-  font-size: 0.88rem; color: var(--amber-light); margin: 0.8rem 0 0.3rem;
+  font-family: 'DotGothic16', monospace;
+  font-size: 0.82rem; color: var(--amber-light); margin: 0.8rem 0 0.3rem;
+  letter-spacing: 0.04em;
 }
 p { font-size: 0.83rem; line-height: 1.75; color: var(--muted); margin-bottom: 0.7rem; }
 strong { color: var(--text); }
@@ -303,26 +307,65 @@ td strong { color: var(--text); }
   border: 1px solid rgba(201,168,76,0.35); border-radius: 14px; padding: 1rem 1.2rem; margin-bottom: 1rem;
   text-align: center;
 }
-.highlight-box .big { font-family: 'Ma Shan Zheng', cursive; font-size: 1.4rem; color: var(--gold-light); }
+.highlight-box .big { font-family: 'Zen Tokyo Zoo', cursive; font-size: 1.4rem; color: var(--gold-light); }
 .highlight-box .sub { font-size: 0.78rem; color: var(--muted); margin-top: 0.25rem; }
+
+/* ── AI SENSEI ── */
+.ai-section { background: linear-gradient(135deg, rgba(74,48,96,0.18), rgba(14,122,90,0.07)); border: 1px solid rgba(74,48,96,0.5); border-radius: 18px; padding: 1.4rem; margin-bottom: 1.2rem; }
+.ai-section-title { font-family: 'Zen Tokyo Zoo', cursive; font-size: 1rem; color: #c090f0; margin-bottom: 0.4rem; letter-spacing: 0.05em; }
+.ai-section-sub { font-size: 0.74rem; color: var(--muted); margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace; }
+.ai-tab-row { display: flex; gap: 0.5rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
+.ai-tab-btn { padding: 0.5rem 1rem; border-radius: 10px; font-size: 0.72rem; border: 1px solid var(--border); background: var(--card2); color: var(--muted); cursor: pointer; font-family: 'DotGothic16', monospace; transition: all 0.15s; }
+.ai-tab-btn:hover { border-color: rgba(74,48,96,0.6); color: #c090f0; }
+.ai-tab-btn.active { background: rgba(74,48,96,0.25); border-color: rgba(74,48,96,0.7); color: #c090f0; }
+.ai-feature { display: none; }
+.ai-feature.active { display: block; animation: fadeIn 0.2s ease; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
+.ai-chat { background: var(--card2); border: 1px solid var(--border); border-radius: 14px; padding: 1rem; min-height: 200px; max-height: 380px; overflow-y: auto; margin-bottom: 0.75rem; }
+.ai-msg { margin-bottom: 0.85rem; }
+.ai-msg-label { font-family: 'DotGothic16', monospace; font-size: 0.6rem; color: var(--muted); margin-bottom: 0.22rem; letter-spacing: 0.05em; }
+.ai-msg-label.you { color: var(--amber); }
+.ai-msg-label.bot { color: #c090f0; }
+.ai-bubble-user { font-size: 0.82rem; line-height: 1.7; padding: 0.7rem 0.9rem; border-radius: 12px; background: rgba(212,137,13,0.12); border: 1px solid rgba(212,137,13,0.2); color: var(--text); }
+.ai-bubble-bot { font-size: 0.82rem; line-height: 1.7; padding: 0.7rem 0.9rem; border-radius: 12px; background: rgba(74,48,96,0.18); border: 1px solid rgba(74,48,96,0.35); color: var(--gold-light); }
+.ai-bubble-sys { font-size: 0.8rem; line-height: 1.65; padding: 0.65rem 0.9rem; border-radius: 10px; background: rgba(32,176,144,0.08); border: 1px solid rgba(32,176,144,0.2); color: var(--teal); font-style: italic; }
+.ai-input-row { display: flex; gap: 0.6rem; }
+.ai-input { flex: 1; background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 0.7rem 0.9rem; color: var(--text); font-family: 'Noto Sans SC', sans-serif; font-size: 0.82rem; resize: none; min-height: 48px; outline: none; transition: border-color 0.15s; }
+.ai-input:focus { border-color: rgba(74,48,96,0.7); }
+.ai-send-btn { padding: 0.7rem 1.2rem; background: linear-gradient(135deg, #4a3060, #6040a0); border: none; border-radius: 10px; color: #fff; font-family: 'DotGothic16', monospace; font-size: 0.72rem; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+.ai-send-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(74,48,96,0.4); }
+.ai-send-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.ai-quick-btns { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.8rem; }
+.ai-quick { padding: 0.28rem 0.7rem; border-radius: 20px; font-size: 0.68rem; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; font-family: 'JetBrains Mono', monospace; transition: all 0.15s; text-align: left; }
+.ai-quick:hover { border-color: rgba(74,48,96,0.55); color: #c090f0; background: rgba(74,48,96,0.1); }
+.ai-mode-btn { padding: 0.32rem 0.8rem; border-radius: 20px; font-size: 0.68rem; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; font-family: 'DotGothic16', monospace; transition: all 0.15s; }
+.ai-mode-btn.selected { background: rgba(212,137,13,0.15); border-color: var(--amber); color: var(--amber-light); }
+.typing-dots { display: inline-flex; gap: 4px; align-items: center; }
+.typing-dots span { width: 6px; height: 6px; background: #c090f0; border-radius: 50%; animation: bounce 1.2s infinite; }
+.typing-dots span:nth-child(2){animation-delay:.2s} .typing-dots span:nth-child(3){animation-delay:.4s}
+@keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+.callout.ai { background: rgba(74,48,96,0.12); border: 1px solid rgba(74,48,96,0.5); }
+.callout.ai .callout-body strong { color: #c090f0; font-family: 'Shippori Mincho B1', serif; }
 </style>
 </head>
 <body>
 
 <div class="topbar">
-  <div class="topbar-title">🐉 EAM301 · 東方醫學史 · History of Eastern Medicine</div>
-  <div class="topbar-meta">Prof. Choi · Socratic · 2 Exams = 90% · Summer 2026</div>
+  <div class="topbar-title">⛩️ EAM301 東方醫學史</div>
+  <div class="topbar-meta">Prof. Choi · KMD · Socratic · 2 Exams = 90% · VUIM Summer 2026</div>
+  <div id="topbar-belt" style="margin-left:auto;font-family:'DotGothic16',monospace;font-size:0.68rem;color:var(--gold);background:var(--gold-dim);border:1px solid rgba(201,168,76,0.3);border-radius:20px;padding:0.2rem 0.7rem">🤍 白帶 Apprentice</div>
 </div>
 
 <div class="tab-bar">
-  <div class="tab active" onclick="showTab('overview')">🏯 Overview</div>
-  <div class="tab" onclick="showTab('reading')">📚 Reading Tracker</div>
-  <div class="tab" onclick="showTab('socratic')">🥋 Socratic Prep</div>
-  <div class="tab" onclick="showTab('timeline')">⚔️ Timeline</div>
-  <div class="tab" onclick="showTab('concepts')">☯️ Core Concepts</div>
-  <div class="tab" onclick="showTab('texts')">📜 Key Texts</div>
+  <div class="tab active" onclick="showTab('overview')">⛩️ Overview</div>
+  <div class="tab" onclick="showTab('reading')">📚 Tracker</div>
+  <div class="tab" onclick="showTab('socratic')">⚔️ Socratic</div>
+  <div class="tab" onclick="showTab('timeline')">🐉 Timeline</div>
+  <div class="tab" onclick="showTab('concepts')">☯️ Concepts</div>
+  <div class="tab" onclick="showTab('texts')">📜 Texts</div>
   <div class="tab" onclick="showTab('exam1')">🎯 Exam 1</div>
   <div class="tab" onclick="showTab('exam2')">🏆 Exam 2</div>
+  <div class="tab" onclick="showTab('ai')" style="color:#c090f0">🤖 AI Sensei</div>
 </div>
 
 <div class="content">
@@ -1408,6 +1451,255 @@ function saveExam2() {
   msg.style.display = 'inline'; setTimeout(() => msg.style.display='none', 2000);
 }
 loadNotes();
+
+// ── BELT DISPLAY UPDATE ──
+const origBuild = buildReadingList;
+buildReadingList = function() {
+  origBuild();
+  const pct = parseInt(document.getElementById('progress-pct')?.textContent || '0');
+  const belt = pct>=67?'🖤 黑帶 Sifu':pct>=34?'🟤 棕帶 Disciple':'🤍 白帶 Apprentice';
+  const tb = document.getElementById('topbar-belt');
+  if (tb) tb.textContent = belt;
+};
+</script>
+
+<!-- ══════════ AI SENSEI PANEL ══════════ -->
+<div class="panel" id="tab-ai" style="display:none">
+  <h1>🤖 AI Sensei · 先生</h1>
+  <div class="week-sub">Powered by Claude · Three training modes · All content from your EAM301 textbook</div>
+
+  <div class="callout ai">
+    <div class="callout-icon">🧠</div>
+    <div class="callout-body">
+      <strong>Three AI Training Modes</strong>
+      ⚔️ Socratic Sparring — AI plays Prof. Choi and grills you in real-time ·
+      🔍 Context Explainer — get deep exam-targeted explanations for any concept ·
+      ✍️ Answer Critiquer — submit your exam answer and get specific feedback with a grade
+    </div>
+  </div>
+
+  <div class="ai-tab-row">
+    <button class="ai-tab-btn active" onclick="switchAI('spar',this)">⚔️ Socratic Sparring</button>
+    <button class="ai-tab-btn" onclick="switchAI('explain',this)">🔍 Context Explainer</button>
+    <button class="ai-tab-btn" onclick="switchAI('critique',this)">✍️ Answer Critiquer</button>
+  </div>
+
+  <!-- SPARRING -->
+  <div class="ai-feature active" id="ai-spar">
+    <div class="ai-section">
+      <div class="ai-section-title">⚔️ Socratic Sparring Partner</div>
+      <div class="ai-section-sub">AI plays Prof. Choi · Asks a pointed question · Pushes back on weak answers · Grades your depth</div>
+      <div class="ai-quick-btns">
+        <button class="ai-quick" onclick="fillSpar(this)">"Naked History" — what does it actually mean?</button>
+        <button class="ai-quick" onclick="fillSpar(this)">Why did Zhang Zhong Jing write Shang Han Lun?</button>
+        <button class="ai-quick" onclick="fillSpar(this)">Significance of Mawangdui for acupuncture history</button>
+        <button class="ai-quick" onclick="fillSpar(this)">Dongui Bogam — context and innovation</button>
+        <button class="ai-quick" onclick="fillSpar(this)">What makes Sasang Medicine uniquely Korean?</button>
+        <button class="ai-quick" onclick="fillSpar(this)">Why abolition AND revival across all East Asia?</button>
+        <button class="ai-quick" onclick="fillSpar(this)">Bi Lei Qu Xiang — the analogical reasoning method</button>
+        <button class="ai-quick" onclick="fillSpar(this)">Jin-Yuan Four Masters and their schools</button>
+      </div>
+      <div class="ai-chat" id="spar-chat">
+        <div class="ai-msg"><div class="ai-bubble-sys">⚔️ Select a topic above or type your own. I'll play Prof. Choi and question you — be ready to defend your answer with historical context.</div></div>
+      </div>
+      <div class="ai-input-row">
+        <textarea class="ai-input" id="spar-input" placeholder="Type a topic to be questioned on, or type your answer to Choi's question..." rows="2"></textarea>
+        <button class="ai-send-btn" id="spar-btn" onclick="sendSpar()">⚔️ Ask Choi</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPLAINER -->
+  <div class="ai-feature" id="ai-explain">
+    <div class="ai-section">
+      <div class="ai-section-title">🔍 Context Explainer</div>
+      <div class="ai-section-sub">Ask about any figure, text, dynasty, concept, or connection · Exam-targeted depth with WHY</div>
+      <div class="ai-quick-btns">
+        <button class="ai-quick" onclick="fillExplain(this)">Why did Sun Si Miao write about medical ethics?</button>
+        <button class="ai-quick" onclick="fillExplain(this)">How do Liu Qi and host-pathogen theory connect?</button>
+        <button class="ai-quick" onclick="fillExplain(this)">What is the Pi/pancreas mistranslation issue?</button>
+        <button class="ai-quick" onclick="fillExplain(this)">How did Ge Hong's qinghao reference lead to a Nobel Prize?</button>
+        <button class="ai-quick" onclick="fillExplain(this)">What is Wang Qingren's contribution to Blood Stasis?</button>
+        <button class="ai-quick" onclick="fillExplain(this)">What is Bi Lei Qu Xiang and why does it matter?</button>
+        <button class="ai-quick" onclick="fillExplain(this)">How does Mawangdui challenge the traditional narrative?</button>
+        <button class="ai-quick" onclick="fillExplain(this)">Explain the 1959 TCM standardization and who drove it</button>
+      </div>
+      <div class="ai-chat" id="explain-chat">
+        <div class="ai-msg"><div class="ai-bubble-sys">🔍 Select a question or type any EAM301 concept. I'll explain WHAT it is, WHY it happened, what Prof. Choi emphasizes, and how to use it on the exam.</div></div>
+      </div>
+      <div class="ai-input-row">
+        <textarea class="ai-input" id="explain-input" placeholder="Ask about any figure, text, dynasty, concept, or connection..." rows="2"></textarea>
+        <button class="ai-send-btn" id="explain-btn" onclick="sendExplain()">🔍 Explain</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CRITIQUER -->
+  <div class="ai-feature" id="ai-critique">
+    <div class="ai-section">
+      <div class="ai-section-title">✍️ Exam Answer Critiquer</div>
+      <div class="ai-section-sub">Write an exam-style answer · Get graded · Find out exactly what Prof. Choi would want</div>
+      <p style="font-size:0.78rem;color:var(--muted);margin-bottom:0.6rem">Choose an exam-style question:</p>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.9rem">
+        <button class="ai-mode-btn selected" onclick="setCritQ(this,'Explain the historical context that led to the creation of the Dongui Bogam and why it represents a significant departure from Chinese medical tradition.')">Dongui Bogam</button>
+        <button class="ai-mode-btn" onclick="setCritQ(this,'What does the Naked History approach reveal about the authorship of the Huang Di Nei Jing that conventional medical history obscures?')">Nei Jing / Naked History</button>
+        <button class="ai-mode-btn" onclick="setCritQ(this,'Compare the Shang Han Lun and Wen Bing approaches to epidemic disease. What clinical and geographical factors drove the development of each school?')">Shang Han vs Wen Bing</button>
+        <button class="ai-mode-btn" onclick="setCritQ(this,'What is Sasang Constitutional Medicine and what makes it a uniquely Korean contribution to Eastern medicine theory?')">Sasang Medicine</button>
+        <button class="ai-mode-btn" onclick="setCritQ(this,'What is Bi Lei Qu Xiang and why is analogical reasoning the epistemological foundation of Asian herbal medicine?')">Bi Lei Qu Xiang</button>
+      </div>
+      <div class="ai-chat" id="critique-chat">
+        <div class="ai-msg"><div class="ai-msg-label bot">📋 EXAM QUESTION:</div><div class="ai-bubble-sys" id="crit-current-q">Explain the historical context that led to the creation of the Dongui Bogam and why it represents a significant departure from Chinese medical tradition.</div></div>
+      </div>
+      <div class="ai-input-row">
+        <textarea class="ai-input" id="critique-input" placeholder="Write your exam answer here — aim for what Prof. Choi would want: context, WHY, Korean medicine angle..." rows="4"></textarea>
+        <button class="ai-send-btn" id="critique-btn" onclick="sendCritique()">✍️ Critique</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── AI SENSEI ──
+// API key stored in localStorage (never hardcoded)
+function getAPIKey(){
+  let k=localStorage.getItem('eam301_claude_key');
+  if(!k){
+    k=prompt('Enter your Claude API key to activate AI Sensei:','sk-ant-api03-...');
+    if(k&&k.startsWith('sk-ant')) localStorage.setItem('eam301_claude_key',k);
+  }
+  return k||'';
+}
+const API_KEY = getAPIKey();
+const EAM_SYS = `You are an AI study assistant for EAM301 — History of Eastern Medicine at VUIM. Student: Jon (doctoral acupuncture student). Professor: Hyungsuk Choi, L.Ac., KMD (also co-author of the textbook "Naked History of Acupuncture and Herbal Medicine"). 2 exams = 90% of grade. Socratic method — Choi calls on students. Choi specializes in Korean medicine history.
+
+KEY FACTS:
+- Dynasty mnemonic (from textbook): "Happy Sloths Travel Slowly, Yearning Meditative Quietness" = Han, Sui, Tang, Song, Yuan, Ming, Qing
+- Mawangdui texts (168 BCE): ~11 channels, NO acupoints — meridian system developed GRADUALLY, not revealed whole
+- Bi Lei Qu Xiang (比類取象): analogical reasoning — core methodology of Asian herbal medicine
+- Zhang Zhong Jing: epidemic killed 2/3 of family → wrote Shang Han Lun (Six Stages). Context drives innovation.
+- Sun Si Miao: first Chinese medical ethics text, "King of Medicine" (藥王), lived ~100 years
+- Wang Qingren: 42 years corpse dissection, Blood Stasis (瘀血), parallel to Greek "thrombos"
+- Ge Hong: referenced qinghao (青蒿) for fever → Tu Youyou → 2015 Nobel Prize (1,700 year gap)
+- Li Shi Zhen: 27 years, 1,892 medicinals; Pi (脾) possibly mistranslated as "pancreas" by Western scholars
+- Ye Tian Shi: Four Levels (Wei/Qi/Ying/Xue); host-pathogen analogy; studied under 17 teachers
+- Heo Jun: Dongui Bogam (1613) commissioned AFTER Imjin War devastated Korea; used KOREAN herbs (not Chinese imports); democratized medicine; 25 volumes; UNESCO heritage
+- Lee Je-ma: Sasang Constitutional Medicine (1894) — 4 types (Taeyang <1%, Soyang ~30%, Taeeum ~50%, Soeum ~20%); UNIQUELY Korean, NOT from Chinese sources
+- 1959 TCM standardization: Porkert (Germany), Kaptchuk (USA), Maciocia (Italy)
+- Liu Qi/Liu Yin (Six Excesses): analogous to host-pathogen theory; von Pettenkofer 1892 cholera self-experiment
+- Abolition-revival pattern: China (1929→1950→1959), Korea (Japanese suppression→revival), Japan (Meiji→Kampo, Koho-ha vs Kokan Igaku), Taiwan
+- Descartes/Flexner: biomedical model critique — mind-body dualism as Western blind spot
+
+Always emphasize WHY things happened. Focus on "Naked History" approach: who wrote texts, political motivations, what was suppressed. Korean medicine = exam priority.`;
+
+let sparH=[], explH=[], critH=[];
+let currentCritQ = "Explain the historical context that led to the creation of the Dongui Bogam and why it represents a significant departure from Chinese medical tradition.";
+
+function switchAI(mode, btn) {
+  document.querySelectorAll('.ai-feature').forEach(f=>f.classList.remove('active'));
+  document.querySelectorAll('.ai-tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('ai-'+mode).classList.add('active');
+  btn.classList.add('active');
+}
+function fillSpar(btn){ document.getElementById('spar-input').value = btn.textContent.trim(); }
+function fillExplain(btn){ document.getElementById('explain-input').value = btn.textContent.trim(); }
+function setCritQ(btn, q){
+  document.querySelectorAll('.ai-mode-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  currentCritQ = q; critH = [];
+  document.getElementById('crit-current-q').textContent = q;
+  document.getElementById('critique-chat').innerHTML = `<div class="ai-msg"><div class="ai-msg-label bot">📋 EXAM QUESTION:</div><div class="ai-bubble-sys">${q}</div></div>`;
+}
+
+function appendMsg(chatId, role, text) {
+  const chat = document.getElementById(chatId);
+  const div = document.createElement('div');
+  div.className = 'ai-msg';
+  div.innerHTML = role==='user'
+    ? `<div class="ai-msg-label you">🥷 YOU</div><div class="ai-bubble-user">${text.replace(/\n/g,'<br>')}</div>`
+    : `<div class="ai-msg-label bot">🤖 AI SENSEI</div><div class="ai-bubble-bot">${text.replace(/\n/g,'<br>')}</div>`;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+function showTyping(chatId){
+  const chat=document.getElementById(chatId);
+  const d=document.createElement('div'); d.className='ai-msg'; d.id=chatId+'-typing';
+  d.innerHTML=`<div class="ai-msg-label bot">🤖 AI SENSEI</div><div class="ai-bubble-bot"><div class="typing-dots"><span></span><span></span><span></span></div></div>`;
+  chat.appendChild(d); chat.scrollTop=chat.scrollHeight;
+}
+function hideTyping(chatId){ const e=document.getElementById(chatId+'-typing'); if(e)e.remove(); }
+
+async function callClaude(messages, sys) {
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method:'POST',
+    headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+    body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:900,system:sys||EAM_SYS,messages})
+  });
+  const d = await res.json();
+  if(d.error) throw new Error(d.error.message);
+  return d.content?.[0]?.text || 'No response.';
+}
+
+async function sendSpar(){
+  const inp=document.getElementById('spar-input'), btn=document.getElementById('spar-btn');
+  const text=inp.value.trim(); if(!text) return;
+  appendMsg('spar-chat','user',text); inp.value=''; btn.disabled=true;
+  const isFirst = sparH.length===0;
+  const sys = EAM_SYS + `\n\nYou ARE Prof. Hyungsuk Choi. ${isFirst?`Student gave topic: "${text}". Ask ONE sharp Socratic question about this topic. Don't lecture — question. Be demanding and intellectually rigorous. After their answer, push back if weak, affirm if strong, and always connect to WHY things happened historically and the "Naked History" approach.`:'Continue the Socratic dialogue. Push back on weak answers. If the answer is solid, affirm it and move to a harder follow-up. Keep connecting to historical context and the "Naked History" approach.'}`;
+  sparH.push({role:'user',content:isFirst?`I want to discuss: ${text}`:text});
+  showTyping('spar-chat');
+  try {
+    const reply = await callClaude(sparH, sys);
+    hideTyping('spar-chat'); appendMsg('spar-chat','assistant',reply);
+    sparH.push({role:'assistant',content:reply});
+  } catch(e){ hideTyping('spar-chat'); appendMsg('spar-chat','assistant','⚠️ Network error — check connection and try again.'); }
+  btn.disabled=false;
+}
+
+async function sendExplain(){
+  const inp=document.getElementById('explain-input'), btn=document.getElementById('explain-btn');
+  const text=inp.value.trim(); if(!text) return;
+  appendMsg('explain-chat','user',text); inp.value=''; btn.disabled=true;
+  const sys = EAM_SYS+`\n\nProvide a rich, exam-targeted explanation structured as: (1) WHAT it is in brief, (2) WHY it happened/matters historically — the causal context, (3) what Prof. Choi specifically emphasizes about this topic, (4) how to use this on the EAM301 exam. Be detailed, use specific dates and names, emphasize causation over description. Always apply the "Naked History" lens — who wrote it, who funded it, what political forces shaped it.`;
+  explH.push({role:'user',content:text});
+  showTyping('explain-chat');
+  try {
+    const reply = await callClaude(explH, sys);
+    hideTyping('explain-chat'); appendMsg('explain-chat','assistant',reply);
+    explH.push({role:'assistant',content:reply});
+  } catch(e){ hideTyping('explain-chat'); appendMsg('explain-chat','assistant','⚠️ Network error — try again.'); }
+  btn.disabled=false;
+}
+
+async function sendCritique(){
+  const inp=document.getElementById('critique-input'), btn=document.getElementById('critique-btn');
+  const text=inp.value.trim(); if(!text) return;
+  appendMsg('critique-chat','user',text); inp.value=''; btn.disabled=true;
+  const sys = EAM_SYS+`\n\nThe exam question was: "${currentCritQ}"\n\nCritique the student's answer as a strict but fair EAM301 grader who knows Prof. Choi's standards. Format your response exactly as:\n\n📊 GRADE: [A/B/C/D] — [one sentence rationale]\n\n✅ STRONG POINTS:\n[what they got right — be specific]\n\n❌ MISSING/WEAK:\n[what Prof. Choi would expect that's absent — focus on: WHY/context, Korean medicine angle, "Naked History" approach, specific dates/names/causal connections]\n\n🥷 TO GET AN A:\n[2-3 specific sentences that would elevate this to an A answer]`;
+  critH.push({role:'user',content:`My exam answer: ${text}`});
+  showTyping('critique-chat');
+  try {
+    const reply = await callClaude(critH, sys);
+    hideTyping('critique-chat'); appendMsg('critique-chat','assistant',reply);
+    critH.push({role:'assistant',content:reply});
+  } catch(e){ hideTyping('critique-chat'); appendMsg('critique-chat','assistant','⚠️ Network error — try again.'); }
+  btn.disabled=false;
+}
+
+// Enter key support
+document.getElementById('spar-input').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendSpar();}});
+document.getElementById('explain-input').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendExplain();}});
+document.getElementById('critique-input').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendCritique();}});
+
+// fix tab routing to include AI panel
+const _showTab = showTab;
+showTab = function(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  const panel = document.getElementById('tab-'+id);
+  if(panel){ panel.style.display='block'; panel.classList.add('active'); }
+  event.target.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+};
 </script>
 </body>
 </html>
