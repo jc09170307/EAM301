@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EAM301 · History of Eastern Medicine</title>
-<link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Zhi+Mang+Xing&family=Noto+Serif+SC:wght@400;600;900&family=Noto+Sans+SC:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=ZCOOL+KuaiLe&family=Noto+Serif+SC:wght@900&family=Noto+Sans+SC:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#06090f;--card:#0d1420;--card2:#080e18;
@@ -21,13 +21,21 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',sans-seri
   url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0L40 20L20 40L0 20z' fill='%23d4a830' fill-opacity='0.015'/%3E%3C/svg%3E")}
 
 /* ═══ FONTS — Reggae One = bold caricature oriental display; Kaisei Decol = elegant Japanese serif ═══ */
-h1{font-family:'ZCOOL KuaiLe',cursive;font-size:2.1rem;color:var(--glight);margin-bottom:.3rem;
-   text-shadow:0 0 30px rgba(212,168,48,.6),0 0 60px rgba(212,168,48,.25);letter-spacing:.04em;line-height:1.15}
-h2{font-family:'Noto Serif SC',serif;font-size:1.15rem;color:var(--gold);font-weight:700;
-   margin:1.8rem 0 .8rem;display:flex;align-items:center;gap:.5rem}
+h1{
+  font-family:'Ma Shan Zheng','ZCOOL KuaiLe',cursive;
+  font-size:2.4rem;color:var(--glight);margin-bottom:.3rem;line-height:1.15;
+  text-shadow:0 0 18px rgba(212,168,48,.9),0 0 40px rgba(212,168,48,.5),0 0 80px rgba(212,168,48,.2),3px 3px 0 rgba(0,0,0,.9);
+  letter-spacing:.08em;
+}
+h2{
+  font-family:'ZCOOL KuaiLe',cursive;
+  font-size:1.25rem;color:var(--gold);font-weight:400;
+  margin:1.8rem 0 .8rem;display:flex;align-items:center;gap:.5rem;letter-spacing:.07em;
+}
+h2::before{content:'⛩';font-size:.9rem;opacity:.7}
 h2::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(212,168,48,.35),transparent)}
-h3{font-family:'Noto Serif SC',serif;font-size:.98rem;font-weight:700;color:var(--text);margin:1rem 0 .5rem}
-h4{font-family:'ZCOOL KuaiLe',cursive;font-size:.82rem;color:var(--alight);margin:.8rem 0 .35rem;letter-spacing:.04em}
+h3{font-family:'ZCOOL KuaiLe',cursive;font-size:1.05rem;color:var(--text);margin:1rem 0 .5rem;letter-spacing:.06em}
+h4{font-family:'Ma Shan Zheng',cursive;font-size:.95rem;color:var(--alight);margin:.8rem 0 .35rem;letter-spacing:.05em}
 p{font-size:.82rem;line-height:1.82;color:var(--muted);margin-bottom:.7rem}
 strong{color:var(--text)}
 .sub{color:var(--muted);font-size:.72rem;margin-bottom:1.5rem;font-family:'JetBrains Mono',monospace;letter-spacing:.02em}
@@ -35,7 +43,7 @@ strong{color:var(--text)}
 /* ═══ TOPBAR ═══ */
 .topbar{position:sticky;top:0;z-index:100;background:rgba(6,9,15,.97);backdrop-filter:blur(16px);
   border-bottom:2px solid rgba(212,168,48,.3);padding:.5rem 1.2rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
-.logo{font-family:'ZCOOL KuaiLe',cursive;font-size:1.35rem;color:var(--glight);
+.logo{font-family:'Ma Shan Zheng',cursive;font-size:1.5rem;color:var(--glight);letter-spacing:.12em;
   text-shadow:0 0 18px rgba(212,168,48,.7),0 0 36px rgba(212,168,48,.3);letter-spacing:.06em}
 .topbar-meta{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--muted)}
 #topbar-belt{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--gold);
@@ -45,9 +53,9 @@ strong{color:var(--text)}
 .tab-bar{position:sticky;top:46px;z-index:99;background:rgba(6,9,15,.97);backdrop-filter:blur(16px);
   border-bottom:1px solid var(--border);display:flex;overflow-x:auto;scrollbar-width:none}
 .tab-bar::-webkit-scrollbar{display:none}
-.tab{padding:.65rem 1rem;cursor:pointer;font-size:.68rem;white-space:nowrap;
+.tab{padding:.7rem 1.1rem;cursor:pointer;font-size:.76rem;white-space:nowrap;
   color:var(--muted);border-bottom:3px solid transparent;transition:all .15s;
-  font-family:'ZCOOL KuaiLe',cursive;letter-spacing:.04em}
+  font-family:'Ma Shan Zheng',cursive;letter-spacing:.06em}
 .tab:hover{color:var(--text);background:rgba(212,168,48,.03)}
 .tab.active{color:var(--glight);border-bottom-color:var(--amber);background:rgba(212,168,48,.04)}
 
@@ -76,7 +84,7 @@ strong{color:var(--text)}
 .co{border-radius:14px;padding:1rem 1.2rem;margin-bottom:1rem;font-size:.82rem;line-height:1.72;display:flex;gap:.8rem}
 .co-icon{font-size:1.6rem;flex-shrink:0;line-height:1.2}
 .co-body{flex:1}
-.co-body strong{display:block;margin-bottom:.25rem;color:var(--text);font-family:'ZCOOL KuaiLe',cursive;font-size:.88rem;letter-spacing:.03em}
+.co-body strong{display:block;margin-bottom:.25rem;color:var(--text);font-family:'Ma Shan Zheng',cursive;font-size:.94rem;letter-spacing:.05em}
 .co.exam{background:rgba(168,32,16,.08);border:1px solid rgba(168,32,16,.3)}
 .co.exam .co-body strong{color:var(--red2)}
 .co.tip{background:rgba(200,120,16,.08);border:1px solid rgba(200,120,16,.28)}
@@ -127,14 +135,14 @@ td strong{color:var(--text)}
   border-radius:14px;padding:1rem;text-align:center;transition:all .2s}
 .belt-card.on{border-color:var(--amber);background:rgba(200,120,16,.07);box-shadow:0 0 20px rgba(200,120,16,.12)}
 .bi{font-size:2.2rem;margin-bottom:.3rem}
-.bn{font-family:'ZCOOL KuaiLe',cursive;font-size:.95rem;color:var(--glight);letter-spacing:.05em}
+.bn{font-family:'Ma Shan Zheng',cursive;font-size:1.05rem;color:var(--glight);letter-spacing:.08em;text-shadow:0 0 12px rgba(212,168,48,.5)}
 .bc{font-family:'Noto Serif SC',serif;font-size:.73rem;color:var(--muted);margin-top:.1rem}
 
 /* ═══ SOCRATIC Q ═══ */
 .sq{background:var(--card);border:1px solid var(--border);border-radius:14px;
   padding:1.1rem;margin-bottom:.9rem;border-left:4px solid var(--jade)}
 .sq:hover{border-left-color:var(--teal)}
-.sq-txt{font-size:.88rem;color:var(--text);font-style:italic;font-family:'Noto Serif SC',serif;line-height:1.72;margin-bottom:.5rem}
+.sq-txt{font-size:.92rem;color:var(--text);font-style:italic;font-family:'Ma Shan Zheng',cursive;line-height:1.72;margin-bottom:.5rem}
 .sq-prompt{font-size:.7rem;color:var(--teal);margin-bottom:.6rem;font-family:'JetBrains Mono',monospace}
 .sq-a{display:none;padding:.75rem .95rem;background:rgba(24,160,128,.07);border-radius:10px;
   font-size:.8rem;color:var(--glight);border-left:2px solid var(--teal);line-height:1.7;margin-top:.5rem}
@@ -204,7 +212,7 @@ td strong{color:var(--text)}
 /* ═══ DYNASTY MNEMONIC ═══ */
 .dm{background:linear-gradient(135deg,rgba(212,168,48,.1),rgba(12,104,72,.07));
   border:1px solid rgba(212,168,48,.35);border-radius:16px;padding:1.3rem;margin-bottom:1rem;text-align:center}
-.dm-ph{font-family:'ZCOOL KuaiLe',cursive;font-size:1.2rem;color:var(--glight);line-height:1.8;letter-spacing:.05em}
+.dm-ph{font-family:'Ma Shan Zheng',cursive;font-size:1.45rem;color:var(--glight);line-height:1.8;letter-spacing:.05em}
 .dm-row{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin-top:.85rem}
 .dm-chip{background:var(--card);border:1px solid var(--border);border-radius:20px;
   padding:.35rem .85rem;display:flex;flex-direction:column;align-items:center}
@@ -281,7 +289,7 @@ textarea:focus{border-color:rgba(212,168,48,.4)}
 /* ═══ WEEKLY READING CARDS ═══ */
 .wk{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.2rem;margin-bottom:.85rem}
 .wk-hdr{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;margin-bottom:.75rem}
-.wk-title{font-family:'ZCOOL KuaiLe',cursive;font-size:1rem;color:var(--glight);letter-spacing:.04em}
+.wk-title{font-family:'Ma Shan Zheng',cursive;font-size:1.1rem;color:var(--glight);letter-spacing:.07em;text-shadow:0 0 10px rgba(212,168,48,.4)}
 .wk-meta{font-size:.68rem;color:var(--amber);font-family:'JetBrains Mono',monospace;margin-top:.2rem}
 .wk-btn{font-size:.62rem;padding:.22rem .7rem;border-radius:20px;background:rgba(200,120,16,.15);
   color:var(--alight);border:1px solid rgba(200,120,16,.3);font-family:'JetBrains Mono',monospace;cursor:pointer;white-space:nowrap;transition:all .2s}
@@ -315,6 +323,37 @@ textarea:focus{border-color:rgba(212,168,48,.4)}
 <!-- ══ OVERVIEW ══ -->
 <div class="panel active" id="tab-overview">
 <h1>⛩️ EAM301 東方醫學史</h1>
+
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem;margin-bottom:1.5rem">
+  <a href="index.html" style="text-decoration:none">
+    <div style="background:rgba(212,168,48,.12);border:2px solid var(--amber);border-radius:14px;padding:.9rem;text-align:center;cursor:pointer">
+      <div style="font-size:1.8rem">🏯</div>
+      <div style="font-family:'Ma Shan Zheng',cursive;font-size:.88rem;color:var(--glight);margin-top:.3rem;letter-spacing:.05em">Study App</div>
+      <div style="font-size:.62rem;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-top:.15rem">index.html · HERE</div>
+    </div>
+  </a>
+  <a href="workbook.html" style="text-decoration:none">
+    <div style="background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:.9rem;text-align:center;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='rgba(212,168,48,.4)'" onmouseout="this.style.borderColor='var(--border)'">
+      <div style="font-size:1.8rem">📋</div>
+      <div style="font-family:'Ma Shan Zheng',cursive;font-size:.88rem;color:var(--text);margin-top:.3rem;letter-spacing:.05em">Workbook</div>
+      <div style="font-size:.62rem;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-top:.15rem">workbook.html · Print</div>
+    </div>
+  </a>
+  <a href="worksheet.html" style="text-decoration:none">
+    <div style="background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:.9rem;text-align:center;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='rgba(212,168,48,.4)'" onmouseout="this.style.borderColor='var(--border)'">
+      <div style="font-size:1.8rem">✍️</div>
+      <div style="font-family:'Ma Shan Zheng',cursive;font-size:.88rem;color:var(--text);margin-top:.3rem;letter-spacing:.05em">Worksheet</div>
+      <div style="font-size:.62rem;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-top:.15rem">worksheet.html · Fill-in</div>
+    </div>
+  </a>
+  <a href="studyguide.html" style="text-decoration:none">
+    <div style="background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:.9rem;text-align:center;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='rgba(212,168,48,.4)'" onmouseout="this.style.borderColor='var(--border)'">
+      <div style="font-size:1.8rem">📖</div>
+      <div style="font-family:'Ma Shan Zheng',cursive;font-size:.88rem;color:var(--text);margin-top:.3rem;letter-spacing:.05em">Study Guide</div>
+      <div style="font-size:.62rem;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-top:.15rem">studyguide.html · Narrative</div>
+    </div>
+  </a>
+</div>
 <div class="sub">Prof. Hyungsuk Choi, L.Ac., KMD · Socratic Method · Summer 2026 · VUIM</div>
 
 <div class="co exam"><div class="co-icon">🥷</div><div class="co-body"><strong>90% Lives on Two Exams</strong>
