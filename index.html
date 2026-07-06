@@ -294,6 +294,14 @@ textarea.notes { width:100%; min-height:110px; background:rgba(255,255,255,0.04)
 .save-btn { margin-top:0.5rem; padding:0.45rem 1rem; background: var(--gold-dim); border:1px solid var(--gold); color: var(--gold-light); border-radius:8px; font-size:0.8rem; cursor:pointer; font-family:'Inter',sans-serif; }
 .save-msg { color: var(--bamboo); font-size:0.78rem; margin-left:0.6rem; display:none; }
 
+.chat-history { min-height: 200px; max-height: 420px; overflow-y: auto; margin-bottom: 0.8rem; display:flex; flex-direction:column; gap:0.6rem; }
+.chat-bubble { padding: 0.6rem 0.85rem; border-radius: 12px; font-size: 0.85rem; line-height: 1.5; max-width: 88%; white-space: pre-wrap; }
+.chat-bubble.user { align-self: flex-end; background: var(--gold-dim); border: 1px solid var(--gold); color: var(--text); }
+.chat-bubble.claude { align-self: flex-start; background: var(--card); border: 1px solid var(--border); color: var(--text); }
+.chat-bubble.error { align-self: flex-start; background: rgba(214,69,65,0.1); border: 1px solid var(--cinnabar); color: var(--cinnabar-light); }
+.chat-input-row { display: flex; gap: 0.5rem; align-items: flex-end; }
+.chat-input { flex: 1; padding: 0.6rem 0.7rem; border-radius: 8px; border: 1px solid var(--border); background: rgba(255,255,255,0.04); color: var(--text); font-family: 'Inter', sans-serif; font-size: 0.85rem; resize: vertical; }
+
 footer { text-align:center; padding: 2rem 1rem; color: var(--muted); font-size: 0.7rem; }
 
 @media (max-width: 640px) {
@@ -329,6 +337,7 @@ footer { text-align:center; padding: 2rem 1rem; color: var(--muted); font-size: 
   <div class="tab" onclick="showTab('timeline', this)">⏳ Timeline</div>
   <div class="tab" onclick="showTab('exam1', this)">🎯 Exam 1 Prep</div>
   <div class="tab" onclick="showTab('exam2', this)">🏆 Exam 2 Prep</div>
+  <div class="tab" onclick="showTab('ask', this)">🤖 Ask Claude</div>
 </div>
 
 <div class="content">
@@ -1949,7 +1958,37 @@ footer { text-align:center; padding: 2rem 1rem; color: var(--muted); font-size: 
   </div>
 </div>
 
+<!-- ASK CLAUDE -->
+<div class="panel" id="tab-ask">
+  <h1>🤖 Ask Claude</h1>
+  <div class="week-sub">Talk through a Socratic question, get unstuck on a concept, or ask for a second angle — powered by your own Cloudflare Worker, not embedded in this file.</div>
+
+  <div class="callout sifu" id="askSetupCallout">
+    <div class="callout-icon">⚙️</div>
+    <div class="callout-body"><strong>One-time setup</strong>This tab needs your Worker's URL to actually talk to Claude. Paste it below once — it's saved only in your browser's local storage, never in this file. If you haven't deployed the Worker yet, this tab won't do anything until you do.</div>
+  </div>
+
+  <div class="card">
+    <h3>Worker URL</h3>
+    <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+      <input type="text" id="workerUrlInput" placeholder="https://your-worker-name.your-subdomain.workers.dev" style="flex:1;min-width:220px;padding:0.55rem 0.7rem;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.78rem">
+      <button class="save-btn" onclick="saveWorkerUrl()">💾 Save URL</button>
+    </div>
+    <div class="save-msg" id="workerUrlMsg" style="display:block;margin-top:0.4rem">✓ Saved</div>
+  </div>
+
+  <div class="card" id="chatCard">
+    <div id="chatHistory" class="chat-history"></div>
+    <div class="chat-input-row">
+      <textarea id="chatInput" class="chat-input" rows="2" placeholder="Ask about a chapter, a Socratic question, anything from the course..."></textarea>
+      <button class="save-btn" id="chatSendBtn" onclick="sendChatMessage()">Send</button>
+    </div>
+    <div style="font-size:0.7rem;color:var(--muted);margin-top:0.4rem">Currently viewing: <span id="chatContextLabel" class="mono">Overview</span> — this gets sent along as context automatically.</div>
+  </div>
+</div>
+
 </div><!-- /content -->
+
 
 <footer>EAM301 Scholar's Study App · Built for VUIM DAcHM · 師父 rank awaits</footer>
 
@@ -1966,6 +2005,9 @@ function showTab(id, el) {
   el.classList.add('active');
   window.scrollTo({top:0, behavior:'smooth'});
   if (id === 'dojo') showChapter(currentChapter, true);
+  window._currentTabLabel = el.textContent.trim();
+  const ctxLabel = document.getElementById('chatContextLabel');
+  if (ctxLabel) ctxLabel.textContent = window._currentTabLabel;
 }
 
 // ── CHAPTER SUBTABS (dojo + overview links) ──
@@ -2150,6 +2192,80 @@ function showFortune() {
   clearTimeout(window._fortuneTimer);
   window._fortuneTimer = setTimeout(() => slip.classList.remove('show'), 5000);
 }
+
+// ── ASK CLAUDE (talks to YOUR Cloudflare Worker — no key in this file) ──
+const WORKER_URL_KEY = 'eam301_worker_url';
+(function initWorkerUrl() {
+  const saved = localStorage.getItem(WORKER_URL_KEY);
+  if (saved) document.getElementById('workerUrlInput').value = saved;
+})();
+
+function saveWorkerUrl() {
+  const val = document.getElementById('workerUrlInput').value.trim();
+  localStorage.setItem(WORKER_URL_KEY, val);
+  const msg = document.getElementById('workerUrlMsg');
+  msg.style.display = 'block';
+  setTimeout(() => msg.style.display = 'none', 2000);
+}
+
+function appendChatBubble(text, cls) {
+  const hist = document.getElementById('chatHistory');
+  const div = document.createElement('div');
+  div.className = 'chat-bubble ' + cls;
+  div.textContent = text;
+  hist.appendChild(div);
+  hist.scrollTop = hist.scrollHeight;
+  return div;
+}
+
+async function sendChatMessage() {
+  const input = document.getElementById('chatInput');
+  const message = input.value.trim();
+  if (!message) return;
+  const workerUrl = localStorage.getItem(WORKER_URL_KEY);
+  if (!workerUrl) {
+    appendChatBubble('Set up your Worker URL above first — paste it in the box and hit Save URL. See the setup guide for how to deploy the Worker itself.', 'error');
+    return;
+  }
+  appendChatBubble(message, 'user');
+  input.value = '';
+  const sendBtn = document.getElementById('chatSendBtn');
+  sendBtn.disabled = true;
+  sendBtn.textContent = '...';
+  const thinking = appendChatBubble('Thinking...', 'claude');
+  try {
+    const res = await fetch(workerUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message, context: window._currentTabLabel || 'Overview' }),
+    });
+    const data = await res.json();
+    thinking.remove();
+    if (data.error) {
+      appendChatBubble('Error: ' + (data.detail || data.error), 'error');
+    } else {
+      appendChatBubble(data.reply || '(empty response)', 'claude');
+    }
+  } catch (err) {
+    thinking.remove();
+    appendChatBubble('Could not reach your Worker. Check the URL is correct and the Worker is deployed. (' + err.message + ')', 'error');
+  } finally {
+    sendBtn.disabled = false;
+    sendBtn.textContent = 'Send';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const input = document.getElementById('chatInput');
+  if (input) {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendChatMessage();
+      }
+    });
+  }
+});
 </script>
 
 </body>
