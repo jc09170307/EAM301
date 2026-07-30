@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EAM301 · Question Bank & Answer Key</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Long+Cang&family=ZCOOL+XiaoWei&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@500;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+\
+:root {
+  /* Warm "night market / rice paper" palette — light by default */
+  --ink: #FFF8EC;
+  --ink-2: #FFEFD6;
+  --gold: #C9821A;
+  --gold-light: #A66A15;
+  --gold-dim: rgba(201,130,26,0.10);
+  --cinnabar: #D64541;
+  --cinnabar-light: #B23330;
+  --jade: #2F8F72;
+  --jade-light: #1F6E56;
+  --bamboo: #6FA050;
+  --plum: #B85C86;
+  --text: #2E2418;
+  --text-dim: #5B4A36;
+  --muted: #8A7860;
+  --border: rgba(201,130,26,0.28);
+  --card: rgba(201,130,26,0.055);
+  font-synthesis: none;
+}
+body.dark {
+  --ink: #1B1410;
+  --ink-2: #241A14;
+  --gold: #F0B349;
+  --gold-light: #F5C878;
+  --gold-dim: rgba(240,179,73,0.15);
+  --cinnabar: #FF6B5B;
+  --cinnabar-light: #FF9186;
+  --jade: #5FCBA6;
+  --jade-light: #8AD9BC;
+  --bamboo: #9AC97A;
+  --plum: #E893BC;
+  --text: #F5E9D6;
+  --text-dim: #C9B79C;
+  --muted: #9C8A70;
+  --border: rgba(240,179,73,0.24);
+  --card: rgba(255,255,255,0.045);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--ink);
+  background-image:
+    radial-gradient(ellipse 900px 500px at 15% -10%, var(--gold-dim), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 100% 20%, rgba(47,143,114,0.06), transparent 60%);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  line-height: 1.6;
+}
+h1, h2, h3, h4 { font-family: 'Dela Gothic One', 'Noto Serif SC', cursive; font-weight: 700; letter-spacing: 0.01em; margin: 0 0 0.5rem; }
+.brush { font-family: 'Ma Shan Zheng', cursive; }
+.hanzi { font-family: 'Noto Serif SC', serif; font-weight: 700; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+
+.seal {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; flex-shrink: 0;
+  background: var(--cinnabar); color: #fff;
+  font-family: 'Noto Serif SC', serif; font-size: 15px; font-weight: 700;
+  border-radius: 6px; transform: rotate(-4deg);
+  box-shadow: 0 2px 6px rgba(214,69,65,0.35);
+  border: 1.5px solid rgba(255,255,255,0.35);
+}
+
+.brush-divider { width: 100%; height: 14px; opacity: 0.6; margin: 1.2rem 0; }
+.brush-divider path { stroke: var(--gold); stroke-width: 2; fill: none; stroke-linecap: round; }
+
+.bamboo-wrap { display: flex; align-items: center; gap: 2px; margin: 0.6rem 0 1rem; }
+.bamboo-node {
+  flex: 1; height: 22px; background: rgba(111,160,80,0.12);
+  border: 1px solid rgba(111,160,80,0.35); border-radius: 5px;
+  position: relative; overflow: hidden;
+}
+.bamboo-node.filled { background: linear-gradient(180deg, var(--bamboo), var(--jade)); border-color: var(--bamboo); }
+.bamboo-node::after {
+  content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px;
+  background: rgba(0,0,0,0.12);
+}
+
+.taiji-toggle {
+  width: 30px; height: 30px; border-radius: 50%; cursor: pointer; flex-shrink: 0;
+  background: linear-gradient(90deg, #fff 50%, #1a1a1a 50%);
+  border: 2px solid var(--gold); position: relative; overflow: hidden;
+}
+.taiji-toggle::before, .taiji-toggle::after {
+  content: ''; position: absolute; width: 15px; height: 15px; border-radius: 50%; left: 7.5px;
+}
+.taiji-toggle::before { background: #fff; top: -0.5px; }
+.taiji-toggle::after { background: #1a1a1a; bottom: -0.5px; }
+
+.callout { display: flex; gap: 0.75rem; padding: 0.9rem 1rem; border-radius: 12px; margin-bottom: 1rem; border: 1px solid; }
+.callout.sifu { background: var(--gold-dim); border-color: var(--gold); }
+.callout.exam { background: rgba(214,69,65,0.09); border-color: var(--cinnabar); }
+.callout.jade { background: rgba(47,143,114,0.09); border-color: var(--jade); }
+.callout-icon { font-size: 1.3rem; flex-shrink: 0; }
+.callout-body strong { color: var(--gold-light); display: block; margin-bottom: 0.25rem; font-family: 'Dela Gothic One', 'Noto Serif SC', cursive; font-size: 0.86rem; letter-spacing: 0.01em; }
+.callout.exam .callout-body strong { color: var(--cinnabar-light); }
+.callout.jade .callout-body strong { color: var(--jade-light); }
+.callout-body { font-size: 0.86rem; color: var(--text-dim); }
+
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 1.1rem 1.2rem; margin-bottom: 1rem; }
+.rank-badge {
+  display: inline-block; font-family: 'Noto Serif SC', serif; font-size: 0.72rem;
+  padding: 0.15rem 0.55rem; border-radius: 20px; border: 1px solid var(--gold);
+  color: var(--gold-light); background: var(--gold-dim); letter-spacing: 0.02em;
+}
+
+table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+th { font-family: 'Dela Gothic One', 'Noto Serif SC', cursive; font-size: 0.75rem; letter-spacing: 0.03em; text-transform: uppercase; padding: 0.6rem 0.7rem; text-align: left; background: var(--gold-dim); color: var(--gold-light); border-bottom: 2px solid var(--gold); }
+td { padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--border); color: var(--text-dim); vertical-align: top; }
+tr:nth-child(even) td { background: rgba(0,0,0,0.015); }
+
+/* ── Timeline (shared by Study App and Workbook) ── */
+.timeline { position: relative; padding-left: 2rem; margin-bottom: 1.2rem; }
+.timeline::before { content:''; position:absolute; left:0.6rem; top:0; bottom:0; width:2px; background: linear-gradient(to bottom, var(--gold), transparent); }
+.tl-item { position: relative; margin-bottom: 1.1rem; }
+.tl-dot { position:absolute; left:-1.55rem; top:0.3rem; width:10px; height:10px; border-radius:50%; background:var(--gold); border:2px solid var(--ink); }
+.tl-dot.korea { background: var(--jade); }
+.tl-date { font-size: 0.68rem; color: var(--gold); margin-bottom:0.15rem; }
+.tl-date.korea { color: var(--jade-light); }
+.tl-title { font-size: 0.86rem; font-weight:600; color: var(--text); margin-bottom:0.15rem; }
+.tl-desc { font-size: 0.79rem; color: var(--text-dim); line-height:1.55; }
+
+body { background: #fff; color: #2a2418; }
+.controls { position: sticky; top:0; z-index:20; background: var(--ink); padding: 0.8rem 1.2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; }
+.ctrl-btn { background: var(--gold); color:#1a1408; border:none; padding:0.55rem 1.1rem; border-radius:8px; font-weight:700; cursor:pointer; font-family:'Inter',sans-serif; }
+.ctrl-label { color: var(--text-dim); font-size:0.75rem; }
+.ctrl-back { color: var(--gold-light); font-size:0.75rem; text-decoration:none; border:1px solid var(--border); padding:0.35rem 0.7rem; border-radius:20px; }
+.ctrl-back:hover { border-color: var(--gold); }
+
+.page {
+  max-width: 800px; margin: 1.5rem auto; background: #fdfaf1;
+  border: 1px solid #d8cfae; border-radius: 4px; padding: 2cm 2cm 1.4cm;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35); color: #2a2418;
+  overflow-wrap: break-word;
+  display: flex; flex-direction: column;
+}
+.page h1, .page h2 { color: #6b4f1a; font-family:'Dela Gothic One','Noto Serif SC',cursive; }
+.page h3 { color: #6b4f1a; font-family:'Dela Gothic One','Noto Serif SC',cursive; }
+.page .callout { background: rgba(201,168,76,0.10); border-color:#c9a84c; }
+.page .callout.exam { background: rgba(214,69,65,0.08); border-color:#b7472a; }
+.page .callout.jade { background: rgba(47,143,114,0.08); border-color:#2f8f72; }
+.page .callout-body { color:#4a4230; }
+.page .callout-body strong { color:#6b4f1a; }
+.page .callout.exam .callout-body strong { color:#a83a2e; }
+.page .callout.jade .callout-body strong { color:#1f6e56; }
+.page .keypoints { color:#4a4230; }
+.page table td { color:#4a4230; border-bottom-color:#e3d9b8; }
+.page table th { background:#eee0b8; color:#6b4f1a; border-bottom-color:#c9a84c; }
+.page .tl-desc { color:#4a4230; }
+.page .tl-title { color:#2a2418; }
+
+/* Cover */
+.cover-page { padding: 2.4cm 2.2cm 1.6cm; }
+.cover-center { text-align:center; padding: 1rem 0 0.6rem; }
+.cover-hanzi { font-size: 3.4rem; color:#b7472a; display:block; margin-bottom:0.5rem; }
+.cover-title { font-size: 2.1rem; margin-bottom:0.4rem; letter-spacing:0.02em; }
+.cover-sub { font-size: 1rem; color:#5a5142; margin-bottom:0.6rem; }
+.cover-meta { font-size: 0.74rem; color:#8a7860; }
+.cover-taiji { width:56px; height:56px; margin: 0.9rem auto 0; color:#c9a84c; opacity:0.7; }
+.sloth-row { display:flex; align-items:center; justify-content:center; gap:1rem; margin-bottom:1rem; }
+.sloth-icon-sm { width:46px; height:46px; color:#a83a2e; flex-shrink:0; }
+.brush-divider-wrap { margin: 1.6rem 0 1.8rem; }
+.brush-divider path { stroke:#c9a84c; }
+.cover-callouts { display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 1.8rem; }
+.cover-callouts .callout { margin-bottom: 0; padding: 1.1rem 1.2rem; }
+.cover-mnemonic { border: 1.5px solid #c9a84c; border-radius: 12px; padding: 1.3rem 1.4rem; background: rgba(201,168,76,0.06); text-align: center; }
+.cover-mnemonic-label { font-size: 0.74rem; color:#8a7860; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.5rem; }
+.cover-mnemonic-phrase { font-size: 1.5rem; color:#a83a2e; margin-bottom: 1rem; line-height:1.3; }
+.mn-row { display:grid; grid-template-columns: repeat(7, 1fr); gap: 0.4rem; }
+.mn-item { background:#fff; border:1px solid #e3d9b8; border-radius:8px; padding:0.5rem 0.2rem; }
+.mn-word { font-size:0.68rem; font-weight:700; color:#a83a2e; }
+.mn-dyn { font-size:0.62rem; color:#4a4230; margin-top:0.15rem; }
+.mn-dates { font-size:0.55rem; color:#8a7860; margin-top:0.1rem; }
+@media (max-width: 600px) { .mn-row { grid-template-columns: repeat(2,1fr); } }
+
+.hdr { display:flex; justify-content:space-between; align-items:flex-start; border-bottom:2px solid #c9a84c; padding-bottom:0.8rem; margin-bottom:1rem; gap:0.8rem; }
+.hdr-hanzi { font-size: 2.2rem; color:#b7472a; }
+.hdr-title { font-weight:700; font-size:1.25rem; color:#6b4f1a; }
+.hdr-sub { font-size:0.8rem; color:#5a5142; margin-top:0.15rem; }
+.hdr-meta { text-align:right; font-size:0.72rem; color:#7a715e; white-space:nowrap; }
+
+.q-block .question { font-size:0.85rem; margin: 0 0 0.5rem; color:#2a2418; overflow-wrap:break-word; }
+.q-num { color:#b7472a; font-weight:700; margin-right:0.3rem; }
+
+.fill-line { border-bottom:1px solid #a89a70; height:1.5rem; display:block; margin-bottom:0.3rem; }
+.fill-box { border:1px solid #a89a70; border-radius:4px; min-height:70px; margin-bottom:0.6rem; }
+
+/* CO2 worksheet */
+.co2-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem; }
+.wuxing-page-wrap { max-width: 380px; margin: 0.8rem auto; text-align:center; }
+.wuxing-page-wrap svg { width: 100%; height: auto; }
+.wx-green { color:#3d5e34; font-weight:700; }
+.wx-red { color:#a83a2e; font-weight:700; }
+.co2-col { border:1px solid #e3d9b8; border-radius:8px; padding:0.7rem; }
+.co2-col-head { font-family:'Dela Gothic One','Noto Serif SC',cursive; font-weight:700; font-size:0.85rem; margin-bottom:0.5rem; }
+.co2-prompt { font-size:0.72rem; color:#7a715e; margin:0.4rem 0 0.2rem; }
+
+/* Glossary */
+.gloss-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.9rem 1.3rem; margin-top:0.8rem; }
+.gloss-item { border-left:3px solid #2f8f72; padding-left:0.7rem; }
+.gloss-term { font-size:1.05rem; color:#1f6e56; }
+.gloss-def { font-size:0.78rem; color:#4a4230; margin-top:0.15rem; }
+
+/* Checklist */
+.checklist-item { display:flex; align-items:flex-start; gap:0.6rem; font-size:0.85rem; color:#2a2418; margin-bottom:0.6rem; }
+.checkbox { width:16px; height:16px; border:1.5px solid #a83a2e; border-radius:4px; flex-shrink:0; margin-top:0.15rem; }
+
+/* Weekly notes pages */
+.notes-page .hdr-meta { font-size:0.8rem; }
+.notes-label { font-size:0.82rem; font-weight:600; color:#6b4f1a; margin: 1rem 0 0.4rem; }
+.notes-big { min-height: 220px; }
+.notes-med { min-height: 130px; }
+
+.page-footer { margin-top:1.5rem; display:flex; justify-content:space-between; font-size:0.62rem; color:#9a8f6e; border-top:1px solid #d8cfae; padding-top:0.35rem; font-family:'JetBrains Mono',monospace; }
+
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { background:#fff; font-size: 13px; }
+  .controls { display:none; }
+  .page {
+    box-shadow:none; border-radius:0; max-width:100%; width:auto;
+    margin:0; padding:1.0cm 1.3cm; box-sizing: border-box;
+    min-height: 10.65in;
+    page-break-after: always; break-after: page;
+    display: block;
+  }
+  .page:last-child { page-break-after: avoid; break-after: avoid; }
+  .page-footer { margin-top: 1rem; }
+  .callout, .q-block .question, .co2-col, .gloss-item, .checklist-item, .mn-item,
+  table, tr, .fill-box, .reading-item, li, .hdr { page-break-inside: avoid; }
+  h1, h2, h3 { page-break-after: avoid; }
+  p, .sg-body { orphans: 3; widows: 3; }
+  .callout { padding: 0.75rem 0.9rem; margin-bottom: 0.7rem; }
+  .callout-body { font-size: 0.78rem; line-height: 1.4; }
+  .keypoints { font-size: 0.78rem; margin: 0.4rem 0; }
+  .keypoints li { margin-bottom: 0.25rem; }
+  h3 { font-size: 0.98rem; margin: 0.7rem 0 0.4rem; }
+  .hdr { padding-bottom: 0.55rem; margin-bottom: 0.7rem; }
+  .hdr-hanzi { font-size: 1.9rem; }
+  .hdr-title { font-size: 1.1rem; }
+  .hdr-sub { font-size: 0.78rem; }
+  .q-block .question { font-size: 0.76rem; margin-bottom: 0.3rem; line-height: 1.3; }
+  .page-footer { margin-top: 0.9rem; padding-top: 0.3rem; }
+  table { font-size: 0.82rem; }
+  td, th { padding: 0.4rem 0.55rem; }
+  .tl-item { margin-bottom: 0.2rem; }
+  .tl-date { font-size: 0.63rem; }
+  .tl-title { font-size: 0.76rem; margin-bottom: 0.02rem; }
+  .tl-desc { font-size: 0.66rem; line-height: 1.15; }
+  .timeline { padding-left: 1.5rem; margin-bottom: 0.5rem; }
+  .cover-callouts { gap: 0.7rem; margin-bottom: 1rem; }
+  .cover-callouts .callout { padding: 0.7rem 0.9rem; }
+  .cover-hanzi { font-size: 2.2rem; }
+  .cover-title { font-size: 1.5rem; margin-bottom: 0.1rem; }
+  .cover-sub { font-size: 0.78rem; margin-bottom: 0.3rem; }
+  .cover-taiji { width: 34px; height: 34px; margin-top: 0.4rem; }
+  .brush-divider-wrap { margin: 0.7rem 0 0.8rem; }
+  .cover-mnemonic { padding: 0.7rem 0.8rem; }
+  .sloth-row { gap: 0.5rem; margin-bottom: 0.5rem; }
+  .sloth-icon-sm { width: 32px; height: 32px; }
+  .cover-mnemonic-phrase { font-size: 1.05rem; margin-bottom: 0; }
+  .mn-row { gap: 0.25rem; }
+  .mn-item { padding: 0.3rem 0.1rem; }
+}
+@media (max-width:600px) {
+  .co2-grid { grid-template-columns:1fr; }
+  .gloss-grid { grid-template-columns:1fr; }
+}
+
+/* ── Question Bank specific ── */
+.qa-block { margin-bottom: 1.1rem; padding-bottom: 0.95rem; border-bottom: 1px dashed var(--border); }
+.qa-block:last-child { border-bottom: none; margin-bottom: 0; }
+.qa-q { font-weight: 700; color: var(--text); font-size: 0.87rem; margin-bottom: 0.4rem; line-height: 1.4; }
+.qa-q .qa-num { font-family:'JetBrains Mono',monospace; color: var(--gold-light); margin-right: 0.45rem; font-weight:700; }
+.qa-a { font-size: 0.82rem; color: var(--text-dim); line-height: 1.58; margin-bottom: 0.55rem; }
+.conf-tag { display:inline-flex; align-items:center; gap:0.32rem; font-family:'JetBrains Mono',monospace; font-size: 0.62rem; padding: 0.18rem 0.6rem; border-radius: 20px; letter-spacing: 0.02em; }
+.conf-verified { background: rgba(47,143,114,0.12); color: var(--jade-light); border: 1px solid var(--jade); }
+.conf-check { background: rgba(214,69,65,0.1); color: var(--cinnabar-light); border: 1px solid var(--cinnabar); }
+.res-section { margin-bottom: 1.1rem; }
+.res-section h4 { font-family:'Dela Gothic One','Noto Serif SC',cursive; font-size: 0.86rem; color: var(--gold-light); margin-bottom: 0.4rem; }
+.res-item { padding: 0.4rem 0; border-bottom: 1px dashed var(--border); font-size: 0.82rem; color: var(--text-dim); }
+.res-item:last-child { border-bottom: none; }
+.res-item strong { color: var(--text); }
+.res-note { display: block; font-size: 0.76rem; color: var(--muted); margin-top: 0.15rem; font-style: italic; }
+@media print {
+  .qa-block, .res-item, .res-section { page-break-inside: avoid; }
+}
+</style>
+<style id="pageSizeStyle">@page { size: letter; margin: 0.25cm; }</style>
+</head>
+<body>
+
+<div class="controls">
+  <button class="ctrl-btn" onclick="printAs('letter')">🖨️ Print — Letter</button>
+  <button class="ctrl-btn" onclick="printAs('remarkable')">📱 Print — reMarkable</button>
+  <span class="ctrl-label brush" style="font-size:1rem;color:var(--gold-light)">問 EAM301 Question Bank &amp; Answer Key</span>
+  <a href="index.html" class="ctrl-back">← Back to Study App</a>
+</div>
+
+<div class="page cover-page">
+  <div class="cover-center">
+    <div class="cover-hanzi brush">問答</div>
+    <h1 class="cover-title">Question Bank &amp; Answer Key</h1>
+    <div class="cover-sub">The instructor's actual question bank from Introduction_History, answered from course material</div>
+    <div class="cover-taiji"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<circle cx="50" cy="34" r="8" fill="currentColor"/>
+<circle cx="50" cy="55" r="6" fill="none" stroke="currentColor" stroke-width="1.6" opacity="0.55"/>
+<path d="M28 70 Q50 90 72 70 Q68 82 50 84 Q32 82 28 70 Z" fill="currentColor" opacity="0.22"/>
+<path d="M30 34 Q22 30 24 20" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+<path d="M70 34 Q78 30 76 20" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+</svg></div>
+  </div>
+
+  <div class="callout exam">
+    <div class="callout-icon">🥋</div>
+    <div class="callout-body"><strong>This is not my invented questions — this is his</strong>Straight from Prof. Choi, Week 1: "Most of the questions will be from this question bank... it may be more than 50%, and this question will be there in final test." These are the actual questions from the Introduction_History document, not Socratic prompts generated separately.</div>
+  </div>
+  <div class="callout sifu">
+    <div class="callout-icon">⚖️</div>
+    <div class="callout-body"><strong>Read this before you use these answers</strong>Every answer below is marked with a confidence tag. "Verified" means traced to specific course material with direct access. "Double-check" means best reasoning was given but the exact fact (a number, a name, a title) couldn't be confirmed — don't write those into an exam answer without checking the chapter or lecture recording yourself first.</div>
+  </div>
+  <div class="callout jade">
+    <div class="callout-icon">🐉</div>
+    <div class="callout-body"><strong>The most important instruction in the whole course</strong>Direct quote, Week 1: "For essay questions, you will receive highest score by directly referencing topics discussed in the class, not the AI, not the textbook, but something we discussed here." These written answers are a strong starting scaffold — but for the essay questions specifically, go back to your own notes or the lecture recording and swap in what Choi actually said in class before you write your real answer.</div>
+  </div>
+  <div class="callout sifu">
+    <div class="callout-icon">🏯</div>
+    <div class="callout-body"><strong>Coverage note — confirmed by reading the full 17-page document directly</strong>Weeks 1, 2, 3–4, 5, 6, 7, and 8 all have printed question lists, and all are covered below. Week 9 (Chapter 6, East and West) genuinely has no printed question list in this document — it isn't a search gap, the document goes straight from the Week 8 list to a resources page and student testimonials. Week 10 is review only, no new content. If Choi releases Week 9 questions later, they can be added the same way.</div>
+  </div>
+  <div class="callout jade">
+    <div class="callout-icon">📚</div>
+    <div class="callout-body"><strong>Choi's own recommended study resources</strong>Straight from the same document — his personal picks, not suggestions. See the resources page at the end of this document for the full list: books, apps, YouTube channels, flashcards, and free WHO references.</div>
+  </div>
+
+  <div class="page-footer"><span>EAM301 · Question Bank &amp; Answer Key</span><span>Cover</span></div>
+</div>
+
+
+
+<div class="page">
+  <div class="hdr">
+    <div><div class="hdr-hanzi brush">問答</div>
+    <div class="hdr-title">Week 1 — Prologue, Appendix</div>
+    <div class="hdr-sub">Instructor's own Question Bank — Prof. Choi says over 50% of Test A/B comes directly from this list</div></div>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">01</span>Why is it important to learn history when studying acupuncture?</div>
+    <div class="qa-a">History gives you the context that makes the medicine coherent rather than a list of memorized techniques. The book frames this directly: understanding AHM's identity depends on knowing where its ideas came from, the same way understanding Shakespeare requires knowing British history and culture. Without that context, a practitioner can perform techniques without understanding why they work the way they do, or how the tradition's logic holds together.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">02</span>What is the difference between TCM history and Medical history?</div>
+    <div class="qa-a">"Medical history" is the broad, general history of medicine as a human activity across all cultures. "TCM history" is specific: it's the history of one particular tradition, inseparable from Chinese philosophy, cosmology, dynastic politics, and cultural identity — and "TCM" itself is a specific, modern (20th-century, 1959-standardized) institutional construction, not a synonym for "Chinese medicine" across all of history. So TCM history is really a subset — the recent, standardized chapter — within the much longer and more diverse history of Chinese and East Asian medicine.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+
+  <div class="page-footer"><span>EAM301 · Question Bank</span><span>Week 1</span></div>
+</div>
+
+
+<div class="page">
+  <div class="hdr">
+    <div><div class="hdr-hanzi brush">問答</div>
+    <div class="hdr-title">Week 2 — Chapter 1 — History of AHM, Dynasties</div>
+    <div class="hdr-sub">Instructor's own Question Bank — Prof. Choi says over 50% of Test A/B comes directly from this list</div></div>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">01</span>When the shift from 'Mythos to Logos' occurred around the Yellow River region, it influenced the formation of TCM. (Discuss/confirm)</div>
+    <div class="qa-a">True, and it's the central move of Chapter 1: the Yellow River region is the traditional cultural cradle where legendary, myth-based accounts of medicine (Pan Gu, the Three Sovereigns) gave way to systematized, reasoned medical theory. That regional cultural cradle is also where the Han-dynasty compilations (Nei Jing, Shang Han Lun) that formalized AHM's theoretical foundation were produced.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">02</span>What is the title of the encyclopedia-like book published by Li during the Ming dynasty, which contains comprehensive knowledge about Materia Medica?</div>
+    <div class="qa-a">Ben Cao Gang Mu (本草綱目), Compendium of Materia Medica, by Li Shi Zhen. Took 27 years to compile; catalogued 1,892 medicinals.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">03</span>Discuss the influence of the Mongolian invasion on TCM reform.</div>
+    <div class="qa-a">The Mongol conquest and establishment of the Yuan dynasty disrupted the existing Song/Jin medical establishment and social order. That disruption is part of the backdrop for the Jin-Yuan "Medical Reform" period and the rise of the Four Great Masters, who broke from prior consensus and developed competing new theoretical schools partly in response to the instability and changing clinical realities of the era.</div>
+    <span class="conf-tag conf-check">⚠ double-check against the chapter/recording</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">04</span>Which dynasty came after the Tang and before the Jin/Yuan dynasty?</div>
+    <div class="qa-a">Song Dynasty.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">05</span>Describe key events that happened during the Ming Dynasty outside of China's borders.</div>
+    <div class="qa-a">The Ming dynasty runs roughly parallel to the European Renaissance and the Age of Exploration — a period of major cultural, artistic, and scientific transformation in Europe, and of European powers beginning transoceanic exploration and colonization. The book explicitly uses this parallel to help place Ming-dynasty China on a global timeline.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">06</span>Did the Chinese civilization start first around the Yangtze River in the south or the Yellow River in the north?</div>
+    <div class="qa-a">The Yellow River, in the north — the traditionally taught cradle of Chinese civilization (Longshan culture and the earliest dynastic states are centered there), though Yangtze River-region cultures were also significant and are increasingly recognized by archaeologists.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">07</span>List the following dynasties in the correct chronological order: Song, Yuan, Qing, Sui, Ming, Han, Tang</div>
+    <div class="qa-a">Han → Sui → Tang → Song → Yuan → Ming → Qing — exactly the order in the book's own mnemonic, "Happy Sloths Travel Slowly, Yearning Meditative Quietness."</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">08</span>The "Hundred Schools of Thought" correspond to which period in history?</div>
+    <div class="qa-a">The Spring and Autumn Period and the Warring States Period.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">09</span>Select four options corresponding to the Spring and Autumn Period and the Warring States Period in China. (A. The Romance of Three Kingdoms B. Not united Chinese nations C. Mongolian Invasion D. Aristotle and Plato E. Steel age in China F. Zhuangzi)</div>
+    <div class="qa-a">B, D, E, F. Political fragmentation among competing states (B), the roughly contemporaneous rise of Greek philosophy under Aristotle and Plato (D, an "In the World" parallel), the transition to iron/steel weaponry (E), and the Daoist philosopher Zhuangzi, active during the Warring States (F). The Romance of Three Kingdoms (A) is Han-Jin transition, centuries later; the Mongolian Invasion (C) is the Yuan dynasty, later still — both are the deliberate wrong-era distractors.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">10</span>The following event happened in _______ dynasty: Rapid progress in clinical medicine with significant advancements in diagnostic techniques. Notable progress in standardization of basic theory and acupuncture (Ling Shu). Foundation of Chinese Pharmacy and the Science of Prescriptions.</div>
+    <div class="qa-a">Han Dynasty — this matches the book's own "Key Characteristics" summary for the Han era: formation of AHM's theoretical foundation (Huang Di Nei Jing), Shang Han Lun, and Shen Nong Ben Cao Jing all trace to this period.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+
+  <div class="page-footer"><span>EAM301 · Question Bank</span><span>Week 2</span></div>
+</div>
+
+
+<div class="page">
+  <div class="hdr">
+    <div><div class="hdr-hanzi brush">問答</div>
+    <div class="hdr-title">Weeks 3–4 — Chapter 2 — Philosophical Background</div>
+    <div class="hdr-sub">Instructor's own Question Bank — Prof. Choi says over 50% of Test A/B comes directly from this list</div></div>
+  </div>
+  <div class="callout exam">
+    <div class="callout-icon">🐾</div>
+    <div class="callout-body"><strong>Straight from Week 4 class — not in the printed question bank</strong>Choi confirms it himself: <em>"Sloth is mascot of our class."</em> He tests yin-yang's relativity with paired examples — <strong>"Tuna vs. Sloth — which is yang?"</strong> and <strong>"Joker vs. Batman — which is yang?"</strong> — where the answer flips depending on the comparison axis. He's explicit that yin-yang is <strong>not binary</strong>: <em>"There is infinite number in between, and that is called four constitution, eight diagram, and 64 diagram"</em> — a direct bridge to Sasang Constitutional Medicine and the I Ching's 64 hexagrams. He also names Xiao Yang / Tai Yang / Xiao Yin / Tai Yin here — vocabulary that resurfaces as the Six Stages in the Shang Han Lun. If Choi asks a yin-yang question on the exam, this is the "discussed in class" answer he's listening for.</div>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">01</span>Discuss the philosophical backgrounds of TCM.</div>
+    <div class="qa-a">Three main schools shaped the theoretical scaffolding: Daoism (the Dao as natural order, wu wei/non-forcing action, yin-yang as the body's self-regulating balance), Confucianism (hierarchy and duty — reflected in organ theory's "ruler/minister" model, and filial-piety-driven attention to elder care, gynecology, and pediatrics), and Legalism (codified, centralized control — the faintest influence, but arguably visible later in standardized formulas and protocols). CO2 asks you to be able to compare and contrast all three directly.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">02</span>Based on our class discussions, who created the universe according to Pangu's narrative?</div>
+    <div class="qa-a">Pangu himself. In the myth, the universe begins as a cosmic egg containing chaos; Pangu splits it into yin (the earth) and yang (the sky), holding them apart as he grows for 18,000 years. After his death, his body's parts become the features of the natural world.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">03</span>What is the meaning of "Yang Sheng," and how does it relate to the art of nourishing life in TCM?</div>
+    <div class="qa-a">Yang Sheng (養生) means "nourishing life" — a preventive, lifestyle-based practice of cultivating health and longevity through diet, moderation, and living in accordance with natural rhythms, rather than treating illness after the fact. It's Daoist in origin and is treated as foundational: prevention and daily self-cultivation come first, with acupuncture and herbal treatment as what you turn to next, not the starting point.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">04</span>Which of the following is NOT a foundational concept of early TCM? (Taoism, Buddhism, Confucianism, Capitalism)</div>
+    <div class="qa-a">Capitalism is the obvious non-answer, but don't stop there — pay attention to the trap: Buddhism is also not a foundational influence on early TCM. Buddhism was imported into China well after Daoism and Confucianism had already shaped early Chinese medical theory; it arrived later via India, not alongside the others. If the question is asking specifically about the earliest philosophical foundations, Buddhism is the more interesting correct answer than Capitalism.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">05</span>Is it possible to have both Yin and Yang symptoms simultaneously?</div>
+    <div class="qa-a">Yes. Yin-yang theory itself explains this as normal, not contradictory — patterns like true heat masked by false cold (or the reverse), or upper-body heat with lower-body cold, are standard descriptions in the tradition. Yin and yang are relative and mutually transforming, not fixed, mutually exclusive states.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">06</span>What does "Wu Wei" mean?</div>
+    <div class="qa-a">Non-forcing, effortless action — acting in alignment with the natural order rather than against it. It's a core Daoist principle: not passivity, but not forcing outcomes either.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">07</span>Explain why ancient Chinese people thought mankind was derived from fleas in Pangu's myth.</div>
+    <div class="qa-a">In some versions of the Pangu myth, after his death the small creatures (fleas/parasites) living on his body become human beings, while larger features of his body become mountains, rivers, and sky. Making humanity a minor, almost incidental byproduct of the cosmic body — rather than its central purpose — reflects a certain humility about humanity's place in the universe, in contrast to creation narratives that put humans at the center of the story.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">08</span>Explain the meaning of 間. Explain why this specific character is used for concepts like human, space, and time in ancient Chinese thought.</div>
+    <div class="qa-a">間 (jiān) means "space between" or "interval." It shows up in 人間 (renjian, "among people" = human society/the human world), 空間 (kongjian, space), and 時間 (shijian, time) because ancient Chinese thought conceived of these concepts relationally — as intervals or relationships between things — rather than as independent, absolute entities existing on their own.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+
+  <div class="page-footer"><span>EAM301 · Question Bank</span><span>Weeks 3–4</span></div>
+</div>
+
+
+<div class="page">
+  <div class="hdr">
+    <div><div class="hdr-hanzi brush">問答</div>
+    <div class="hdr-title">Week 5 — Chapter 3 — Cornerstones of AHM (up to acupuncture)</div>
+    <div class="hdr-sub">Instructor's own Question Bank — Prof. Choi says over 50% of Test A/B comes directly from this list</div></div>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">01</span>Do you think TCM is evolving like other natural sciences? Explain your reasoning.</div>
+    <div class="qa-a">Open discussion question — no single correct answer, but build your case on evidence from the course: texts were revised over centuries (Nei Jing compiled over generations, Wen Bing theory emerging a thousand years after Shang Han theory), channel theory itself changed shape (see below), and standardization efforts (1959 TCM curriculum) reorganized the field. The counter-argument: TCM's changes weren't always cumulative or falsifiable the way natural science is expected to be — schools sometimes diverged rather than converged on consensus.</div>
+    <span class="conf-tag conf-check">⚠ double-check against the chapter/recording</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">02</span>If TCM evolves like other natural sciences, do you think modern acupuncturists are superior to ancient acupuncturists? Why or why not?</div>
+    <div class="qa-a">"Superior" is the wrong frame — ancient and modern practitioners worked with different clinical realities, tools, and patient populations, so direct ranking is a category error. What's more defensible is that modern practitioners have access to more accumulated clinical data and cross-checking against biomedicine, while ancient practitioners had direct, unmediated clinical experience the texts were built from.</div>
+    <span class="conf-tag conf-check">⚠ double-check against the chapter/recording</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">03</span>Have channel pathway(s) changed through TCM history? Yes or no?</div>
+    <div class="qa-a">Yes. Early excavated texts (the Mawangdui-era manuscripts) describe roughly eleven meridians, not the twelve used today, with only two or three connected to internal organs and no acupoints named yet — just channel lines. The now-standard twelve-channel, organ-linked system was assembled gradually, not handed down complete from the start.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">04</span>How many formulas were recorded in the government-published 'Taiping Shenghui Fang' during the Song dynasty?</div>
+    <div class="qa-a">Roughly 17,800+ formulas (commonly cited around 17,880) — the book's own material traces a Song-dynasty escalation in recorded formulas: from about 2,800 in the Zheng Lei Ben Cao to about 5,000 in the Qian Jin Yao Fang lineage, up to this much larger number in the Taiping Shenghui Fang. Double-check the exact figure against the Chapter 3 text directly.</div>
+    <span class="conf-tag conf-check">⚠ double-check against the chapter/recording</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">05</span>How many acupuncture points were introduced in 'Zi Sheng Jing' during the Song dynasty?</div>
+    <div class="qa-a">No verified figure available from the material on hand — check directly against the Chapter 3 text or the Week 5 lecture recording rather than take a guess here.</div>
+    <span class="conf-tag conf-check">⚠ double-check against the chapter/recording</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">06</span>How many herbs were added to 'Shen Nong Ben Cao Jing' to create 'Ben Cao Gang Mu' in the Ming dynasty?</div>
+    <div class="qa-a">About 1,527 more. Shen Nong Ben Cao Jing catalogued 365 medicinals; Li Shi Zhen's Ben Cao Gang Mu expanded that to 1,892 medicinals (1,892 − 365 = 1,527).</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">07</span>Describe how Shennong discovered new herbs and the methodology behind his work.</div>
+    <div class="qa-a">According to legend, Shennong ("the Divine Farmer") personally tasted hundreds of plants to test their medicinal and toxic properties, reportedly poisoning himself many times over in the process. It's framed as an empirical, self-experimentation-based method — testing directly on his own body rather than reasoning from theory alone.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">08</span>How many channels are explained in Mawangdui textbooks?</div>
+    <div class="qa-a">Roughly eleven, not the twelve used in the standard system today.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">09</span>Is Aloe vera considered a TCM herb? Explain why or why not.</div>
+    <div class="qa-a">Yes — Aloe vera (Lu Hui, 蘆薈) appears in the Chinese materia medica, classified as bitter and cold, used for purging heat and treating constipation, despite originating outside China (Africa/Arabian peninsula). This is a good example of the same identity question that comes up with Sun Si Miao's Persian herbs (Week 6): TCM's herbal canon absorbed non-Chinese substances through the Silk Road and other trade routes rather than staying botanically "pure."</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">10</span>Who is the cultural hero among the Three Sovereigns that introduced Chinese medicine and agriculture?</div>
+    <div class="qa-a">Shennong (神農).</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">11</span>What is the name of the first Chinese book on agriculture and medicinal plants?</div>
+    <div class="qa-a">Shen Nong Ben Cao Jing (神農本草經) is the standard answer in this context — the foundational materia medica attributed to Shennong.</div>
+    <span class="conf-tag conf-check">⚠ double-check against the chapter/recording</span>
+  </div>
+
+  <div class="page-footer"><span>EAM301 · Question Bank</span><span>Week 5</span></div>
+</div>
+
+
+<div class="page">
+  <div class="hdr">
+    <div><div class="hdr-hanzi brush">問答</div>
+    <div class="hdr-title">Week 6 — Chapter 3 — Cornerstones of AHM (end)</div>
+    <div class="hdr-sub">Instructor's own Question Bank — Prof. Choi says over 50% of Test A/B comes directly from this list</div></div>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">01</span>Sun Simiao used many herbs from Persia through the Silk Road. Should we also study European or Indian herbs in the framework of Chinese herbs? Explain why we 'should' or 'don't have to'.</div>
+    <div class="qa-a">Strongest "should" argument: the tradition's own history models integration, not purity — Sun Si Miao himself incorporated foreign substances, so treating the herbal canon as a closed, purely Chinese-origin system misreads its actual history. The "don't have to" counter: clinical training has to bound itself somewhere, and TCM theory (properties, channel entry, combinations) is what defines a "TCM herb," not geographic origin — so the framework matters more than the herb's birthplace.</div>
+    <span class="conf-tag conf-check">⚠ double-check against the chapter/recording</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">02</span>When was Huang Di Nei Jing written?</div>
+    <div class="qa-a">Compiled around 100 BCE, during the Han dynasty — though it's a composite work assembled and edited over generations, not written at one sitting by one author.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">03</span>In your opinion, which religion or philosophy influenced the 'Huang Di Nei Jing' the most?</div>
+    <div class="qa-a">The defensible answer is Daoism — its cosmology (yin-yang, the Dao as natural order, qi) is the most directly embedded framework running through the text's theory.</div>
+    <span class="conf-tag conf-check">⚠ double-check against the chapter/recording</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">04</span>Who wrote this ethical code during the Tang dynasty: "As a physician, you may not depend on your own greatness [alone]...but you must create a heart intent on relieving suffering"?</div>
+    <div class="qa-a">Sun Si Miao, from the ethics section of his Bei Ji Qian Jin Yao Fang — the first Chinese medical ethics text.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">05</span>When (dynasty) did medical reform based on neo-Confucianism occur in Chinese medical history?</div>
+    <div class="qa-a">The Jin-Yuan period (the "Medical Reform" era in the course schedule) — associated with the Four Great Masters and a Neo-Confucian intellectual revival that reshaped medical theory.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">06</span>What is the title of the first specialized book about pulse diagnosis?</div>
+    <div class="qa-a">Mai Jing (脈經), by Wang Shu He.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">07</span>Who wrote Huang Di Nei Jing?</div>
+    <div class="qa-a">No single author — traditionally attributed to the legendary Yellow Emperor (Huang Di) in dialogue with his minister Qi Bo, but actually compiled and edited by unknown scholars over generations during the Han dynasty. The attribution to Huang Di functions as a legendary framing device, not a historical authorship claim.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">08</span>Who wrote 'Pi Wei Lun'?</div>
+    <div class="qa-a">Li Dongyuan (Li Gao), one of the Jin-Yuan Four Great Masters, associated with the Spleen-Stomach school.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">09</span>Discuss whether Shang Han Lun is a book based on fundamental theories or clinical experience.</div>
+    <div class="qa-a">Primarily clinical experience. Zhang Zhong Jing wrote it after an epidemic killed roughly two-thirds of his own clan — it's organized around observed clinical stages and concrete treatment protocols rather than abstract cosmological theorizing, even though it draws on Nei Jing theoretical foundations where useful.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">10</span>Which school focused more on internal etiology, like the balance of organs, than external pathogens in Yuan dynasty?</div>
+    <div class="qa-a">Li Dongyuan's Spleen-Stomach school (Internal Damage theory) — in contrast to masters who emphasized external pathogenic factors like heat/fire.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">11</span>What is the incorrect description about AHM/TCM diagnosis? (A. tongue diagnosis is the only thing that matters / B. think comprehensively / C. think in relative manner / D. patient's condition and diagnosis can change at any moment)</div>
+    <div class="qa-a">A — "tongue diagnosis is the only thing that matters" is the incorrect statement. TCM diagnosis is explicitly holistic, using four examination methods (looking, listening/smelling, asking, palpating), not any single method in isolation.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+
+  <div class="page-footer"><span>EAM301 · Question Bank</span><span>Week 6</span></div>
+</div>
+
+
+<div class="page">
+  <div class="hdr">
+    <div><div class="hdr-hanzi brush">問答</div>
+    <div class="hdr-title">Week 7 — Chapter 4 — Now and Future</div>
+    <div class="hdr-sub">Instructor's own Question Bank — Prof. Choi says over 50% of Test A/B comes directly from this list</div></div>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">01</span>Discuss the meaning behind the title 'The Sack of Pearls' by Zhang Yuan Su and explain why he may have chosen this title for his book.</div>
+    <div class="qa-a">"Zhen Zhu Nang" (珍珠囊, "Pearl Sack/Bag of Pearls") frames the book's contents — condensed, essential knowledge about herb properties and formulas — as precious pearls gathered into a pouch: small in volume but high in concentrated value. The title signals that this is a distilled, practical reference rather than an exhaustive theoretical treatise.</div>
+    <span class="conf-tag conf-check">⚠ double-check against the chapter/recording</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">02</span>Which herb saved Kangxi from malaria in 1693?</div>
+    <div class="qa-a">Cinchona bark (quinine source) — given to the Kangxi Emperor by French Jesuit missionaries, a striking example of a Western remedy entering the Chinese imperial court directly.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">03</span>Who was the female physician during the Ming dynasty who wrote 'Na Yi Za Yan'?</div>
+    <div class="qa-a">No confidently verified name available — flag this and check directly against the Chapter 4 text or Week 7 recording rather than trust a guess here.</div>
+    <span class="conf-tag conf-check">⚠ double-check against the chapter/recording</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">04</span>What might ancient people have called acupuncturists? Explain your reasoning.</div>
+    <div class="qa-a">Worth checking the exact term the book uses here — early Chinese healers overlapped conceptually with shamans/diviners (巫, wu), and the Zhou-dynasty official medical hierarchy had specific role titles (e.g., 疾醫, 瘍醫) — but don't assert one specific historical title for "acupuncturist" as confirmed without checking the chapter directly.</div>
+    <span class="conf-tag conf-check">⚠ double-check against the chapter/recording</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">05</span>Who said, "To treat illness without understanding the viscera and bowels anatomy is no different from a blind man walking in the dark"?</div>
+    <div class="qa-a">This lines up thematically with Wang Qingren (王清任), the Qing-dynasty physician who spent 42 years dissecting corpses specifically to correct anatomical errors in classical texts — direct anatomical observation was his defining argument. Worth confirming the exact attribution against the chapter text.</div>
+    <span class="conf-tag conf-check">⚠ double-check against the chapter/recording</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">06</span>What disease did 'Qing Hao (Artemisia annua)' and 'China bark (quinine)' treat?</div>
+    <div class="qa-a">Malaria — a clean parallel between the Chinese herbal tradition (qinghao, source of artemisinin) and the Western/Peruvian tradition (cinchona bark, source of quinine) independently converging on treatments for the same disease.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">07</span>After reviewing the article (doi: 10.1007/s11427-015-4948-7), do you think artemisinin is part of TCM or biomedicine? Explain your reasoning.</div>
+    <div class="qa-a">Strongest answer treats it as a hybrid case: the lead came from a TCM historical text (Ge Hong's reference to qinghao for fever), but isolating and purifying it into the defined pharmaceutical compound artemisinin was achieved through modern biomedical scientific method (Tu Youyou's research, earning a Nobel Prize). It's genuinely a bridge case rather than belonging cleanly to either category.</div>
+    <span class="conf-tag conf-check">⚠ double-check against the chapter/recording</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">08</span>What is Ming Men in TCM pathology, based on the lecture content? Avoid referencing external sources.</div>
+    <div class="qa-a">This one is explicitly asking for Choi's specific in-class framing, not a textbook definition — pull this one from the Week 7 recording notes directly; the highest-scoring answer references what he said in class, not an external source.</div>
+    <span class="conf-tag conf-check">⚠ double-check against the chapter/recording</span>
+  </div>
+
+  <div class="page-footer"><span>EAM301 · Question Bank</span><span>Week 7</span></div>
+</div>
+
+
+<div class="page">
+  <div class="hdr">
+    <div><div class="hdr-hanzi brush">問答</div>
+    <div class="hdr-title">Week 8 — Chapter 5 — Besides China</div>
+    <div class="hdr-sub">Instructor's own Question Bank — Prof. Choi says over 50% of Test A/B comes directly from this list</div></div>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">01</span>What is the title of the book written by Kimura Taichu about acupuncture, which represents a synthesis of Chinese, Korean, and Japanese techniques?</div>
+    <div class="qa-a">No verified title available from the material on hand — check directly against the Chapter 5 text or Week 8 recording.</div>
+    <span class="conf-tag conf-check">⚠ double-check against the chapter/recording</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">02</span>What does the term 'Kanpō' (Kampo) literally mean?</div>
+    <div class="qa-a">"Han method" — 漢方, literally "[the] Han [dynasty/China]'s method/prescriptions," referring to medicine derived from Chinese methods as adapted and practiced in Japan.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">03</span>Who was the Korean acupuncturist in the late 16th century who taught acupuncture to the Japanese and influenced the book 'Shinkyu Gokuhi Sho'?</div>
+    <div class="qa-a">Kim Deuk Bang (also transliterated Kim Deokbang) — named directly in the course material.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+  <div class="qa-block">
+    <div class="qa-q"><span class="qa-num">04</span>Why did the Japanese Kohoha school focus exclusively on studying 'Shang Han Lun'?</div>
+    <div class="qa-a">Yoshimasu Todo, founder of the Koho-ha school, rejected abstract yin-yang and Five Phase theorizing in favor of pragmatic, empirically testable clinical formulas. The Shang Han Lun's concrete, pattern-based clinical protocols fit that "back to the clinical classics" philosophy far better than the more theory-laden Nei Jing did.</div>
+    <span class="conf-tag conf-verified">✓ verified against course material</span>
+  </div>
+
+  <div class="page-footer"><span>EAM301 · Question Bank</span><span>Week 8</span></div>
+</div>
+
+
+<div class="page">
+  <div class="hdr">
+    <div><div class="hdr-hanzi brush">資源</div>
+    <div class="hdr-title">Prof. Choi's Own Recommended Resources</div>
+    <div class="hdr-sub">Straight from Introduction_History — his personal picks, not generated suggestions</div></div>
+  </div>
+  <div class="res-section"><h4>Books</h4>
+    <div class="res-item"><strong>The Web That Has No Weaver — Ted Kaptchuk</strong><span class="res-note">Best single pick for fundamental theory of acupuncture/TCM</span></div>
+    <div class="res-item"><strong>The Yellow Monkey Emperor's Classic of Chinese Medicine — Damo Mitchell</strong><span class="res-note">Comic-style primer for organ-pattern diagnosis</span></div>
+  </div>
+  <div class="res-section"><h4>Apps</h4>
+    <div class="res-item"><strong>A Manual of Acupuncture (app) — Peter Deadman</strong><span class="res-note">Convenient and affordable; frequent sales</span></div>
+    <div class="res-item"><strong>Muscle Premium (3D anatomy)</strong></div>
+  </div>
+  <div class="res-section"><h4>Board Exam Prep</h4>
+    <div class="res-item"><strong>Handbook of Oriental Medicine, 5th ed. — H.B. Kim</strong></div>
+    <div class="res-item"><strong>TCMtest.com</strong><span class="res-note">His note: "Question quality is limited, but few alternatives exist."</span></div>
+  </div>
+  <div class="res-section"><h4>YouTube (recommended)</h4>
+    <div class="res-item"><strong>The Noted Anatomist</strong><span class="res-note">best for anatomy learning</span></div>
+    <div class="res-item"><strong>Chinese Medicine Channel</strong><span class="res-note">basic TCM theories</span></div>
+    <div class="res-item"><strong>ibn culpeper</strong><span class="res-note">authentic/orthodox TCM</span></div>
+    <div class="res-item"><strong>His own channels</strong><span class="res-note">Kinetic Acupuncture (EN), @acupunctureclass (KR)</span></div>
+  </div>
+  <div class="res-section"><h4>YouTube (NOT recommended)</h4>
+    <div class="res-item"><strong>Acuproacademy</strong><span class="res-note">his note: "too shallow, many misconceptions"</span></div>
+  </div>
+  <div class="res-section"><h4>Flashcards (Quizlet)</h4>
+    <div class="res-item"><strong>Acupuncture points and extra points, Chinese herbs, CALE formulas, NCCAOM formulas</strong><span class="res-note">all searchable directly on Quizlet under those names</span></div>
+  </div>
+  <div class="res-section"><h4>Free Books</h4>
+    <div class="res-item"><strong>WHO — TCM Terminology</strong><span class="res-note">who.int, free download</span></div>
+    <div class="res-item"><strong>WHO — Acupuncture Point Locations</strong><span class="res-note">apps.who.int, free download</span></div>
+  </div>
+
+  <div class="page-footer"><span>EAM301 · Question Bank &amp; Answer Key</span><span>Recommended Resources</span></div>
+</div>
+
+<script>
+function printAs(mode){
+  var sizes = { letter: '8.5in 11in', remarkable: '7.075in 9.433in' };
+  var margin = mode === 'remarkable' ? '0.2cm' : '0.25cm';
+  var el = document.getElementById('pageSizeStyle');
+  if (el) el.textContent = '@page { size: ' + sizes[mode] + '; margin: ' + margin + '; }';
+  setTimeout(function(){ window.print(); }, 60);
+}
+</script>
+</body>
+</html>
