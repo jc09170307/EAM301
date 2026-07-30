@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>EAM301 · Study Guide</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Long+Cang&family=ZCOOL+XiaoWei&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@500;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Long+Cang&family=ZCOOL+XiaoWei&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@500;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 \
 :root {
@@ -55,7 +55,7 @@ body {
   font-family: 'Inter', -apple-system, sans-serif;
   line-height: 1.6;
 }
-h1, h2, h3, h4 { font-family: 'Long Cang', 'ZCOOL XiaoWei', 'Noto Serif SC', serif; font-weight: 700; letter-spacing: 0.01em; margin: 0 0 0.5rem; }
+h1, h2, h3, h4 { font-family: 'Dela Gothic One', 'Noto Serif SC', cursive; font-weight: 700; letter-spacing: 0.01em; margin: 0 0 0.5rem; }
 .brush { font-family: 'Ma Shan Zheng', cursive; }
 .hanzi { font-family: 'Noto Serif SC', serif; font-weight: 700; }
 .mono { font-family: 'JetBrains Mono', monospace; }
@@ -101,7 +101,7 @@ h1, h2, h3, h4 { font-family: 'Long Cang', 'ZCOOL XiaoWei', 'Noto Serif SC', ser
 .callout.exam { background: rgba(214,69,65,0.09); border-color: var(--cinnabar); }
 .callout.jade { background: rgba(47,143,114,0.09); border-color: var(--jade); }
 .callout-icon { font-size: 1.3rem; flex-shrink: 0; }
-.callout-body strong { color: var(--gold-light); display: block; margin-bottom: 0.25rem; font-family: 'Long Cang', 'ZCOOL XiaoWei', serif; font-size: 1rem; letter-spacing: 0.01em; }
+.callout-body strong { color: var(--gold-light); display: block; margin-bottom: 0.25rem; font-family: 'Dela Gothic One', 'Noto Serif SC', cursive; font-size: 0.86rem; letter-spacing: 0.01em; }
 .callout.exam .callout-body strong { color: var(--cinnabar-light); }
 .callout.jade .callout-body strong { color: var(--jade-light); }
 .callout-body { font-size: 0.86rem; color: var(--text-dim); }
@@ -114,7 +114,7 @@ h1, h2, h3, h4 { font-family: 'Long Cang', 'ZCOOL XiaoWei', 'Noto Serif SC', ser
 }
 
 table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
-th { font-family: 'ZCOOL XiaoWei', serif; font-size: 0.75rem; letter-spacing: 0.03em; text-transform: uppercase; padding: 0.6rem 0.7rem; text-align: left; background: var(--gold-dim); color: var(--gold-light); border-bottom: 2px solid var(--gold); }
+th { font-family: 'Dela Gothic One', 'Noto Serif SC', cursive; font-size: 0.75rem; letter-spacing: 0.03em; text-transform: uppercase; padding: 0.6rem 0.7rem; text-align: left; background: var(--gold-dim); color: var(--gold-light); border-bottom: 2px solid var(--gold); }
 td { padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--border); color: var(--text-dim); vertical-align: top; }
 tr:nth-child(even) td { background: rgba(0,0,0,0.015); }
 
@@ -143,8 +143,8 @@ body { background: #fff; color: #2a2418; }
   overflow-wrap: break-word;
   display: flex; flex-direction: column;
 }
-.page h2 { color: #6b4f1a; font-family:'Long Cang','ZCOOL XiaoWei',serif; }
-.page h4 { color: #6b4f1a; font-family:'Long Cang','ZCOOL XiaoWei',serif; }
+.page h2 { color: #6b4f1a; font-family:'Dela Gothic One','Noto Serif SC',cursive; }
+.page h4 { color: #6b4f1a; font-family:'Dela Gothic One','Noto Serif SC',cursive; }
 .page .keypoints { color:#4a4230; }
 .page table td { color:#4a4230; border-bottom-color:#e3d9b8; }
 .page table th { background:#eee0b8; color:#6b4f1a; border-bottom-color:#c9a84c; }
@@ -233,7 +233,6 @@ body { background: #fff; color: #2a2418; }
   .toc-item { font-size: 0.8rem; padding: 0.2rem 0; }
   table { font-size: 0.78rem; }
   td, th { padding: 0.35rem 0.5rem; }
-  @page { size: letter; margin: 0.25cm; }
 }
 @media (max-width:600px) {
   .gloss-grid { grid-template-columns:1fr; }
@@ -241,11 +240,13 @@ body { background: #fff; color: #2a2418; }
   .mnemonic-block { flex-direction:column; }
 }
 </style>
+<style id="pageSizeStyle">@page { size: letter; margin: 0.25cm; }</style>
 </head>
 <body>
 
 <div class="controls">
-  <button class="ctrl-btn" onclick="window.print()">🖨️ Print Study Guide</button>
+  <button class="ctrl-btn" onclick="printAs('letter')">🖨️ Print — Letter</button>
+  <button class="ctrl-btn" onclick="printAs('remarkable')">📱 Print — reMarkable</button>
   <span class="ctrl-label brush" style="font-size:1rem;color:var(--gold-light)">師父之道 EAM301 Study Guide</span>
   <a href="index.html" class="ctrl-back">← Back to Study App</a>
 </div>
@@ -265,7 +266,7 @@ body { background: #fff; color: #2a2418; }
 <path d="M50 40 a6 6 0 0 1 0 12 a3 3 0 0 1 0 -6 a3 3 0 0 0 0 -6 z" fill="currentColor" opacity="0.55"/>
 </svg></div>
   <div class="callout sifu" style="text-align:left">
-    <div class="callout-icon">🎋</div>
+    <div class="callout-icon">🥋</div>
     <div class="callout-body"><strong>How to use this guide</strong>Read each chapter's summary and key-point list <em>before</em> the assigned class, not the night before an exam. Then move to the Study App's Socratic Dojo (22 questions per chapter) to test whether you can actually explain these ideas out loud.</div>
   </div>
   <div class="toc"><a href="#sg-prologue" class="toc-item"><span class="hanzi">序</span>Prologue & Appendix</a><a href="#sg-ch1" class="toc-item"><span class="hanzi">一</span>Chapter 1 — History of AHM</a><a href="#sg-ch2" class="toc-item"><span class="hanzi">二</span>Chapter 2 — Upon a Time in China: Philosophical Background</a><a href="#sg-ch3" class="toc-item"><span class="hanzi">三</span>Chapter 3 — Cornerstones of AHM</a><a href="#sg-ch4" class="toc-item"><span class="hanzi">四</span>Chapter 4 — Now and Future</a><a href="#sg-ch5" class="toc-item"><span class="hanzi">五</span>Chapter 5 — Besides China</a><a href="#sg-ch6" class="toc-item"><span class="hanzi">六</span>Chapter 6 — East and West</a></div>
@@ -344,6 +345,10 @@ body { background: #fff; color: #2a2418; }
     </div>
   </div>
   <p class="sg-body">Titled "Upon a Time in China: Philosophical Background" in the book itself, and it runs longer than its two assigned weeks suggest — deep into what a syllabus-level view would call Chapter 3 territory. Yin-yang is presented as relative and mutually transforming, never fixed. The Five Phases (Wu Xing) get an especially clear teaching device: imagine dividing a company into five departments — what matters isn't the department's name but its function and relationships to the others. The book is explicit that its own correspondence tables (organs/tastes/pathology) are "flexible tools rather than fixed entities," not absolute law.</p>
+  <div class="callout exam">
+    <div class="callout-icon">🐾</div>
+    <div class="callout-body"><strong>Straight from Week 4 class — not in the book</strong>Choi confirms it himself: <em>"Sloth is mascot of our class."</em> He tests yin-yang's relativity with paired examples — <strong>"Tuna vs. Sloth — which is yang?"</strong> and <strong>"Joker vs. Batman — which is yang?"</strong> — where the answer flips depending on the comparison axis. He's explicit that yin-yang is <strong>not binary</strong>: <em>"There is infinite number in between, and that is called four constitution, eight diagram, and 64 diagram"</em> — a direct bridge to Sasang Constitutional Medicine and the I Ching's 64 hexagrams. He also names the gradation terms Xiao Yang / Tai Yang / Xiao Yin / Tai Yin here — the same vocabulary that resurfaces as the Six Stages in Chapter 3's Shang Han Lun.</div>
+  </div>
   <h4>Specific topics in this section</h4>
   <ul class="keypoints"><li>Yin-Yang theory: relativity, interdependence, and mutual transformation</li><li>The Four Movements of Yin-Yang mapped onto the Five Phases (Wu Xing)</li><li>The "five departments in a company" analogy for understanding Wu Xing as function, not substance</li><li>The book's own caveat: Five Element correspondence tables are "flexible tools," not fixed entities</li><li>Liu Qi and Liu Yin (Six Qi / Six Excesses) compared directly to the modern host-pathogen debate</li><li>Bi Lei Qu Xiang — analogical reasoning as AHM's core epistemological method</li></ul>
   <h4>What to walk into class already able to explain</h4>
@@ -494,5 +499,14 @@ body { background: #fff; color: #2a2418; }
   <div class="page-footer"><span>EAM301 · Study Guide</span><span>Glossary</span></div>
 </div>
 
+<script>
+function printAs(mode){
+  var sizes = { letter: '8.5in 11in', remarkable: '7.075in 9.433in' };
+  var margin = mode === 'remarkable' ? '0.2cm' : '0.25cm';
+  var el = document.getElementById('pageSizeStyle');
+  if (el) el.textContent = '@page { size: ' + sizes[mode] + '; margin: ' + margin + '; }';
+  setTimeout(function(){ window.print(); }, 60);
+}
+</script>
 </body>
 </html>
