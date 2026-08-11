@@ -195,10 +195,9 @@ body { background: #fff; color: #2a2418; }
   .page {
     box-shadow:none !important; border:none !important; background:#fff !important; border-radius:0; max-width:100%; width:auto;
     margin:0; padding:1.1cm 1.4cm; box-sizing: border-box;
-    page-break-after: always; break-after: page;
     display: block;
   }
-  .page:last-child { page-break-after: avoid; break-after: avoid; }
+  .page:not(:first-of-type) { border-top: 1.5px dashed #c9a84c; padding-top: 1.3cm !important; margin-top: 0.5cm; }
   .page-footer { margin-top: 1rem; }
   .sg-head, .mn-item, .gloss-item, table, li { page-break-inside: avoid; }
   h2, h4 { page-break-after: avoid; }
@@ -240,7 +239,7 @@ body { background: #fff; color: #2a2418; }
   .mnemonic-block { flex-direction:column; }
 }
 
-.qz-block { background: rgba(0,0,0,0.015); border: 1px solid #e3d9b8; border-radius: 10px; padding: 0.9rem 1.1rem; margin-bottom: 0.9rem; page-break-inside: avoid; }
+.qz-block { background: rgba(0,0,0,0.015); border: 1px solid #e3d9b8; border-radius: 10px; padding: 0.9rem 1.1rem; margin-bottom: 0.9rem; }
 .qz-q { font-size: 0.88rem; color: #2a2418; margin-bottom: 0.55rem; line-height: 1.5; }
 .qz-num { font-family:'JetBrains Mono',monospace; color:#a66a15; font-weight:700; margin-right:0.4rem; }
 .qz-opts { display:flex; flex-direction:column; gap:0.3rem; margin-bottom:0.6rem; }
@@ -252,7 +251,7 @@ body { background: #fff; color: #2a2418; }
 .conf-verified { background: rgba(47,143,114,0.15); color:#1f6e56; }
 .conf-check { background: rgba(214,69,65,0.12); color:#a83a2e; }
 @media print {
-  .qz-block { page-break-inside: avoid; margin-bottom: 0.7rem; padding: 0.7rem 0.9rem; }
+  .qz-block { margin-bottom: 0.7rem; padding: 0.7rem 0.9rem; }
   .qz-q { font-size: 0.84rem; }
   .qz-opt { font-size: 0.78rem; padding: 0.22rem 0.5rem; }
   .qz-exp { font-size: 0.76rem; }
