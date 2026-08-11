@@ -101,7 +101,8 @@ h1, h2, h3, h4 { font-family: 'Dela Gothic One', 'Noto Serif SC', cursive; font-
 .callout.exam { background: rgba(214,69,65,0.09); border-color: var(--cinnabar); }
 .callout.jade { background: rgba(47,143,114,0.09); border-color: var(--jade); }
 .callout-icon { font-size: 1.3rem; flex-shrink: 0; }
-.callout-body strong { color: var(--gold-light); display: block; margin-bottom: 0.25rem; font-family: 'Dela Gothic One', 'Noto Serif SC', cursive; font-size: 0.86rem; letter-spacing: 0.01em; }
+.callout-body strong:first-of-type { color: var(--gold-light); display: block; margin-bottom: 0.25rem; font-family: 'Dela Gothic One', 'Noto Serif SC', cursive; font-size: 0.86rem; letter-spacing: 0.01em; }
+.callout-body strong { color: inherit; font-weight: 700; }
 .callout.exam .callout-body strong { color: var(--cinnabar-light); }
 .callout.jade .callout-body strong { color: var(--jade-light); }
 .callout-body { font-size: 0.86rem; color: var(--text-dim); }
@@ -192,9 +193,8 @@ body { background: #fff; color: #2a2418; }
   body { background:#fff; font-size: 14px; }
   .controls { display:none; }
   .page {
-    box-shadow:none; border-radius:0; max-width:100%; width:auto;
+    box-shadow:none !important; border:none !important; background:#fff !important; border-radius:0; max-width:100%; width:auto;
     margin:0; padding:1.1cm 1.4cm; box-sizing: border-box;
-    min-height: 10.65in;
     page-break-after: always; break-after: page;
     display: block;
   }
@@ -459,12 +459,17 @@ body { background: #fff; color: #2a2418; }
   <path d="M180,318 A138,138 0 0,1 60,249" fill="none" stroke="#6FA050" stroke-width="3" marker-end="url(#ar)"/>
   <path d="M60,249 A138,138 0 0,1 60,111" fill="none" stroke="#6FA050" stroke-width="3" marker-end="url(#ar)"/>
   <path d="M60,111 A138,138 0 0,1 180,42" fill="none" stroke="#6FA050" stroke-width="3" marker-end="url(#ar)"/>
-  <!-- Ke (controlling) cycle - inner red star, pentagon skip-one pattern -->
-  <path d="M180,72 L214,244" fill="none" stroke="#D64541" stroke-width="2.2" marker-end="url(#ar2)" opacity="0.85"/>
-  <path d="M214,244 L86,146" fill="none" stroke="#D64541" stroke-width="2.2" marker-end="url(#ar2)" opacity="0.85"/>
-  <path d="M86,146 L274,146" fill="none" stroke="#D64541" stroke-width="2.2" marker-end="url(#ar2)" opacity="0.85"/>
-  <path d="M274,146 L146,244" fill="none" stroke="#D64541" stroke-width="2.2" marker-end="url(#ar2)" opacity="0.85"/>
-  <path d="M146,244 L180,72" fill="none" stroke="#D64541" stroke-width="2.2" marker-end="url(#ar2)" opacity="0.85"/>
+  <!-- Ke (controlling) cycle - inner red star, correctly connecting each phase circle's edge to the one it controls -->
+  <!-- Wood controls Earth -->
+  <path d="M195.0,68.0 L285.0,223.0" fill="none" stroke="#D64541" stroke-width="2.2" marker-end="url(#ar2)" opacity="0.85"/>
+  <!-- Earth controls Water -->
+  <path d="M270,249 L90,249" fill="none" stroke="#D64541" stroke-width="2.2" marker-end="url(#ar2)" opacity="0.85"/>
+  <!-- Water controls Fire -->
+  <path d="M86.0,234.0 L274.0,126.0" fill="none" stroke="#D64541" stroke-width="2.2" marker-end="url(#ar2)" opacity="0.85"/>
+  <!-- Fire controls Metal -->
+  <path d="M285.0,137.0 L195.0,292.0" fill="none" stroke="#D64541" stroke-width="2.2" marker-end="url(#ar2)" opacity="0.85"/>
+  <!-- Metal controls Wood -->
+  <path d="M180,288 L180,72" fill="none" stroke="#D64541" stroke-width="2.2" marker-end="url(#ar2)" opacity="0.85"/>
   <!-- Phase nodes -->
   <g font-family="ZCOOL XiaoWei, serif" font-size="17" font-weight="700" text-anchor="middle">
     <circle cx="180" cy="42" r="30" fill="#e8f2e2" stroke="#6FA050" stroke-width="2"/>
