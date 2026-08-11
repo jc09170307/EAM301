@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EAM301 · Fast-Lookup Index</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Long+Cang&family=ZCOOL+XiaoWei&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@500;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+\
+:root {
+  /* Warm "night market / rice paper" palette — light by default */
+  --ink: #FFF8EC;
+  --ink-2: #FFEFD6;
+  --gold: #C9821A;
+  --gold-light: #A66A15;
+  --gold-dim: rgba(201,130,26,0.10);
+  --cinnabar: #D64541;
+  --cinnabar-light: #B23330;
+  --jade: #2F8F72;
+  --jade-light: #1F6E56;
+  --bamboo: #6FA050;
+  --plum: #B85C86;
+  --text: #2E2418;
+  --text-dim: #5B4A36;
+  --muted: #8A7860;
+  --border: rgba(201,130,26,0.28);
+  --card: rgba(201,130,26,0.055);
+  font-synthesis: none;
+}
+body.dark {
+  --ink: #1B1410;
+  --ink-2: #241A14;
+  --gold: #F0B349;
+  --gold-light: #F5C878;
+  --gold-dim: rgba(240,179,73,0.15);
+  --cinnabar: #FF6B5B;
+  --cinnabar-light: #FF9186;
+  --jade: #5FCBA6;
+  --jade-light: #8AD9BC;
+  --bamboo: #9AC97A;
+  --plum: #E893BC;
+  --text: #F5E9D6;
+  --text-dim: #C9B79C;
+  --muted: #9C8A70;
+  --border: rgba(240,179,73,0.24);
+  --card: rgba(255,255,255,0.045);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--ink);
+  background-image:
+    radial-gradient(ellipse 900px 500px at 15% -10%, var(--gold-dim), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 100% 20%, rgba(47,143,114,0.06), transparent 60%);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  line-height: 1.6;
+}
+h1, h2, h3, h4 { font-family: 'Dela Gothic One', 'Noto Serif SC', cursive; font-weight: 700; letter-spacing: 0.01em; margin: 0 0 0.5rem; }
+.brush { font-family: 'Ma Shan Zheng', cursive; }
+.hanzi { font-family: 'Noto Serif SC', serif; font-weight: 700; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+
+.seal {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; flex-shrink: 0;
+  background: var(--cinnabar); color: #fff;
+  font-family: 'Noto Serif SC', serif; font-size: 15px; font-weight: 700;
+  border-radius: 6px; transform: rotate(-4deg);
+  box-shadow: 0 2px 6px rgba(214,69,65,0.35);
+  border: 1.5px solid rgba(255,255,255,0.35);
+}
+
+.brush-divider { width: 100%; height: 14px; opacity: 0.6; margin: 1.2rem 0; }
+.brush-divider path { stroke: var(--gold); stroke-width: 2; fill: none; stroke-linecap: round; }
+
+.bamboo-wrap { display: flex; align-items: center; gap: 2px; margin: 0.6rem 0 1rem; }
+.bamboo-node {
+  flex: 1; height: 22px; background: rgba(111,160,80,0.12);
+  border: 1px solid rgba(111,160,80,0.35); border-radius: 5px;
+  position: relative; overflow: hidden;
+}
+.bamboo-node.filled { background: linear-gradient(180deg, var(--bamboo), var(--jade)); border-color: var(--bamboo); }
+.bamboo-node::after {
+  content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px;
+  background: rgba(0,0,0,0.12);
+}
+
+.taiji-toggle {
+  width: 30px; height: 30px; border-radius: 50%; cursor: pointer; flex-shrink: 0;
+  background: linear-gradient(90deg, #fff 50%, #1a1a1a 50%);
+  border: 2px solid var(--gold); position: relative; overflow: hidden;
+}
+.taiji-toggle::before, .taiji-toggle::after {
+  content: ''; position: absolute; width: 15px; height: 15px; border-radius: 50%; left: 7.5px;
+}
+.taiji-toggle::before { background: #fff; top: -0.5px; }
+.taiji-toggle::after { background: #1a1a1a; bottom: -0.5px; }
+
+.callout { display: flex; gap: 0.75rem; padding: 0.9rem 1rem; border-radius: 12px; margin-bottom: 1rem; border: 1px solid; }
+.callout.sifu { background: var(--gold-dim); border-color: var(--gold); }
+.callout.exam { background: rgba(214,69,65,0.09); border-color: var(--cinnabar); }
+.callout.jade { background: rgba(47,143,114,0.09); border-color: var(--jade); }
+.callout-icon { font-size: 1.3rem; flex-shrink: 0; }
+.callout-body strong { color: var(--gold-light); display: block; margin-bottom: 0.25rem; font-family: 'Dela Gothic One', 'Noto Serif SC', cursive; font-size: 0.86rem; letter-spacing: 0.01em; }
+.callout.exam .callout-body strong { color: var(--cinnabar-light); }
+.callout.jade .callout-body strong { color: var(--jade-light); }
+.callout-body { font-size: 0.86rem; color: var(--text-dim); }
+
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 1.1rem 1.2rem; margin-bottom: 1rem; }
+.rank-badge {
+  display: inline-block; font-family: 'Noto Serif SC', serif; font-size: 0.72rem;
+  padding: 0.15rem 0.55rem; border-radius: 20px; border: 1px solid var(--gold);
+  color: var(--gold-light); background: var(--gold-dim); letter-spacing: 0.02em;
+}
+
+table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+th { font-family: 'Dela Gothic One', 'Noto Serif SC', cursive; font-size: 0.75rem; letter-spacing: 0.03em; text-transform: uppercase; padding: 0.6rem 0.7rem; text-align: left; background: var(--gold-dim); color: var(--gold-light); border-bottom: 2px solid var(--gold); }
+td { padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--border); color: var(--text-dim); vertical-align: top; }
+tr:nth-child(even) td { background: rgba(0,0,0,0.015); }
+
+/* ── Timeline (shared by Study App and Workbook) ── */
+.timeline { position: relative; padding-left: 2rem; margin-bottom: 1.2rem; }
+.timeline::before { content:''; position:absolute; left:0.6rem; top:0; bottom:0; width:2px; background: linear-gradient(to bottom, var(--gold), transparent); }
+.tl-item { position: relative; margin-bottom: 1.1rem; }
+.tl-dot { position:absolute; left:-1.55rem; top:0.3rem; width:10px; height:10px; border-radius:50%; background:var(--gold); border:2px solid var(--ink); }
+.tl-dot.korea { background: var(--jade); }
+.tl-date { font-size: 0.68rem; color: var(--gold); margin-bottom:0.15rem; }
+.tl-date.korea { color: var(--jade-light); }
+.tl-title { font-size: 0.86rem; font-weight:600; color: var(--text); margin-bottom:0.15rem; }
+.tl-desc { font-size: 0.79rem; color: var(--text-dim); line-height:1.55; }
+
+body { background: #fff; color: #2a2418; }
+.controls { position: sticky; top:0; z-index:20; background: var(--ink); padding: 0.8rem 1.2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; }
+.ctrl-btn { background: var(--gold); color:#1a1408; border:none; padding:0.55rem 1.1rem; border-radius:8px; font-weight:700; cursor:pointer; font-family:'Inter',sans-serif; }
+.ctrl-label { color: var(--text-dim); font-size:0.75rem; }
+.ctrl-back { color: var(--gold-light); font-size:0.75rem; text-decoration:none; border:1px solid var(--border); padding:0.35rem 0.7rem; border-radius:20px; }
+.ctrl-back:hover { border-color: var(--gold); }
+
+.page {
+  max-width: 800px; margin: 1.5rem auto; background: #fdfaf1;
+  border: 1px solid #d8cfae; border-radius: 4px; padding: 2cm 2cm 1.4cm;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35); color: #2a2418;
+  overflow-wrap: break-word;
+  display: flex; flex-direction: column;
+}
+.page h2 { color: #6b4f1a; font-family:'Dela Gothic One','Noto Serif SC',cursive; }
+.page h4 { color: #6b4f1a; font-family:'Dela Gothic One','Noto Serif SC',cursive; }
+.page .keypoints { color:#4a4230; }
+.page table td { color:#4a4230; border-bottom-color:#e3d9b8; }
+.page table th { background:#eee0b8; color:#6b4f1a; border-bottom-color:#c9a84c; }
+
+.toc-cover { text-align:center; }
+.toc-cover .hanzi { font-size: 3rem; color: #b7472a; display:block; margin-bottom:0.4rem; }
+.toc-cover h1 { font-size: 1.9rem; color:#6b4f1a; margin-bottom:0.3rem; }
+.toc-cover .sub { color: #7a715e; font-size:0.9rem; margin-bottom:1.2rem; }
+.taiji-deco { width:70px; height:70px; margin: 0.6rem auto 1.4rem; color:#c9a84c; opacity:0.75; }
+
+.toc { display:flex; flex-direction:column; gap:0.5rem; border:1px solid #e3d9b8; border-radius:12px; padding:1rem 1.2rem; margin-top:1.2rem; background: rgba(201,168,76,0.06); }
+.toc-item { color: #4a4230; text-decoration:none; font-size:0.88rem; display:flex; gap:0.6rem; align-items:center; padding:0.3rem 0; border-bottom: 1px dashed #e3d9b8; }
+.toc-item:last-child { border-bottom:none; }
+.toc-item .hanzi { color: #b7472a; width:1.4rem; font-size:1.1rem; }
+
+.sg-head { display:flex; gap:1rem; align-items:center; margin-bottom:0.9rem; border-bottom:2px solid #c9a84c; padding-bottom:0.9rem; }
+.sg-hanzi { font-size: 2.4rem; color: #b7472a; }
+.sg-weeks { font-size:0.68rem; color:#8a7860; text-transform:uppercase; letter-spacing:0.06em; }
+.sg-subtitle { font-size:0.82rem; color:#5a5142; margin-top:0.15rem; }
+.sg-body { font-size:0.92rem; color: #4a4230; line-height:1.75; margin-bottom:1rem; }
+.sg-page h4 { font-size:0.82rem; color: #a66a15; text-transform:uppercase; letter-spacing:0.04em; margin-top:1rem; }
+
+.mnemonic-block { display:flex; align-items:center; gap:1.2rem; justify-content:center; margin: 1rem 0 1.2rem; }
+.sloth-icon { width:64px; height:64px; color:#a83a2e; flex-shrink:0; }
+.mnemonic-phrase { font-size:1.4rem; color:#a83a2e; text-align:center; line-height:1.35; }
+.mn-row { display:grid; grid-template-columns: repeat(7, 1fr); gap: 0.4rem; }
+.wuxing-page-wrap { max-width: 380px; margin: 0.8rem auto; text-align:center; }
+.wuxing-page-wrap svg { width: 100%; height: auto; }
+.wx-green { color:#3d5e34; font-weight:700; }
+.wx-red { color:#a83a2e; font-weight:700; }
+.mn-item { background:#fff; border:1px solid #e3d9b8; border-radius:8px; padding:0.5rem 0.2rem; text-align:center; page-break-inside: avoid; }
+.mn-word { font-size:0.68rem; font-weight:700; color:#a83a2e; }
+.mn-dyn { font-size:0.62rem; color:#4a4230; margin-top:0.15rem; }
+.mn-dates { font-size:0.55rem; color:#8a7860; margin-top:0.1rem; }
+
+.gloss-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 0.8rem 1.2rem; margin-top:0.6rem; }
+.gloss-item { border-left: 2px solid #2f8f72; padding-left: 0.7rem; page-break-inside: avoid; }
+.gloss-term { font-size: 1rem; color: #1f6e56; }
+.gloss-def { font-size: 0.78rem; color: #4a4230; margin-top:0.15rem; }
+
+.page-footer { margin-top:1.5rem; display:flex; justify-content:space-between; font-size:0.62rem; color:#9a8f6e; border-top:1px solid #d8cfae; padding-top:0.35rem; font-family:'JetBrains Mono',monospace; }
+
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { background:#fff; font-size: 14px; }
+  .controls { display:none; }
+  .page {
+    box-shadow:none; border-radius:0; max-width:100%; width:auto;
+    margin:0; padding:1.1cm 1.4cm; box-sizing: border-box;
+    min-height: 10.65in;
+    page-break-after: always; break-after: page;
+    display: block;
+  }
+  .page:last-child { page-break-after: avoid; break-after: avoid; }
+  .page-footer { margin-top: 1rem; }
+  .sg-head, .mn-item, .gloss-item, table, li { page-break-inside: avoid; }
+  h2, h4 { page-break-after: avoid; }
+  p { orphans: 3; widows: 3; }
+  .sg-head { padding-bottom: 0.5rem; margin-bottom: 0.55rem; }
+  .sg-hanzi { font-size: 2.3rem; }
+  .sg-page h2 { font-size: 1.35rem; }
+  .sg-subtitle { font-size: 0.88rem; }
+  .sg-weeks { font-size: 0.7rem; }
+  .sg-body { font-size: 0.88rem; line-height: 1.58; margin-bottom: 0.7rem; }
+  .sg-page h4 { font-size: 0.85rem; margin-top: 0.9rem; }
+  .keypoints { font-size: 0.86rem; margin: 0.45rem 0; }
+  .keypoints li { margin-bottom: 0.3rem; }
+  table { font-size: 0.85rem; }
+  td, th { padding: 0.45rem 0.6rem; }
+  .gloss-grid { gap: 0.7rem 1.1rem; }
+  .gloss-term { font-size: 1rem; }
+  .gloss-def { font-size: 0.82rem; }
+  .mnemonic-block { margin: 0.8rem 0 1.1rem; gap: 1rem; }
+  .sloth-icon { width: 60px; height: 60px; }
+  .mnemonic-phrase { font-size: 1.4rem; }
+  .mn-row { gap: 0.4rem; }
+  .mn-item { padding: 0.5rem 0.2rem; }
+  .page-footer { margin-top: 1rem; padding-top: 0.35rem; }
+  .toc-cover .taiji-deco { width: 46px; height: 46px; margin: 0.4rem auto 0.7rem; }
+  .toc-cover .hanzi { font-size: 2.2rem; }
+  .toc-cover h1 { font-size: 1.5rem; margin-bottom: 0.15rem; }
+  .toc-cover .sub { font-size: 0.78rem; margin-bottom: 0.6rem; }
+  .toc-cover .callout { padding: 0.6rem 0.8rem; margin-bottom: 0.6rem; }
+  .toc-cover .callout-body { font-size: 0.78rem; line-height: 1.4; }
+  .toc { padding: 0.7rem 0.9rem; margin-top: 0.6rem; gap: 0.3rem; }
+  .toc-item { font-size: 0.8rem; padding: 0.2rem 0; }
+  table { font-size: 0.78rem; }
+  td, th { padding: 0.35rem 0.5rem; }
+}
+@media (max-width:600px) {
+  .gloss-grid { grid-template-columns:1fr; }
+  .mn-row { grid-template-columns: repeat(2,1fr); }
+  .mnemonic-block { flex-direction:column; }
+}
+
+.lk-search-wrap { position: sticky; top: 56px; z-index: 15; background: #fdfaf1; padding: 0.8rem 0; margin-bottom: 0.5rem; border-bottom: 2px solid #c9a84c; }
+.lk-search { width: 100%; box-sizing: border-box; padding: 0.75rem 1rem; font-size: 1rem; border: 2px solid #c9a84c; border-radius: 10px; background: #fff; color: #2a2418; font-family: 'Inter', sans-serif; }
+.lk-search:focus { outline: none; border-color: #a83a2e; }
+.lk-count { font-size: 0.72rem; color: #8a7860; margin-top: 0.35rem; font-family: 'JetBrains Mono', monospace; }
+.lk-card { background: #fff; border: 1px solid #e3d9b8; border-radius: 10px; padding: 0.8rem 1rem; margin-bottom: 0.6rem; }
+.lk-card.hidden { display: none; }
+.lk-topic { font-size: 0.98rem; color: #6b4f1a; font-weight: 700; margin-bottom: 0.5rem; font-family: 'Dela Gothic One', 'Noto Serif SC', cursive; }
+.lk-links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.lk-link { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.76rem; padding: 0.32rem 0.7rem; border-radius: 20px; background: rgba(47,143,114,0.09); border: 1px solid #2f8f72; color: #1f6e56; text-decoration: none; font-family: 'JetBrains Mono', monospace; }
+.lk-link:hover { background: rgba(47,143,114,0.18); }
+.lk-empty { text-align: center; color: #8a7860; padding: 2rem; font-size: 0.9rem; display: none; }
+</style>
+<style id="pageSizeStyle">@page { size: letter; margin: 0.25cm; }</style>
+</head>
+<body>
+
+<div class="controls">
+  <span class="ctrl-label brush" style="font-size:1rem;color:var(--gold-light)">速查 EAM301 Fast-Lookup Index</span>
+  <a href="index.html" class="ctrl-back">← Back to Study App</a>
+</div>
+
+<div class="page" style="max-width:900px">
+  <div class="toc-cover" style="margin-bottom:0.5rem">
+    <span class="hanzi brush">速查</span>
+    <h1>Fast-Lookup Index</h1>
+    <div class="sub">One search box, all six documents — built for the open-book timed exam window</div>
+  </div>
+  <div class="callout exam" style="text-align:left;margin-bottom:1rem">
+    <div class="callout-icon">⚡</div>
+    <div class="callout-body"><strong>How to use this</strong>Type a keyword below — a person's name, a text title, a number, anything. Matching topics filter instantly. Each result links straight to the right section in the right document. Practice with this <em>before</em> exam week so you already know your real lookup speed.</div>
+  </div>
+  <div class="lk-search-wrap">
+    <input type="text" class="lk-search" id="lkSearch" placeholder="Type to search — e.g. 'Dongui Bogam', 'meridian', '359', 'Yamawaki'..." oninput="lkFilter()" autocomplete="off">
+    <div class="lk-count" id="lkCount"></div>
+  </div>
+  <div id="lkList">
+<div class="lk-card" data-kw="naked history strip mythology method choi naked history (methodology)">
+<div class="lk-topic">Naked History (methodology)</div>
+<div class="lk-links">
+<a href="studyguide.html#sg-prologue" target="_blank" class="lk-link">📖 Prologue</a>
+<a href="workbook.html#wb-prologue" target="_blank" class="lk-link">📋 Prologue</a>
+<a href="worksheet.html#ws-prologue" target="_blank" class="lk-link">✍️ Prologue answer key</a>
+</div></div>
+<div class="lk-card" data-kw="three sovereigns fu xi shen nong yellow emperor fuxi three sovereigns (fu xi, shen nong, yellow emperor)">
+<div class="lk-topic">Three Sovereigns (Fu Xi, Shen Nong, Yellow Emperor)</div>
+<div class="lk-links">
+<a href="studyguide.html#sg-ch1" target="_blank" class="lk-link">📖 Ch.1</a>
+<a href="workbook.html#wb-ch1" target="_blank" class="lk-link">📋 Ch.1</a>
+<a href="quizbank.html#qz-w3" target="_blank" class="lk-link">📋 Week 3 quiz</a>
+</div></div>
+<div class="lk-card" data-kw="shen nong shennong testing herbs full credit myth shen nong — 'by testing and testing'">
+<div class="lk-topic">Shen Nong — 'by testing and testing'</div>
+<div class="lk-links">
+<a href="studyguide.html#sg-ch1" target="_blank" class="lk-link">📖 Ch.1 — Week 5 callout</a>
+<a href="workbook.html#wb-ch1" target="_blank" class="lk-link">📋 Ch.1 — Week 5 callout</a>
+<a href="cramsheet.html#cs-credit" target="_blank" class="lk-link">⚖️ Full-Credit Phrases</a>
+<a href="quizbank.html#qz-w5" target="_blank" class="lk-link">📋 Week 5 quiz</a>
+</div></div>
+<div class="lk-card" data-kw="dynasty mnemonic happy sloths han sui tang song yuan ming qing dynasty mnemonic (han-sui-tang-song-yuan-ming-qing)">
+<div class="lk-topic">Dynasty Mnemonic (Han-Sui-Tang-Song-Yuan-Ming-Qing)</div>
+<div class="lk-links">
+<a href="worksheet.html#ws-mnemonic" target="_blank" class="lk-link">✍️ Fill-in page</a>
+<a href="studyguide.html#sg-ch1" target="_blank" class="lk-link">📖 Ch.1</a>
+</div></div>
+<div class="lk-card" data-kw="mawangdui 11 meridians channels no acupoints gradual mawangdui texts (11 meridians)">
+<div class="lk-topic">Mawangdui Texts (11 meridians)</div>
+<div class="lk-links">
+<a href="studyguide.html#sg-ch3" target="_blank" class="lk-link">📖 Ch.3</a>
+<a href="workbook.html#wb-ch3" target="_blank" class="lk-link">📋 Ch.3</a>
+<a href="cramsheet.html#cs-timeline" target="_blank" class="lk-link">⚖️ Timeline</a>
+<a href="quizbank.html#qz-w5" target="_blank" class="lk-link">📋 Week 5 quiz</a>
+</div></div>
+<div class="lk-card" data-kw="meridian evolution 11 12 pericardium added later meridian evolution (11 → 12, pericardium added)">
+<div class="lk-topic">Meridian Evolution (11 → 12, Pericardium added)</div>
+<div class="lk-links">
+<a href="cramsheet.html#cs-timeline" target="_blank" class="lk-link">⚖️ Timeline</a>
+<a href="quizbank.html#qz-w5" target="_blank" class="lk-link">📋 Week 5 quiz</a>
+</div></div>
+<div class="lk-card" data-kw="nei jing su wen ling shu yellow emperor compiled han huang di nei jing (su wen / ling shu)">
+<div class="lk-topic">Huang Di Nei Jing (Su Wen / Ling Shu)</div>
+<div class="lk-links">
+<a href="studyguide.html#sg-ch3" target="_blank" class="lk-link">📖 Ch.3</a>
+<a href="workbook.html#wb-ch3" target="_blank" class="lk-link">📋 Ch.3</a>
+<a href="worksheet.html#ws-ch3" target="_blank" class="lk-link">✍️ Ch.3</a>
+<a href="quizbank.html#qz-w6" target="_blank" class="lk-link">📋 Week 6 quiz Pt.1</a>
+</div></div>
+<div class="lk-card" data-kw="shen nong ben cao jing 365 herbs three grades materia medica shen nong ben cao jing (365 herbs, 3 grades)">
+<div class="lk-topic">Shen Nong Ben Cao Jing (365 herbs, 3 grades)</div>
+<div class="lk-links">
+<a href="studyguide.html#sg-ch1" target="_blank" class="lk-link">📖 Ch.1</a>
+<a href="quizbank.html#qz-w5" target="_blank" class="lk-link">📋 Week 5 quiz</a>
+</div></div>
+<div class="lk-card" data-kw="ben cao gang mu li shi zhen 1892 1527 herbs ming ben cao gang mu (li shi zhen, 1,892 herbs)">
+<div class="lk-topic">Ben Cao Gang Mu (Li Shi Zhen, 1,892 herbs)</div>
+<div class="lk-links">
+<a href="cramsheet.html#cs-numbers" target="_blank" class="lk-link">⚖️ Numbers table</a>
+<a href="quizbank.html#qz-w5" target="_blank" class="lk-link">📋 Week 5 quiz</a>
+</div></div>
+<div class="lk-card" data-kw="acupoint count 365 349 359 361 ji sheng jing zisheng number acupoint count evolution (365→349→359→361)">
+<div class="lk-topic">Acupoint Count Evolution (365→349→359→361)</div>
+<div class="lk-links">
+<a href="cramsheet.html#cs-numbers" target="_blank" class="lk-link">⚖️ Numbers table</a>
+<a href="studyguide.html#sg-ch3" target="_blank" class="lk-link">📖 Ch.3</a>
+<a href="quizbank.html#qz-w5" target="_blank" class="lk-link">📋 Week 5 quiz</a>
+</div></div>
+<div class="lk-card" data-kw="shang han lun zhang zhong jing six stages epidemic family shang han lun / zhang zhong jing / six stages">
+<div class="lk-topic">Shang Han Lun / Zhang Zhong Jing / Six Stages</div>
+<div class="lk-links">
+<a href="studyguide.html#sg-ch3" target="_blank" class="lk-link">📖 Ch.3</a>
+<a href="workbook.html#wb-ch3" target="_blank" class="lk-link">📋 Ch.3</a>
+<a href="worksheet.html#ws-ch3" target="_blank" class="lk-link">✍️ Ch.3</a>
+<a href="quizbank.html#qz-w6" target="_blank" class="lk-link">📋 Week 6 quiz Pt.1</a>
+</div></div>
+<div class="lk-card" data-kw="hua tuo surgeon mafeisan anesthesia executed cao cao hua tuo (surgeon, mafeisan, executed)">
+<div class="lk-topic">Hua Tuo (surgeon, mafeisan, executed)</div>
+<div class="lk-links">
+<a href="workbook.html#wb-ch3" target="_blank" class="lk-link">📋 Ch.3</a>
+<a href="worksheet.html#ws-ch3" target="_blank" class="lk-link">✍️ Ch.3</a>
+</div></div>
+<div class="lk-card" data-kw="sun si miao king of medicine ethics ashi point qian jin yao fang sun si miao (king of medicine, ethics, ashi point)">
+<div class="lk-topic">Sun Si Miao (King of Medicine, ethics, Ashi point)</div>
+<div class="lk-links">
+<a href="workbook.html#wb-ch3" target="_blank" class="lk-link">📋 Ch.3</a>
+<a href="worksheet.html#ws-ch3" target="_blank" class="lk-link">✍️ Ch.3</a>
+<a href="quizbank.html#qz-w6" target="_blank" class="lk-link">📋 Week 6 quiz Pt.1</a>
+</div></div>
+<div class="lk-card" data-kw="live point true point oshide sashite toyohari japanese meridian therapy live point / true point (活穴) — oshide/sashite/toyohari">
+<div class="lk-topic">Live Point / True Point (活穴) — Oshide/Sashite/Toyohari</div>
+<div class="lk-links">
+<a href="studyguide.html#sg-ch3" target="_blank" class="lk-link">📖 Ch.3 — Week 5 callout</a>
+<a href="workbook.html#wb-ch3" target="_blank" class="lk-link">📋 Ch.3 — Week 5 callout</a>
+<a href="worksheet.html#ws-ch3" target="_blank" class="lk-link">✍️ Ch.3</a>
+<a href="cramsheet.html#cs-threads" target="_blank" class="lk-link">⚖️ Cross-chapter threads</a>
+</div></div>
+<div class="lk-card" data-kw="jin yuan four masters liu wansu zhang congzheng li dongyuan zhu danxi zhenheng jin-yuan four masters">
+<div class="lk-topic">Jin-Yuan Four Masters</div>
+<div class="lk-links">
+<a href="workbook.html#wb-ch3" target="_blank" class="lk-link">📋 Ch.3</a>
+<a href="quizbank.html#qz-w6" target="_blank" class="lk-link">📋 Week 6 quiz Pt.1</a>
+</div></div>
+<div class="lk-card" data-kw="confucian physicians ruyi mongol yuan restrict public office confucian physicians (ruyi) / mongol rule">
+<div class="lk-topic">Confucian Physicians (Ruyi) / Mongol rule</div>
+<div class="lk-links">
+<a href="quizbank.html#qz-w6" target="_blank" class="lk-link">📋 Week 6 quiz Pt.1</a>
+</div></div>
+<div class="lk-card" data-kw="yin yang relative relativity binary tuna sloth joker batman yin-yang (relativity, not binary)">
+<div class="lk-topic">Yin-Yang (relativity, not binary)</div>
+<div class="lk-links">
+<a href="studyguide.html#sg-ch2" target="_blank" class="lk-link">📖 Ch.2 — Week 4 callout</a>
+<a href="workbook.html#wb-ch2" target="_blank" class="lk-link">📋 Ch.2</a>
+<a href="worksheet.html#ws-ch2" target="_blank" class="lk-link">✍️ Ch.2</a>
+<a href="quizbank.html#qz-w4" target="_blank" class="lk-link">📋 Week 4 quiz</a>
+</div></div>
+<div class="lk-card" data-kw="five phases wu xing sheng ke cycle wood fire earth metal water five phases / wu xing (sheng & ke cycles)">
+<div class="lk-topic">Five Phases / Wu Xing (Sheng & Ke cycles)</div>
+<div class="lk-links">
+<a href="studyguide.html#sg-ch2" target="_blank" class="lk-link">📖 Ch.2</a>
+<a href="workbook.html#wb-ch2" target="_blank" class="lk-link">📋 Ch.2</a>
+<a href="quizbank.html#qz-w4" target="_blank" class="lk-link">📋 Week 4 quiz</a>
+</div></div>
+<div class="lk-card" data-kw="bi lei qu xiang analogical reasoning analogy doctrine signatures bi lei qu xiang (analogical reasoning)">
+<div class="lk-topic">Bi Lei Qu Xiang (analogical reasoning)</div>
+<div class="lk-links">
+<a href="studyguide.html#sg-ch2" target="_blank" class="lk-link">📖 Ch.2</a>
+<a href="workbook.html#wb-ch1" target="_blank" class="lk-link">📋 Ch.1 — Week 5 callout</a>
+</div></div>
+<div class="lk-card" data-kw="sasindo four cardinal spirits azure dragon white tiger vermilion bird black tortoise sasindo (four cardinal spirits: azure dragon etc.)">
+<div class="lk-topic">Sasindo (Four Cardinal Spirits: Azure Dragon etc.)</div>
+<div class="lk-links">
+<a href="quizbank.html#qz-w4" target="_blank" class="lk-link">📋 Week 4 quiz</a>
+</div></div>
+<div class="lk-card" data-kw="pangu creation myth wuji chaos parasites maggots humanity pangu creation myth">
+<div class="lk-topic">Pangu Creation Myth</div>
+<div class="lk-links">
+<a href="quizbank.html#qz-w3" target="_blank" class="lk-link">📋 Week 3 quiz</a>
+</div></div>
+<div class="lk-card" data-kw="daoism wuwei ziran laozi tao te ching dao de jing self-so daoism / wuwei / ziran">
+<div class="lk-topic">Daoism / Wuwei / Ziran</div>
+<div class="lk-links">
+<a href="workbook.html#wb-ch2" target="_blank" class="lk-link">📋 Ch.2</a>
+<a href="quizbank.html#qz-w3" target="_blank" class="lk-link">📋 Week 3 quiz</a>
+</div></div>
+<div class="lk-card" data-kw="zhuangzi xiaoyao san xiaoyaoyu wandering wife death qi zhuangzi / xiaoyao san / wife's death">
+<div class="lk-topic">Zhuangzi / Xiaoyao San / wife's death</div>
+<div class="lk-links">
+<a href="quizbank.html#qz-w3" target="_blank" class="lk-link">📋 Week 3 quiz</a>
+</div></div>
+<div class="lk-card" data-kw="six stages four levels wen bing wei qi ying xue cross chapter thread six stages ↔ wen bing four levels (cross-chapter)">
+<div class="lk-topic">Six Stages ↔ Wen Bing Four Levels (cross-chapter)</div>
+<div class="lk-links">
+<a href="cramsheet.html#cs-threads" target="_blank" class="lk-link">⚖️ Cross-chapter threads</a>
+<a href="studyguide.html#sg-ch2" target="_blank" class="lk-link">📖 Ch.2 — Week 4 callout</a>
+</div></div>
+<div class="lk-card" data-kw="pulse diagnosis egypt greece hippocrates clepsydra ibn sina ayurveda maijing wang shuhe pulse diagnosis — global history">
+<div class="lk-topic">Pulse Diagnosis — global history</div>
+<div class="lk-links">
+<a href="studyguide.html#sg-ch3" target="_blank" class="lk-link">📖 Ch.3</a>
+<a href="quizbank.html#qz-w6b" target="_blank" class="lk-link">📋 Week 6 quiz Pt.2 — Pulse</a>
+</div></div>
+<div class="lk-card" data-kw="tongue diagnosis ao shi shanghan jin jing lu wenbing epithelium tongue diagnosis — history">
+<div class="lk-topic">Tongue Diagnosis — history</div>
+<div class="lk-links">
+<a href="quizbank.html#qz-w6c" target="_blank" class="lk-link">📋 Week 6 quiz Pt.3 — Tongue</a>
+</div></div>
+<div class="lk-card" data-kw="wen bing ye tian shi four levels wei qi ying xue warm disease wen bing school / ye tian shi / four levels">
+<div class="lk-topic">Wen Bing School / Ye Tian Shi / Four Levels</div>
+<div class="lk-links">
+<a href="workbook.html#wb-ch6" target="_blank" class="lk-link">📋 Ch.6</a>
+<a href="studyguide.html#sg-ch6" target="_blank" class="lk-link">📖 Ch.6</a>
+<a href="quizbank.html#qz-w2" target="_blank" class="lk-link">📋 Week 2 quiz</a>
+</div></div>
+<div class="lk-card" data-kw="li shi zhen ben cao gang mu 27 years 1892 herbs formulas illustrations li shi zhen / ben cao gang mu (27 yrs, 1892 herbs)">
+<div class="lk-topic">Li Shi Zhen / Ben Cao Gang Mu (27 yrs, 1892 herbs)</div>
+<div class="lk-links">
+<a href="workbook.html#wb-ch4" target="_blank" class="lk-link">📋 Ch.4</a>
+</div></div>
+<div class="lk-card" data-kw="wang qingren blood stasis yi lin gai cuo dissection 42 years wang qingren (blood stasis, yi lin gai cuo)">
+<div class="lk-topic">Wang Qingren (Blood Stasis, Yi Lin Gai Cuo)</div>
+<div class="lk-links">
+<a href="workbook.html#wb-ch4" target="_blank" class="lk-link">📋 Ch.4</a>
+<a href="quizbank.html#qz-w2" target="_blank" class="lk-link">📋 Week 2 quiz</a>
+</div></div>
+<div class="lk-card" data-kw="artemisinin ge hong tu youyou nobel qinghao cold extraction artemisinin / ge hong / tu youyou nobel">
+<div class="lk-topic">Artemisinin / Ge Hong / Tu Youyou Nobel</div>
+<div class="lk-links">
+<a href="workbook.html#wb-ch4" target="_blank" class="lk-link">📋 Ch.4</a>
+<a href="studyguide.html#sg-ch4" target="_blank" class="lk-link">📖 Ch.4</a>
+</div></div>
+<div class="lk-card" data-kw="kampo koho koho-ha kokan igaku yoshimasu todo yakucho abdominal diagnosis kampo / koho-ha vs kokan igaku / yoshimasu todo">
+<div class="lk-topic">Kampo / Koho-ha vs Kokan Igaku / Yoshimasu Todo</div>
+<div class="lk-links">
+<a href="workbook.html#wb-ch4" target="_blank" class="lk-link">📋 Ch.4</a>
+<a href="studyguide.html#sg-ch5" target="_blank" class="lk-link">📖 Ch.5</a>
+<a href="quizbank.html#qz-w8" target="_blank" class="lk-link">📋 Week 8 quiz</a>
+</div></div>
+<div class="lk-card" data-kw="1959 tcm standardization porkert kaptchuk maciocia curriculum 15 subjects 1959 tcm standardization / porkert, kaptchuk, maciocia">
+<div class="lk-topic">1959 TCM Standardization / Porkert, Kaptchuk, Maciocia</div>
+<div class="lk-links">
+<a href="workbook.html#wb-ch4" target="_blank" class="lk-link">📋 Ch.4</a>
+<a href="studyguide.html#sg-ch4" target="_blank" class="lk-link">📖 Ch.4</a>
+<a href="cramsheet.html#cs-numbers" target="_blank" class="lk-link">⚖️ Numbers table</a>
+</div></div>
+<div class="lk-card" data-kw="abolition revival china korea japan taiwan meiji suppression abolition-revival pattern (china/korea/japan/taiwan)">
+<div class="lk-topic">Abolition-Revival Pattern (China/Korea/Japan/Taiwan)</div>
+<div class="lk-links">
+<a href="workbook.html#wb-ch4" target="_blank" class="lk-link">📋 Ch.4</a>
+</div></div>
+<div class="lk-card" data-kw="dongui bogam heo jun imjin war korean herbs unesco 1613 dongui bogam / heo jun / imjin war">
+<div class="lk-topic">Dongui Bogam / Heo Jun / Imjin War</div>
+<div class="lk-links">
+<a href="workbook.html#wb-ch5" target="_blank" class="lk-link">📋 Ch.5</a>
+<a href="studyguide.html#sg-ch5" target="_blank" class="lk-link">📖 Ch.5</a>
+<a href="worksheet.html#ws-ch5" target="_blank" class="lk-link">✍️ Ch.5</a>
+<a href="quizbank.html#qz-w8" target="_blank" class="lk-link">📋 Week 8 quiz</a>
+</div></div>
+<div class="lk-card" data-kw="sasang constitutional medicine lee je-ma four types taeyang soyang taeeum soeum sasang constitutional medicine (lee je-ma, 4 types)">
+<div class="lk-topic">Sasang Constitutional Medicine (Lee Je-ma, 4 types)</div>
+<div class="lk-links">
+<a href="workbook.html#wb-ch5" target="_blank" class="lk-link">📋 Ch.5</a>
+<a href="studyguide.html#sg-ch5" target="_blank" class="lk-link">📖 Ch.5</a>
+<a href="worksheet.html#ws-ch5" target="_blank" class="lk-link">✍️ Ch.5</a>
+<a href="quizbank.html#qz-w6b" target="_blank" class="lk-link">📋 Week 6 quiz Pt.2 — Pulse</a>
+</div></div>
+<div class="lk-card" data-kw="heo im dry needling kim deokbang chimgu gyeongheombang heo im (dry needling) / kim deokbang">
+<div class="lk-topic">Heo Im (dry needling) / Kim Deokbang</div>
+<div class="lk-links">
+<a href="workbook.html#wb-ch5" target="_blank" class="lk-link">📋 Ch.5</a>
+<a href="quizbank.html#qz-w8" target="_blank" class="lk-link">📋 Week 8 quiz</a>
+</div></div>
+<div class="lk-card" data-kw="joseon female physicians uinyeo chohak training stages joseon female physicians (uinyeo)">
+<div class="lk-topic">Joseon Female Physicians (Uinyeo)</div>
+<div class="lk-links">
+<a href="quizbank.html#qz-w7" target="_blank" class="lk-link">📋 Week 7 quiz</a>
+</div></div>
+<div class="lk-card" data-kw="malpractice king hyojong horace allen needle death lethal pichim lancet acupuncture malpractice cases (king hyojong, horace allen)">
+<div class="lk-topic">Acupuncture Malpractice Cases (King Hyojong, Horace Allen)</div>
+<div class="lk-links">
+<a href="quizbank.html#qz-w8" target="_blank" class="lk-link">📋 Week 8 quiz</a>
+</div></div>
+<div class="lk-card" data-kw="sho-saiko-to incident interstitial pneumonia japan 1990s kampo adverse sho-saiko-to incident (1990s japan)">
+<div class="lk-topic">Sho-saiko-to Incident (1990s Japan)</div>
+<div class="lk-links">
+<a href="quizbank.html#qz-w9" target="_blank" class="lk-link">📋 Week 9 quiz</a>
+</div></div>
+<div class="lk-card" data-kw="flexner report 1910 medical education standardization exclusion flexner report (1910)">
+<div class="lk-topic">Flexner Report (1910)</div>
+<div class="lk-links">
+<a href="workbook.html#wb-ch6" target="_blank" class="lk-link">📋 Ch.6</a>
+<a href="quizbank.html#qz-w9" target="_blank" class="lk-link">📋 Week 9 quiz</a>
+</div></div>
+<div class="lk-card" data-kw="vesalius de humani corporis fabrica galen dissection wang qingren vesalius / wang qingren comparison">
+<div class="lk-topic">Vesalius / Wang Qingren comparison</div>
+<div class="lk-links">
+<a href="workbook.html#wb-ch3" target="_blank" class="lk-link">📋 Ch.3</a>
+<a href="quizbank.html#qz-w9" target="_blank" class="lk-link">📋 Week 9 quiz</a>
+</div></div>
+<div class="lk-card" data-kw="pi spleen pancreas mistranslation organ function pi (脾) / pancreas mistranslation">
+<div class="lk-topic">Pi (脾) / Pancreas Mistranslation</div>
+<div class="lk-links">
+<a href="workbook.html#wb-ch6" target="_blank" class="lk-link">📋 Ch.6</a>
+<a href="studyguide.html#sg-ch6" target="_blank" class="lk-link">📖 Ch.6</a>
+<a href="quizbank.html#qz-w9" target="_blank" class="lk-link">📋 Week 9 quiz</a>
+</div></div>
+<div class="lk-card" data-kw="pettenkofer cholera miasma germ theory koch 1892 drank bacteria pettenkofer cholera experiment / germ vs miasma">
+<div class="lk-topic">Pettenkofer Cholera Experiment / Germ vs Miasma</div>
+<div class="lk-links">
+<a href="workbook.html#wb-ch6" target="_blank" class="lk-link">📋 Ch.6</a>
+<a href="studyguide.html#sg-ch6" target="_blank" class="lk-link">📖 Ch.6</a>
+</div></div>
+<div class="lk-card" data-kw="worship or ignore critical engagement choi position ebm eam flexner worship or ignore? (choi's third path)">
+<div class="lk-topic">Worship or Ignore? (Choi's Third Path)</div>
+<div class="lk-links">
+<a href="workbook.html#wb-ch6" target="_blank" class="lk-link">📋 Ch.6</a>
+<a href="studyguide.html#sg-ch6" target="_blank" class="lk-link">📖 Ch.6</a>
+</div></div>
+<div class="lk-card" data-kw="sugita genpaku yamawaki toyo zoshi kaitai shinsho dissection 1757 1774 sugita genpaku vs yamawaki tōyō (dissection texts)">
+<div class="lk-topic">Sugita Genpaku vs Yamawaki Tōyō (dissection texts)</div>
+<div class="lk-links">
+<a href="quizbank.html#qz-w9" target="_blank" class="lk-link">📋 Week 9 quiz — corrected answer</a>
+</div></div>
+<div class="lk-card" data-kw="asclepius hygieia epione greek mythology wife daughter soothing pain asclepius / hygieia / epione (greek medicine myth)">
+<div class="lk-topic">Asclepius / Hygieia / Epione (Greek medicine myth)</div>
+<div class="lk-links">
+<a href="quizbank.html#qz-w9" target="_blank" class="lk-link">📋 Week 9 quiz — corrected answer</a>
+</div></div>
+<div class="lk-card" data-kw="exam structure test a test b comprehensive open book timed midterm final week 10 exam structure (test a/b, both comprehensive)">
+<div class="lk-topic">Exam Structure (Test A/B, both comprehensive)</div>
+<div class="lk-links">
+<a href="index.html" target="_blank" class="lk-link">🏯 Study App home screen callout</a>
+</div></div>
+<div class="lk-card" data-kw="full credit answer phrases verbatim exact wording testing testing 359 full-credit answer phrases (verbatim)">
+<div class="lk-topic">Full-Credit Answer Phrases (verbatim)</div>
+<div class="lk-links">
+<a href="cramsheet.html#cs-credit" target="_blank" class="lk-link">⚖️ Full-Credit Phrases</a>
+</div></div>
+<div class="lk-card" data-kw="master timeline dynasties numbers overlaid han tang song ming qing master timeline (all dynasties + numbers)">
+<div class="lk-topic">Master Timeline (all dynasties + numbers)</div>
+<div class="lk-links">
+<a href="cramsheet.html#cs-timeline" target="_blank" class="lk-link">⚖️ Timeline</a>
+</div></div>
+</div>
+<div class="lk-empty" id="lkEmpty">No matches — try a different keyword, or Ctrl+F within a specific document.</div>
+</div>
+
+<script>
+function lkFilter(){
+  var q = document.getElementById('lkSearch').value.toLowerCase().trim();
+  var cards = document.querySelectorAll('.lk-card');
+  var shown = 0;
+  cards.forEach(function(c){
+    var kw = c.getAttribute('data-kw');
+    if (q === '' || kw.includes(q)) { c.classList.remove('hidden'); shown++; }
+    else { c.classList.add('hidden'); }
+  });
+  document.getElementById('lkCount').textContent = shown + ' of 49 topics shown';
+  document.getElementById('lkEmpty').style.display = shown === 0 ? 'block' : 'none';
+}
+document.addEventListener('DOMContentLoaded', lkFilter);
+</script>
+</body>
+</html>
