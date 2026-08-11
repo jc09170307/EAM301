@@ -195,10 +195,9 @@ body { background: #fff; color: #2a2418; }
   .page {
     box-shadow:none !important; border:none !important; background:#fff !important; border-radius:0; max-width:100%; width:auto;
     margin:0; padding:1.1cm 1.4cm; box-sizing: border-box;
-    page-break-after: always; break-after: page;
     display: block;
   }
-  .page:last-child { page-break-after: avoid; break-after: avoid; }
+  .page:not(:first-of-type) { border-top: 1.5px dashed #c9a84c; padding-top: 1.3cm !important; margin-top: 0.5cm; }
   .page-footer { margin-top: 1rem; }
   .sg-head, .mn-item, .gloss-item, table, li { page-break-inside: avoid; }
   h2, h4 { page-break-after: avoid; }
