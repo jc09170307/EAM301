@@ -101,7 +101,8 @@ h1, h2, h3, h4 { font-family: 'Dela Gothic One', 'Noto Serif SC', cursive; font-
 .callout.exam { background: rgba(214,69,65,0.09); border-color: var(--cinnabar); }
 .callout.jade { background: rgba(47,143,114,0.09); border-color: var(--jade); }
 .callout-icon { font-size: 1.3rem; flex-shrink: 0; }
-.callout-body strong { color: var(--gold-light); display: block; margin-bottom: 0.25rem; font-family: 'Dela Gothic One', 'Noto Serif SC', cursive; font-size: 0.86rem; letter-spacing: 0.01em; }
+.callout-body strong:first-of-type { color: var(--gold-light); display: block; margin-bottom: 0.25rem; font-family: 'Dela Gothic One', 'Noto Serif SC', cursive; font-size: 0.86rem; letter-spacing: 0.01em; }
+.callout-body strong { color: inherit; font-weight: 700; }
 .callout.exam .callout-body strong { color: var(--cinnabar-light); }
 .callout.jade .callout-body strong { color: var(--jade-light); }
 .callout-body { font-size: 0.86rem; color: var(--text-dim); }
@@ -192,9 +193,8 @@ body { background: #fff; color: #2a2418; }
   body { background:#fff; font-size: 14px; }
   .controls { display:none; }
   .page {
-    box-shadow:none; border-radius:0; max-width:100%; width:auto;
+    box-shadow:none !important; border:none !important; background:#fff !important; border-radius:0; max-width:100%; width:auto;
     margin:0; padding:1.1cm 1.4cm; box-sizing: border-box;
-    min-height: 10.65in;
     page-break-after: always; break-after: page;
     display: block;
   }
