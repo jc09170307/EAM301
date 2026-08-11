@@ -221,7 +221,7 @@ body { background: #fff; color: #2a2418; }
 .notes-big { min-height: 220px; }
 .notes-med { min-height: 130px; }
 
-.page-footer { margin-top:1.5rem; display:flex; justify-content:space-between; font-size:0.62rem; color:#9a8f6e; border-top:1px solid #d8cfae; padding-top:0.35rem; font-family:'JetBrains Mono',monospace; }
+.page-footer { margin-top:1.5rem; display:flex; justify-content:space-between; font-size:0.62rem; color:#9a8f6e; border-top:1px solid #d8cfae; padding-top:0.35rem; font-family:'JetBrains Mono',monospace; page-break-before: avoid; break-before: avoid; }
 
 .mini-toggle { display:inline-block; cursor:pointer; color:#1f6e56; font-size:0.68rem; font-family:'JetBrains Mono',monospace; margin-top:0.15rem; user-select:none; }
 .mini-toggle:hover { color:#2f8f72; }
@@ -239,7 +239,8 @@ body { background: #fff; color: #2a2418; }
     margin:0; padding:1.0cm 1.3cm; box-sizing: border-box;
     display: block;
   }
-  .page:not(:first-of-type) { border-top: 1.5px dashed #c9a84c; padding-top: 1.3cm !important; margin-top: 0.5cm; }
+  .page { page-break-before: always; break-before: page; }
+  .page:first-of-type { page-break-before: avoid; break-before: avoid; }
   .page-footer { margin-top: 1rem; }
   .gloss-item, .checklist-item, .mn-item,
   table, tr, .fill-box, .reading-item, li, .hdr { page-break-inside: avoid; }
