@@ -155,7 +155,7 @@ h3 { color:#6b4f1a; font-size:0.95rem; margin-top:1.1rem; font-family:'Dela Goth
 .term-box { font-size:0.8rem; overflow-wrap:break-word; }
 .term-label { color:#4a4230; margin-bottom:0.25rem; font-weight:600; overflow-wrap:break-word; }
 
-.qa-item { margin-bottom:0.9rem; page-break-inside: avoid; }
+.qa-item { margin-bottom:0.9rem; }
 .question { font-size:0.83rem; margin: 0 0 0.35rem; color:#2a2418; overflow-wrap:break-word; }
 .q-num { color:#b7472a; font-weight:700; margin-right:0.3rem; }
 .fill-line { border-bottom:1px solid #a89a70; height:1.4rem; display:block; margin-bottom:0.25rem; }
@@ -193,12 +193,11 @@ h3 { color:#6b4f1a; font-size:0.95rem; margin-top:1.1rem; font-family:'Dela Goth
   .page {
     box-shadow:none !important; border:none !important; background:#fff !important; border-radius:0; max-width:100%; width:auto;
     margin:0; padding:1.0cm 1.3cm; box-sizing: border-box;
-    page-break-after: always; break-after: page;
     display: block;
   }
-  .page:last-child { page-break-after: avoid; break-after: avoid; }
+  .page:not(:first-of-type) { border-top: 1.5px dashed #c9a84c; padding-top: 1.3cm !important; margin-top: 0.5cm; }
   .page-footer { margin-top: 1rem; }
-  .qa-item, .term-box, .mn-blank-item, .key-term, .key-hint, table, tr, .hdr { page-break-inside: avoid; }
+  .term-box, .mn-blank-item, table, tr, .hdr { page-break-inside: avoid; }
   h3 { page-break-after: avoid; font-size: 0.95rem; margin: 0.7rem 0 0.4rem; }
   .hdr { padding-bottom: 0.55rem; margin-bottom: 0.65rem; }
   .hdr-hanzi { font-size: 1.8rem; }
