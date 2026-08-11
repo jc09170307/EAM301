@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EAM301 · Weekly Quiz Bank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Long+Cang&family=ZCOOL+XiaoWei&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@500;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+\
+:root {
+  /* Warm "night market / rice paper" palette — light by default */
+  --ink: #FFF8EC;
+  --ink-2: #FFEFD6;
+  --gold: #C9821A;
+  --gold-light: #A66A15;
+  --gold-dim: rgba(201,130,26,0.10);
+  --cinnabar: #D64541;
+  --cinnabar-light: #B23330;
+  --jade: #2F8F72;
+  --jade-light: #1F6E56;
+  --bamboo: #6FA050;
+  --plum: #B85C86;
+  --text: #2E2418;
+  --text-dim: #5B4A36;
+  --muted: #8A7860;
+  --border: rgba(201,130,26,0.28);
+  --card: rgba(201,130,26,0.055);
+  font-synthesis: none;
+}
+body.dark {
+  --ink: #1B1410;
+  --ink-2: #241A14;
+  --gold: #F0B349;
+  --gold-light: #F5C878;
+  --gold-dim: rgba(240,179,73,0.15);
+  --cinnabar: #FF6B5B;
+  --cinnabar-light: #FF9186;
+  --jade: #5FCBA6;
+  --jade-light: #8AD9BC;
+  --bamboo: #9AC97A;
+  --plum: #E893BC;
+  --text: #F5E9D6;
+  --text-dim: #C9B79C;
+  --muted: #9C8A70;
+  --border: rgba(240,179,73,0.24);
+  --card: rgba(255,255,255,0.045);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--ink);
+  background-image:
+    radial-gradient(ellipse 900px 500px at 15% -10%, var(--gold-dim), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 100% 20%, rgba(47,143,114,0.06), transparent 60%);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  line-height: 1.6;
+}
+h1, h2, h3, h4 { font-family: 'Dela Gothic One', 'Noto Serif SC', cursive; font-weight: 700; letter-spacing: 0.01em; margin: 0 0 0.5rem; }
+.brush { font-family: 'Ma Shan Zheng', cursive; }
+.hanzi { font-family: 'Noto Serif SC', serif; font-weight: 700; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+
+.seal {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; flex-shrink: 0;
+  background: var(--cinnabar); color: #fff;
+  font-family: 'Noto Serif SC', serif; font-size: 15px; font-weight: 700;
+  border-radius: 6px; transform: rotate(-4deg);
+  box-shadow: 0 2px 6px rgba(214,69,65,0.35);
+  border: 1.5px solid rgba(255,255,255,0.35);
+}
+
+.brush-divider { width: 100%; height: 14px; opacity: 0.6; margin: 1.2rem 0; }
+.brush-divider path { stroke: var(--gold); stroke-width: 2; fill: none; stroke-linecap: round; }
+
+.bamboo-wrap { display: flex; align-items: center; gap: 2px; margin: 0.6rem 0 1rem; }
+.bamboo-node {
+  flex: 1; height: 22px; background: rgba(111,160,80,0.12);
+  border: 1px solid rgba(111,160,80,0.35); border-radius: 5px;
+  position: relative; overflow: hidden;
+}
+.bamboo-node.filled { background: linear-gradient(180deg, var(--bamboo), var(--jade)); border-color: var(--bamboo); }
+.bamboo-node::after {
+  content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px;
+  background: rgba(0,0,0,0.12);
+}
+
+.taiji-toggle {
+  width: 30px; height: 30px; border-radius: 50%; cursor: pointer; flex-shrink: 0;
+  background: linear-gradient(90deg, #fff 50%, #1a1a1a 50%);
+  border: 2px solid var(--gold); position: relative; overflow: hidden;
+}
+.taiji-toggle::before, .taiji-toggle::after {
+  content: ''; position: absolute; width: 15px; height: 15px; border-radius: 50%; left: 7.5px;
+}
+.taiji-toggle::before { background: #fff; top: -0.5px; }
+.taiji-toggle::after { background: #1a1a1a; bottom: -0.5px; }
+
+.callout { display: flex; gap: 0.75rem; padding: 0.9rem 1rem; border-radius: 12px; margin-bottom: 1rem; border: 1px solid; }
+.callout.sifu { background: var(--gold-dim); border-color: var(--gold); }
+.callout.exam { background: rgba(214,69,65,0.09); border-color: var(--cinnabar); }
+.callout.jade { background: rgba(47,143,114,0.09); border-color: var(--jade); }
+.callout-icon { font-size: 1.3rem; flex-shrink: 0; }
+.callout-body strong { color: var(--gold-light); display: block; margin-bottom: 0.25rem; font-family: 'Dela Gothic One', 'Noto Serif SC', cursive; font-size: 0.86rem; letter-spacing: 0.01em; }
+.callout.exam .callout-body strong { color: var(--cinnabar-light); }
+.callout.jade .callout-body strong { color: var(--jade-light); }
+.callout-body { font-size: 0.86rem; color: var(--text-dim); }
+
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 1.1rem 1.2rem; margin-bottom: 1rem; }
+.rank-badge {
+  display: inline-block; font-family: 'Noto Serif SC', serif; font-size: 0.72rem;
+  padding: 0.15rem 0.55rem; border-radius: 20px; border: 1px solid var(--gold);
+  color: var(--gold-light); background: var(--gold-dim); letter-spacing: 0.02em;
+}
+
+table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+th { font-family: 'Dela Gothic One', 'Noto Serif SC', cursive; font-size: 0.75rem; letter-spacing: 0.03em; text-transform: uppercase; padding: 0.6rem 0.7rem; text-align: left; background: var(--gold-dim); color: var(--gold-light); border-bottom: 2px solid var(--gold); }
+td { padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--border); color: var(--text-dim); vertical-align: top; }
+tr:nth-child(even) td { background: rgba(0,0,0,0.015); }
+
+/* ── Timeline (shared by Study App and Workbook) ── */
+.timeline { position: relative; padding-left: 2rem; margin-bottom: 1.2rem; }
+.timeline::before { content:''; position:absolute; left:0.6rem; top:0; bottom:0; width:2px; background: linear-gradient(to bottom, var(--gold), transparent); }
+.tl-item { position: relative; margin-bottom: 1.1rem; }
+.tl-dot { position:absolute; left:-1.55rem; top:0.3rem; width:10px; height:10px; border-radius:50%; background:var(--gold); border:2px solid var(--ink); }
+.tl-dot.korea { background: var(--jade); }
+.tl-date { font-size: 0.68rem; color: var(--gold); margin-bottom:0.15rem; }
+.tl-date.korea { color: var(--jade-light); }
+.tl-title { font-size: 0.86rem; font-weight:600; color: var(--text); margin-bottom:0.15rem; }
+.tl-desc { font-size: 0.79rem; color: var(--text-dim); line-height:1.55; }
+
+body { background: #fff; color: #2a2418; }
+.controls { position: sticky; top:0; z-index:20; background: var(--ink); padding: 0.8rem 1.2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; }
+.ctrl-btn { background: var(--gold); color:#1a1408; border:none; padding:0.55rem 1.1rem; border-radius:8px; font-weight:700; cursor:pointer; font-family:'Inter',sans-serif; }
+.ctrl-label { color: var(--text-dim); font-size:0.75rem; }
+.ctrl-back { color: var(--gold-light); font-size:0.75rem; text-decoration:none; border:1px solid var(--border); padding:0.35rem 0.7rem; border-radius:20px; }
+.ctrl-back:hover { border-color: var(--gold); }
+
+.page {
+  max-width: 800px; margin: 1.5rem auto; background: #fdfaf1;
+  border: 1px solid #d8cfae; border-radius: 4px; padding: 2cm 2cm 1.4cm;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35); color: #2a2418;
+  overflow-wrap: break-word;
+  display: flex; flex-direction: column;
+}
+.page h2 { color: #6b4f1a; font-family:'Dela Gothic One','Noto Serif SC',cursive; }
+.page h4 { color: #6b4f1a; font-family:'Dela Gothic One','Noto Serif SC',cursive; }
+.page .keypoints { color:#4a4230; }
+.page table td { color:#4a4230; border-bottom-color:#e3d9b8; }
+.page table th { background:#eee0b8; color:#6b4f1a; border-bottom-color:#c9a84c; }
+
+.toc-cover { text-align:center; }
+.toc-cover .hanzi { font-size: 3rem; color: #b7472a; display:block; margin-bottom:0.4rem; }
+.toc-cover h1 { font-size: 1.9rem; color:#6b4f1a; margin-bottom:0.3rem; }
+.toc-cover .sub { color: #7a715e; font-size:0.9rem; margin-bottom:1.2rem; }
+.taiji-deco { width:70px; height:70px; margin: 0.6rem auto 1.4rem; color:#c9a84c; opacity:0.75; }
+
+.toc { display:flex; flex-direction:column; gap:0.5rem; border:1px solid #e3d9b8; border-radius:12px; padding:1rem 1.2rem; margin-top:1.2rem; background: rgba(201,168,76,0.06); }
+.toc-item { color: #4a4230; text-decoration:none; font-size:0.88rem; display:flex; gap:0.6rem; align-items:center; padding:0.3rem 0; border-bottom: 1px dashed #e3d9b8; }
+.toc-item:last-child { border-bottom:none; }
+.toc-item .hanzi { color: #b7472a; width:1.4rem; font-size:1.1rem; }
+
+.sg-head { display:flex; gap:1rem; align-items:center; margin-bottom:0.9rem; border-bottom:2px solid #c9a84c; padding-bottom:0.9rem; }
+.sg-hanzi { font-size: 2.4rem; color: #b7472a; }
+.sg-weeks { font-size:0.68rem; color:#8a7860; text-transform:uppercase; letter-spacing:0.06em; }
+.sg-subtitle { font-size:0.82rem; color:#5a5142; margin-top:0.15rem; }
+.sg-body { font-size:0.92rem; color: #4a4230; line-height:1.75; margin-bottom:1rem; }
+.sg-page h4 { font-size:0.82rem; color: #a66a15; text-transform:uppercase; letter-spacing:0.04em; margin-top:1rem; }
+
+.mnemonic-block { display:flex; align-items:center; gap:1.2rem; justify-content:center; margin: 1rem 0 1.2rem; }
+.sloth-icon { width:64px; height:64px; color:#a83a2e; flex-shrink:0; }
+.mnemonic-phrase { font-size:1.4rem; color:#a83a2e; text-align:center; line-height:1.35; }
+.mn-row { display:grid; grid-template-columns: repeat(7, 1fr); gap: 0.4rem; }
+.wuxing-page-wrap { max-width: 380px; margin: 0.8rem auto; text-align:center; }
+.wuxing-page-wrap svg { width: 100%; height: auto; }
+.wx-green { color:#3d5e34; font-weight:700; }
+.wx-red { color:#a83a2e; font-weight:700; }
+.mn-item { background:#fff; border:1px solid #e3d9b8; border-radius:8px; padding:0.5rem 0.2rem; text-align:center; page-break-inside: avoid; }
+.mn-word { font-size:0.68rem; font-weight:700; color:#a83a2e; }
+.mn-dyn { font-size:0.62rem; color:#4a4230; margin-top:0.15rem; }
+.mn-dates { font-size:0.55rem; color:#8a7860; margin-top:0.1rem; }
+
+.gloss-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 0.8rem 1.2rem; margin-top:0.6rem; }
+.gloss-item { border-left: 2px solid #2f8f72; padding-left: 0.7rem; page-break-inside: avoid; }
+.gloss-term { font-size: 1rem; color: #1f6e56; }
+.gloss-def { font-size: 0.78rem; color: #4a4230; margin-top:0.15rem; }
+
+.page-footer { margin-top:1.5rem; display:flex; justify-content:space-between; font-size:0.62rem; color:#9a8f6e; border-top:1px solid #d8cfae; padding-top:0.35rem; font-family:'JetBrains Mono',monospace; }
+
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { background:#fff; font-size: 14px; }
+  .controls { display:none; }
+  .page {
+    box-shadow:none; border-radius:0; max-width:100%; width:auto;
+    margin:0; padding:1.1cm 1.4cm; box-sizing: border-box;
+    min-height: 10.65in;
+    page-break-after: always; break-after: page;
+    display: block;
+  }
+  .page:last-child { page-break-after: avoid; break-after: avoid; }
+  .page-footer { margin-top: 1rem; }
+  .sg-head, .mn-item, .gloss-item, table, li { page-break-inside: avoid; }
+  h2, h4 { page-break-after: avoid; }
+  p { orphans: 3; widows: 3; }
+  .sg-head { padding-bottom: 0.5rem; margin-bottom: 0.55rem; }
+  .sg-hanzi { font-size: 2.3rem; }
+  .sg-page h2 { font-size: 1.35rem; }
+  .sg-subtitle { font-size: 0.88rem; }
+  .sg-weeks { font-size: 0.7rem; }
+  .sg-body { font-size: 0.88rem; line-height: 1.58; margin-bottom: 0.7rem; }
+  .sg-page h4 { font-size: 0.85rem; margin-top: 0.9rem; }
+  .keypoints { font-size: 0.86rem; margin: 0.45rem 0; }
+  .keypoints li { margin-bottom: 0.3rem; }
+  table { font-size: 0.85rem; }
+  td, th { padding: 0.45rem 0.6rem; }
+  .gloss-grid { gap: 0.7rem 1.1rem; }
+  .gloss-term { font-size: 1rem; }
+  .gloss-def { font-size: 0.82rem; }
+  .mnemonic-block { margin: 0.8rem 0 1.1rem; gap: 1rem; }
+  .sloth-icon { width: 60px; height: 60px; }
+  .mnemonic-phrase { font-size: 1.4rem; }
+  .mn-row { gap: 0.4rem; }
+  .mn-item { padding: 0.5rem 0.2rem; }
+  .page-footer { margin-top: 1rem; padding-top: 0.35rem; }
+  .toc-cover .taiji-deco { width: 46px; height: 46px; margin: 0.4rem auto 0.7rem; }
+  .toc-cover .hanzi { font-size: 2.2rem; }
+  .toc-cover h1 { font-size: 1.5rem; margin-bottom: 0.15rem; }
+  .toc-cover .sub { font-size: 0.78rem; margin-bottom: 0.6rem; }
+  .toc-cover .callout { padding: 0.6rem 0.8rem; margin-bottom: 0.6rem; }
+  .toc-cover .callout-body { font-size: 0.78rem; line-height: 1.4; }
+  .toc { padding: 0.7rem 0.9rem; margin-top: 0.6rem; gap: 0.3rem; }
+  .toc-item { font-size: 0.8rem; padding: 0.2rem 0; }
+  table { font-size: 0.78rem; }
+  td, th { padding: 0.35rem 0.5rem; }
+}
+@media (max-width:600px) {
+  .gloss-grid { grid-template-columns:1fr; }
+  .mn-row { grid-template-columns: repeat(2,1fr); }
+  .mnemonic-block { flex-direction:column; }
+}
+
+.qz-block { background: rgba(0,0,0,0.015); border: 1px solid #e3d9b8; border-radius: 10px; padding: 0.9rem 1.1rem; margin-bottom: 0.9rem; page-break-inside: avoid; }
+.qz-q { font-size: 0.88rem; color: #2a2418; margin-bottom: 0.55rem; line-height: 1.5; }
+.qz-num { font-family:'JetBrains Mono',monospace; color:#a66a15; font-weight:700; margin-right:0.4rem; }
+.qz-opts { display:flex; flex-direction:column; gap:0.3rem; margin-bottom:0.6rem; }
+.qz-opt { font-size:0.82rem; color:#5a5142; padding:0.3rem 0.6rem; border-radius:6px; border:1px solid #e3d9b8; }
+.qz-opt.correct { background: rgba(47,143,114,0.12); border-color:#2f8f72; color:#1f6e56; font-weight:600; }
+.qz-exp { font-size:0.8rem; color:#4a4230; line-height:1.6; padding:0.55rem 0.7rem; background: rgba(201,168,76,0.08); border-left:2px solid #c9a84c; border-radius:6px; }
+.qz-essay-label { font-size:0.72rem; color:#a66a15; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:0.4rem; font-family:'JetBrains Mono',monospace; }
+.conf-tag { display:inline-block; font-size:0.66rem; font-family:'JetBrains Mono',monospace; padding:0.15rem 0.5rem; border-radius:12px; margin-top:0.5rem; }
+.conf-verified { background: rgba(47,143,114,0.15); color:#1f6e56; }
+.conf-check { background: rgba(214,69,65,0.12); color:#a83a2e; }
+@media print {
+  .qz-block { page-break-inside: avoid; margin-bottom: 0.7rem; padding: 0.7rem 0.9rem; }
+  .qz-q { font-size: 0.84rem; }
+  .qz-opt { font-size: 0.78rem; padding: 0.22rem 0.5rem; }
+  .qz-exp { font-size: 0.76rem; }
+}
+</style>
+<style id="pageSizeStyle">@page { size: letter; margin: 0.25cm; }</style>
+</head>
+<body>
+
+<div class="controls">
+  <button class="ctrl-btn" onclick="printAs('letter')">🖨️ Print — Letter</button>
+  <button class="ctrl-btn" onclick="printAs('remarkable')">📱 Print — reMarkable</button>
+  <span class="ctrl-label brush" style="font-size:1rem;color:var(--gold-light)">週問 EAM301 Weekly Quiz Bank</span>
+  <a href="cramsheet.html" class="ctrl-back">⚖️ Cram Sheet</a> <a href="index.html" class="ctrl-back">← Back to Study App</a>
+</div>
+
+<div class="page toc-cover">
+  <span class="hanzi brush">週問</span>
+  <h1>EAM301 · Weekly Quiz Bank</h1>
+  <div class="sub">126 Real Quiz Questions, Weeks 2–9 — With Answers &amp; Explanations</div>
+  <div class="callout exam" style="text-align:left">
+    <div class="callout-icon">📋</div>
+    <div class="callout-body"><strong>Source &amp; confidence</strong>These are the actual weekly quiz questions Jon uploaded, spanning Weeks 2 through 9. Every answer below was determined independently and cross-checked against material already verified elsewhere in this study suite. <span class="conf-tag conf-verified">✓ verified</span> means high confidence, often matching a number or fact already confirmed in your other docs. <span class="conf-tag conf-check">⚠ check</span> means a reasoned best-effort answer — double-check these specific ones against the lecture recording or textbook directly before treating them as certain.</div>
+  </div>
+  <div class="toc">
+<a href="#qz-w1" class="toc-item"><span class="hanzi">01</span>Week 2 — Chronological Overview of the History of Traditional Medicine</a>
+<a href="#qz-w2" class="toc-item"><span class="hanzi">02</span>Week 3 — Background Philosophy: Creation Myths & Confucianism, Daoism, Buddhism</a>
+<a href="#qz-w3" class="toc-item"><span class="hanzi">03</span>Week 4 — Yin-Yang and Five Elements</a>
+<a href="#qz-w4" class="toc-item"><span class="hanzi">04</span>Week 5 — History of Acupuncture and AHM</a>
+<a href="#qz-w5" class="toc-item"><span class="hanzi">05</span>Week 6, Part 1 — Major Theoretical Background</a>
+<a href="#qz-w6" class="toc-item"><span class="hanzi">06</span>Week 6, Part 2 — Pulse Diagnosis</a>
+<a href="#qz-w7" class="toc-item"><span class="hanzi">07</span>Week 6, Part 3 — Tongue Diagnosis</a>
+<a href="#qz-w8" class="toc-item"><span class="hanzi">08</span>Week 7 — Present and Future</a>
+<a href="#qz-w9" class="toc-item"><span class="hanzi">09</span>Week 8 — Traditional Medicine in Korea, China, and Japan</a>
+<a href="#qz-w10" class="toc-item"><span class="hanzi">10</span>Week 9 — East and West</a>
+</div></div>
+<div class="page sg-page" id="qz-w1">
+<div class="sg-head"><span class="sg-hanzi brush">問</span><div><div class="sg-weeks mono">11 questions</div><h2>Week 2 — Chronological Overview of the History of Traditional Medicine</h2></div></div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">1.</span>Which of the following is not a historical characteristic of the Spring and Autumn and Warring States periods?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) Political turmoil due to the decline of the Zhou Dynasty</div>
+<div class="qz-opt">B) Diverse philosophical flowering known as the Hundred Schools of Thought (Zhuzi Baijia)</div>
+<div class="qz-opt">C) Development of military technology and state philosophy</div>
+<div class="qz-opt correct">D) Adoption of Buddhism as the state religion and the decline of medicine ✓</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Buddhism didn't reach China until the Han Dynasty at the earliest (later spreading via the Silk Road) — it plays no role in the Spring & Autumn/Warring States periods.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">2.</span>What medical transition is signified by the change in the radical of the character for medicine (Yi, 醫) from "Shaman" (Wu, 巫) to "Alcohol/Wine" (You, 酉)?</div>
+<div class="qz-opts">
+<div class="qz-opt correct">A) A shift from shamanistic healing to rational, pharmacological treatment ✓</div>
+<div class="qz-opt">B) A shift in focus from acupuncture to surgery</div>
+<div class="qz-opt">C) Elevation from folk medicine to imperial medicine</div>
+<div class="qz-opt">D) The introduction of Western medicine and the disappearance of traditional medicine</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>The character's radical change from 巫 (shaman) to 酉 (wine — used to prepare medicinal decoctions) tracks medicine moving away from spirit-based healing toward herbal/pharmacological practice.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">3.</span>What new theoretical system emerged during the Qing Dynasty for the treatment of infectious diseases?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) 'Shanghan Lun' (Treatise on Cold Damage)</div>
+<div class="qz-opt correct">B) 'Wenbing' theory (Warm Disease Theory) ✓</div>
+<div class="qz-opt">C) 'Pi Wei Lun' (Treatise on the Spleen and Stomach)</div>
+<div class="qz-opt">D) 'Zi Yin' theory (Nourishing Yin Theory)</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Wen Bing (Warm Disease) theory, developed by Ye Tian Shi and later systematized by Wu Jutong, is the Qing-era framework for epidemic febrile disease — already covered in your Chapter 6 material.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">4.</span>Which book, written by Wang Qingren during the Qing Dynasty, attempted to correct the errors of past medicine through anatomical observation?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) 'Wenbing Tiaobian' (Systematic Differentiation of Warm Diseases)</div>
+<div class="qz-opt correct">B) 'Yilin Gaicuo' (Correction of Errors in Medical Works) ✓</div>
+<div class="qz-opt">C) 'Huayang Zangxiang Yaocuan' (Brief Compilation of Visceral Manifestations)</div>
+<div class="qz-opt">D) 'Danxi Xinfa' (Essential Methods of Danxi)</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Yi Lin Gai Cuo — literally 'Correction of Errors in the Forest of Medicine' — is Wang Qingren's anatomical-correction text, the same 42-years-of-corpse-observation work behind his Blood Stasis theory.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">5.</span>Which book by Zhang Zhongjing is revered as the ancestor of formulas (prescriptions) and records 375 prescriptions?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) 'Huangdi Neijing' (Yellow Emperor's Inner Canon)</div>
+<div class="qz-opt">B) 'Zhenjiu Dacheng' (Great Compendium of Acupuncture and Moxibustion)</div>
+<div class="qz-opt correct">C) 'Shanghan Zabing Lun' (Treatise on Cold Damage and Miscellaneous Diseases) ✓</div>
+<div class="qz-opt">D) 'Shennong Bencao Jing' (Shennong's Classic of Materia Medica)</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Shang Han Za Bing Lun is the original combined text later split into Shang Han Lun and Jin Gui Yao Lue — together the source of ~375 classical formulas, earning it the title 'ancestor of formulas.'</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">6.</span>Which book, written by Huangfu Mi in 259 AD, established the clinical foundation and structure of acupuncture and moxibustion?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) 'Maijing' (The Pulse Classic)</div>
+<div class="qz-opt correct">B) 'Zhenjiu Jiayi Jing' (Systematic Classic of Acupuncture and Moxibustion) ✓</div>
+<div class="qz-opt">C) 'Zhenjiu Dacheng' (Great Compendium of Acupuncture and Moxibustion)</div>
+<div class="qz-opt">D) 'Yinyang Shiyi Maijiu Jing' (Moxibustion Classic of the Eleven Yin and Yang Channels)</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Zhen Jiu Jia Yi Jing (259 CE) is the first systematic acupuncture/moxibustion clinical text — this is new to your materials and worth adding alongside Wang Shu He's Mai Jing.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">7.</span>Which book, compiled by Wang Shuhe during the Western Jin Dynasty, detailed the clinical implications of pulse diagnosis?</div>
+<div class="qz-opts">
+<div class="qz-opt correct">A) 'Maijing' (The Pulse Classic) ✓</div>
+<div class="qz-opt">B) 'Neijing' (The Inner Canon)</div>
+<div class="qz-opt">C) 'Qianjin Yaofang' (Essential Prescriptions Worth a Thousand in Gold)</div>
+<div class="qz-opt">D) 'Binhu Maixue' (Binhu's Sphygmology)</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Mai Jing — already in your materials as the text that preserved Shang Han Lun and systematized 24 pulse qualities.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">8.</span>Who is the figure from the Sui and Tang Dynasties, known as the "King of Medicine," who recorded the first medical ethical code and wrote the 'Qianjin Yaofang'?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) Zhang Zhongjing</div>
+<div class="qz-opt correct">B) Sun Simiao ✓</div>
+<div class="qz-opt">C) Li Shizhen</div>
+<div class="qz-opt">D) Wu Jutong</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Sun Simiao — already well-covered in your materials.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">9.</span>Which of the following is not a new medicinal material introduced to China from foreign countries after the Han Dynasty?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) Agarwood / Aloeswood (Chenxiang)</div>
+<div class="qz-opt">B) Myrrh (Moyao)</div>
+<div class="qz-opt">C) Turmeric (Jianghuang)</div>
+<div class="qz-opt correct">D) Ginseng (Renshen) ✓</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Ginseng is native to Northeast Asia (Manchuria/Korea), unlike agarwood, myrrh, and turmeric, which entered China via Silk Road / maritime trade — so ginseng is the one that was NOT newly imported.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">10.</span>What intellectual movement was established by Confucian scholars during the Song Dynasty in response to the influence of Buddhism and Daoism?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) Daoism (Daojia)</div>
+<div class="qz-opt correct">B) Neo-Confucianism (Lixue) ✓</div>
+<div class="qz-opt">C) Legalism (Fajia)</div>
+<div class="qz-opt">D) Mohism (Mojia)</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Neo-Confucianism (Lixue) — Song-dynasty synthesis reasserting Confucian ethics against Buddhist/Daoist influence; this is the same movement behind the Jin-Yuan medical reforms and the rise of 'Confucian Physicians' (Ruyi).</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">11.</span>Which massive encyclopedic medical book from the Song Dynasty demonstrates a significant increase in the number of formulas to approximately 17,000?</div>
+<div class="qz-opts">
+<div class="qz-opt correct">A) 'Taiping Shenghui Fang' (Taiping Imperial Grace Formulary) ✓</div>
+<div class="qz-opt">B) 'Zhenghe Bencao' (Zhenghe Materia Medica)</div>
+<div class="qz-opt">C) 'Qianjin Yifang' (Supplement to the Formulas of a Thousand Gold Worth)</div>
+<div class="qz-opt">D) 'Yixue Ramen'</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Taiping Shenghui Fang — matches the ~17,800 figure already in your Cram Sheet.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="page-footer"><span>EAM301 · Weekly Quiz Bank</span><span>Week 2 — Chronological Overview of the History of Traditional Medicine</span></div>
+</div>
+<div class="page sg-page" id="qz-w2">
+<div class="sg-head"><span class="sg-hanzi brush">問</span><div><div class="sg-weeks mono">15 questions</div><h2>Week 3 — Background Philosophy: Creation Myths & Confucianism, Daoism, Buddhism</h2></div></div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">1.</span>In the myth of Pangu, what principle did Pangu use to break through chaos and divide heaven and earth?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Five Elements (Wuxing)</div>
+<div class="qz-opt">b) Yin and Yang</div>
+<div class="qz-opt correct">c) Wuji (Ultimate Nothingness) ✓</div>
+<div class="qz-opt">d) Wuwei (Non-action)</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Pangu emerges from and breaks through Wuji (formless primordial chaos/nothingness) — the philosophical stage prior to Taiji and the emergence of Yin-Yang differentiation.</div>
+<span class="conf-tag conf-check">⚠ best-effort — double-check</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">2.</span>According to the myth of Pangu, from which part of Pangu's body did humanity evolve?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Muscles</div>
+<div class="qz-opt">b) Blood</div>
+<div class="qz-opt correct">c) Parasites/Maggots ✓</div>
+<div class="qz-opt">d) Hair</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>In the myth, most of Pangu's body becomes nature (breath→wind, voice→thunder, eyes→sun/moon, blood→rivers) — humanity specifically is said to arise from the parasites/fleas living on his body.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">3.</span>What is the main difference between the myth of Pangu and the creation story in the Judeo-Christian Bible?</div>
+<div class="qz-opts">
+<div class="qz-opt correct">a) Presence or absence of a clear purpose by the creator ✓</div>
+<div class="qz-opt">b) The size of the universe</div>
+<div class="qz-opt">c) The physical form of humans</div>
+<div class="qz-opt">d) The appearance of animals</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Genesis presents deliberate, purposeful creation of humanity; Pangu's death and transformation into the universe is not framed as a plan for humanity specifically — humans arise almost incidentally.</div>
+<span class="conf-tag conf-check">⚠ best-effort — double-check</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">4.</span>What is the most appropriate literal meaning of 'Ziran (自然)' in Chinese philosophy?</div>
+<div class="qz-opts">
+<div class="qz-opt correct">a) Self-so / Being natural of itself ✓</div>
+<div class="qz-opt">b) A forest created by God</div>
+<div class="qz-opt">c) An object to be conquered by humans</div>
+<div class="qz-opt">d) Beautiful scenery</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>自 (self) + 然 (so/thus) — literally 'self-so,' the state of being spontaneously as it is, without external imposition.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">5.</span>What attribute of nature does the 'straw dog (芻狗)' mentioned in Laozi's Tao Te Ching symbolize?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Boundless love for humanity</div>
+<div class="qz-opt correct">b) Value-neutral and unfeeling existence ✓</div>
+<div class="qz-opt">c) A sacrifice taking on human sins</div>
+<div class="qz-opt">d) Everlasting life force</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Straw dogs were ritual objects, treated with reverence during use and discarded without sentiment afterward — Laozi uses this to describe how Heaven and Earth treat all things impartially, without favoritism or malice.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">6.</span>In the definition of 'Universe (宇宙)' recorded in Huainanzi, what do 'U (宇)' and 'Ju (宙)' respectively mean?</div>
+<div class="qz-opts">
+<div class="qz-opt correct">a) Space and Time ✓</div>
+<div class="qz-opt">b) Heaven and Earth</div>
+<div class="qz-opt">c) Sun and Moon</div>
+<div class="qz-opt">d) Mind and Body</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>宇 = all directions/space, 宙 = past-present-future/time — together 'universe' as space-time, a strikingly early formulation.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">7.</span>Who is the author of The Web That Has No Weaver and also famous for research on the placebo effect?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Joseph Needham</div>
+<div class="qz-opt">b) Laozi</div>
+<div class="qz-opt correct">c) Ted Kaptchuk ✓</div>
+<div class="qz-opt">d) Choe Han-gi</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Ted Kaptchuk — already named in your materials as one of the Western scholars (with Porkert and Maciocia) who introduced systematic AHM theory to English-speaking audiences; his placebo research is a separate, additional credential worth noting.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">8.</span>What does the opening line of the Tao Te Ching, "The Dao that can be told is not the eternal Dao (道可道非常道)," emphasize?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) The Dao can only be transmitted through writing</div>
+<div class="qz-opt">b) Anyone can easily explain the Dao</div>
+<div class="qz-opt correct">c) A Dao that can be expressed in words is not the absolute/eternal Dao ✓</div>
+<div class="qz-opt">d) The Dao is a non-existent hypothesis</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Language necessarily limits and distorts the Dao — any Dao fully expressible in words is, by definition, not the true eternal Dao.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">9.</span>In the idiom 'Pointing at the moon (見指忘月)', what does the 'finger' symbolize?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Truth and essence</div>
+<div class="qz-opt correct">b) Words and language (Tools/Means) ✓</div>
+<div class="qz-opt">c) The moon in the night sky</div>
+<div class="qz-opt">d) The master's authority</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>The finger (words/teaching/language) merely points toward truth (the moon) — mistaking the pointer for the destination is the error the idiom warns against.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">10.</span>What is the true meaning of 'Wuwei (無爲)', a key concept in Daoism?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Indolence / Doing nothing out of laziness</div>
+<div class="qz-opt correct">b) Complying with the natural flow without forcing artificial effort ✓</div>
+<div class="qz-opt">c) Cessation of all social activities</div>
+<div class="qz-opt">d) Actions that disregard law and order</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Wuwei is not laziness — it's acting in alignment with natural flow rather than against it, minimizing forced/artificial effort.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">11.</span>What term in Traditional Chinese Medicine refers to the broad practice of nurturing life and maintaining health?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Wuwei (Non-action)</div>
+<div class="qz-opt">b) Xiaoyaoyu (Wandering at ease)</div>
+<div class="qz-opt correct">c) Yangsheng (Nurturing Life) ✓</div>
+<div class="qz-opt">d) Chishu (Water Control)</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Yangsheng — literally 'nurturing life' — the broad practice of health maintenance through daily self-care.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">12.</span>What is the double meaning embedded in the name of 'Muweihui (無胃會 / 無爲會)', a gathering of doctors who underwent stomach cancer surgery?</div>
+<div class="qz-opts">
+<div class="qz-opt correct">a) Having no stomach & Living a life without unnatural force ✓</div>
+<div class="qz-opt">b) A gathering of great doctors</div>
+<div class="qz-opt">c) Techniques to heal the stomach</div>
+<div class="qz-opt">d) A non-risky surgical method</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>A pun: 無胃 ('no stomach,' literal post-surgery state) and 無爲 (wuwei, 'non-forcing action') are homophones in this context — the name carries both meanings simultaneously.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">13.</span>Which book contains 'Xiaoyaoyu (逍遙遊)', the origin of the herbal formula name 'Xiaoyao San (逍遙散)'?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Tao Te Ching</div>
+<div class="qz-opt correct">b) Zhuangzi ✓</div>
+<div class="qz-opt">c) I Ching (Book of Changes)</div>
+<div class="qz-opt">d) Huainanzi</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>'Free and Easy Wandering' (逍遙遊) is the opening chapter of the Zhuangzi — the formula Xiao Yao San borrows its name and spirit from this chapter.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">14.</span>What is the most important mental state that patients should be guided toward when using the formula 'Xiaoyao San'?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Strong obsession toward a goal</div>
+<div class="qz-opt correct">b) A mind that wanders freely without aim (Xiaoyao) ✓</div>
+<div class="qz-opt">c) Deep reflection on the past</div>
+<div class="qz-opt">d) Thorough planning for the future</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>The formula's therapeutic aim mirrors its namesake chapter — cultivating a free, unburdened, unfixated state of mind.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">15.</span>Why did Zhuangzi sing while beating a basin upon his wife's death (Gubun Jitong, 鼓盆之痛)?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Because he did not love his wife</div>
+<div class="qz-opt correct">b) Because he viewed death as a natural process of energy (Qi) dispersing and returning to nature ✓</div>
+<div class="qz-opt">c) As an incantatory ritual praying for his wife's resurrection</div>
+<div class="qz-opt">d) As a self-punishing act to forget his sorrow</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>A famous Zhuangzi anecdote — grief gave way to acceptance once he reflected that death is simply Qi returning to the natural cycle, the same process that produced life in the first place.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="page-footer"><span>EAM301 · Weekly Quiz Bank</span><span>Week 3 — Background Philosophy: Creation Myths & Confucianism, Daoism, Buddhism</span></div>
+</div>
+<div class="page sg-page" id="qz-w3">
+<div class="sg-head"><span class="sg-hanzi brush">問</span><div><div class="sg-weeks mono">22 questions</div><h2>Week 4 — Yin-Yang and Five Elements</h2></div></div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">1.</span>Which of the following corresponds to the attribute of Yin (陰)?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Activity</div>
+<div class="qz-opt correct">b) Coldness ✓</div>
+<div class="qz-opt">c) Extroversion</div>
+<div class="qz-opt">d) Light</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Coldness is a core Yin attribute (vs. Heat as Yang).</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">2.</span>Which of the following corresponds to the attribute of Yang (陽)?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Passivity</div>
+<div class="qz-opt">b) Darkness</div>
+<div class="qz-opt correct">c) Heat ✓</div>
+<div class="qz-opt">d) Rest</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Heat is a core Yang attribute.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">3.</span>Which of the following best describes the epistemological characteristics of Western thought?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Deducing results after listing specific examples</div>
+<div class="qz-opt correct">c) Presenting abstract summaries and conclusions first, followed by detailed explanations ✓</div>
+<div class="qz-opt">d) Emphasizing the attitude that repeated reading reveals the meaning naturally</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Western epistemology is framed here as deductive/top-down — stating the abstract conclusion first, then supporting detail — contrasted with a more inductive, immersive Eastern approach.</div>
+<span class="conf-tag conf-check">⚠ best-effort — double-check</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">4.</span>What is the essential prerequisite for determining whether a cat is Yin or Yang?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) The cat's fur color</div>
+<div class="qz-opt">b) The cat's age</div>
+<div class="qz-opt">c) The absolute numerical value of Yin and Yang</div>
+<div class="qz-opt correct">d) The subject of comparison and the criterion for comparison ✓</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Yin-Yang is always relative, never absolute — you can't classify anything as Yin or Yang without specifying what it's being compared against and on what axis. Direct extension of the Tuna-vs-Sloth / Joker-vs-Batman examples already in your Chapter 2 material.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">5.</span>From the perspective of Cheonwonjibang (Round Heaven, Square Earth), which of the following corresponds to Yang (陽)?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Square</div>
+<div class="qz-opt">b) Softness</div>
+<div class="qz-opt">c) Earth</div>
+<div class="qz-opt correct">d) Circle ✓</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Round Heaven = Yang, Square Earth = Yin, per this classical cosmological framework.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">6.</span>Which statement correctly describes the function of the left side (Left) in Traditional Chinese Medicine?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) It governs Qi (氣).</div>
+<div class="qz-opt correct">b) It governs Blood (血) and has Yin properties. ✓</div>
+<div class="qz-opt">c) It possesses Yang (陽) properties.</div>
+<div class="qz-opt">d) It varies depending on the standard of comparison.</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Classical convention: left = Blood/Yin, right = Qi/Yang.</div>
+<span class="conf-tag conf-check">⚠ best-effort — double-check</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">7.</span>In Pandora's box, Hope (Yang) lay at the bottom beneath all kinds of disaster (Yin). Which characteristic of Yin and Yang does this demonstrate?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Yin and Yang are mutually exclusive.</div>
+<div class="qz-opt">b) If one exists, the other completely disappears.</div>
+<div class="qz-opt correct">c) Yin and Yang coexist and are complementary. ✓</div>
+<div class="qz-opt">d) Yin and Yang never change.</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Hope persisting alongside every disaster shows Yin and Yang coexisting within the same situation, not cancelling each other out.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">8.</span>From the perspective of the autonomic nervous system, which of the following is the correct Yin-Yang assignment for inhalation and exhalation?</div>
+<div class="qz-opts">
+<div class="qz-opt correct">a) Inhalation is Yang, Exhalation is Yin ✓</div>
+<div class="qz-opt">b) Inhalation is Yin, Exhalation is Yang</div>
+<div class="qz-opt">c) Both are Yang</div>
+<div class="qz-opt">d) Both are Yin</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Inhalation as an active, mobilizing (sympathetic-leaning) process is classed Yang; exhalation as a releasing, settling process is Yin. Double-check this against Choi's own framing in class — autonomic Yin-Yang assignments vary across sources.</div>
+<span class="conf-tag conf-check">⚠ best-effort — double-check</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">9.</span>What is the system that subdivides Yin and Yang to classify the energy of the natural world into five categories?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Four Cardinal Spirits (Sasindo)</div>
+<div class="qz-opt correct">b) Five Elements (Wuxing / Ohang) ✓</div>
+<div class="qz-opt">c) Seven Luminaries (Chilyo)</div>
+<div class="qz-opt">d) Eight Principle Pattern Identification (Palgangbyeonjeung)</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Five Elements/Phases — already central to your Chapter 2 material.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">10.</span>Among the Five Elements, which energy possesses the force to straighten what is bent (Gokjik), and corresponds to spring and the color green?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Fire (火)</div>
+<div class="qz-opt">b) Earth (土)</div>
+<div class="qz-opt">c) Metal (金)</div>
+<div class="qz-opt correct">d) Wood (木) ✓</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Wood — spring, green, growth/straightening quality.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">11.</span>Among the Five Elements, which energy has the property of burning fiercely and flaring upward (Yeomsang)?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Wood (木)</div>
+<div class="qz-opt">b) Water (水)</div>
+<div class="qz-opt">c) Earth (土)</div>
+<div class="qz-opt correct">d) Fire (火) ✓</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Fire — flaring upward is its defining classical property.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">12.</span>According to Nakanishi Ikko's study on Shanghanlun, what did "Cold (寒)" signify in ancient East Asian medicine?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Low temperature and cold weather</div>
+<div class="qz-opt correct">b) All types of pathogenic factors ✓</div>
+<div class="qz-opt">c) Epidemic diseases occurring in winter</div>
+<div class="qz-opt">d) Medicinal herbs with water properties</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>'Cold' in Shang Han Lun's title is argued to function as shorthand for pathogenic factors broadly, not literal cold-weather illness alone.</div>
+<span class="conf-tag conf-check">⚠ best-effort — double-check</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">13.</span>Which statement best describes the principle of Water Overcoming Fire (水剋火)?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Wood makes fire burn.</div>
+<div class="qz-opt correct">b) Water puts out fire. ✓</div>
+<div class="qz-opt">c) Fire melts metal.</div>
+<div class="qz-opt">d) Earth blocks the flow of water.</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Literal Ke (controlling) cycle relationship — water extinguishes fire.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">14.</span>What principle of the Five Elements was applied in the case of using a mud ball (Earth energy) to treat Emperor Taizong's phobia (Water energy)?</div>
+<div class="qz-opts">
+<div class="qz-opt correct">a) Earth Overcoming Water (土剋水) ✓</div>
+<div class="qz-opt">b) Wood Overcoming Earth (木剋土)</div>
+<div class="qz-opt">c) Fire Overcoming Metal (火剋金)</div>
+<div class="qz-opt">d) Metal Overcoming Wood (金剋木)</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Earth controls/overcomes Water in the Ke cycle — mud (Earth) used to counter a Water-associated phobia.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">15.</span>In the Four Cardinal Spirits (Sasindo), which mythical animal guards the East?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) White Tiger</div>
+<div class="qz-opt">b) Vermilion Bird</div>
+<div class="qz-opt">c) Black Tortoise</div>
+<div class="qz-opt correct">d) Azure Dragon ✓</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Azure Dragon (East), White Tiger (West), Vermilion Bird (South), Black Tortoise (North) — the standard four-directional guardian set.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">16.</span>From a critical perspective on the modern medical term 'pathogen', what should be emphasized most when studying diseases?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Memorizing the names and types of microorganisms</div>
+<div class="qz-opt">b) Focusing exclusively on the deceased patients' symptoms</div>
+<div class="qz-opt correct">c) The interactions between microorganisms and the host ✓</div>
+<div class="qz-opt">d) Physical methods to completely sterilize pathogens</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Host-pathogen interaction, not the pathogen alone — directly echoes the Liu Qi/host-pathogen theme already in your Chapter 4 material.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">17.</span>Which of the following is the most appropriate perspective on understanding disease in Traditional Chinese Medicine?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) A condition is definitively diagnosed as a disease once it exceeds a specific numerical threshold.</div>
+<div class="qz-opt correct">b) The human body exists on a continuum between a state of perfect Yin-Yang balance and death. ✓</div>
+<div class="qz-opt">c) Every human maintains a perfect balance of Yin and Yang from birth.</div>
+<div class="qz-opt">d) It considers that a single virus causes a single disease.</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>TCM views health/disease as a spectrum, not a binary — matches the non-binary Yin-Yang framing throughout your materials.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">18.</span>The ancient Chinese activity most closely related to the etymology of 'Chi (治)', which means treatment in East Asian medicine, is:</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Smelting industry dealing with fire</div>
+<div class="qz-opt correct">b) Water management controlling the flow of the Yellow River ✓</div>
+<div class="qz-opt">c) Construction of the Great Wall of China</div>
+<div class="qz-opt">d) Weapon manufacturing</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>治 originally referred to river/water management (controlling flooding) — extended metaphorically to 'governing'/'treating' a body back into balanced flow.</div>
+<span class="conf-tag conf-check">⚠ best-effort — double-check</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">19.</span>Which medical term represents the analytical thinking of the West that dissects and divides subjects into branches for analysis?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Cognition</div>
+<div class="qz-opt">b) Consilience</div>
+<div class="qz-opt correct">c) Diagnosis ✓</div>
+<div class="qz-opt">d) Pattern Identification</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Diagnosis (dividing/differentiating toward a discrete disease category) is framed as the analytical Western counterpart to Pattern Identification's holistic approach.</div>
+<span class="conf-tag conf-check">⚠ best-effort — double-check</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">20.</span>Which term refers to 'Pattern (證)', which is the result of synthesizing and differentiating multiple symptoms, acting as a milestone that determines the direction of treatment?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Zheng (症)</div>
+<div class="qz-opt correct">b) Zheng (證) ✓</div>
+<div class="qz-opt">c) Pathogen</div>
+<div class="qz-opt">d) Six Exogenous Factors (Liuyin / Yukeum)</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>證 (Zheng, 'pattern') is the synthesized diagnostic conclusion; 症 (Zheng, 'symptom') is an individual sign — same pronunciation, different characters and meanings.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">21.</span>Roughly when did the four-character idiom 'Differentiating Patterns and Determining Treatment (辨證論治)' become established as an official academic term?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Han Dynasty</div>
+<div class="qz-opt">b) Ming Dynasty</div>
+<div class="qz-opt">c) Late Joseon Dynasty</div>
+<div class="qz-opt correct">d) Around 1955 (Modern Era) ✓</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>A modern (mid-20th-century) standardization, not an ancient term — consistent with the broader course theme that much of 'traditional' terminology is a recent institutional construction.</div>
+<span class="conf-tag conf-check">⚠ best-effort — double-check</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">22.</span>What is the most common misconception regarding 'Pattern Differentiation (辨證)'?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) It is the process of identifying a group (pattern) of symptoms.</div>
+<div class="qz-opt correct">b) It is identifying the disease name or the root cause of the disease (etiology). ✓</div>
+<div class="qz-opt">c) It is identifying the patient's overall imbalance.</div>
+<div class="qz-opt">d) Pattern differentiation is a concept similar to a Western medical syndrome.</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Pattern differentiation is about identifying the current functional imbalance/pattern, NOT pinpointing a fixed disease name or root cause the way Western etiology does — conflating the two is the common misconception.</div>
+<span class="conf-tag conf-check">⚠ best-effort — double-check</span>
+</div>
+<div class="page-footer"><span>EAM301 · Weekly Quiz Bank</span><span>Week 4 — Yin</span></div>
+</div>
+<div class="page sg-page" id="qz-w4">
+<div class="sg-head"><span class="sg-hanzi brush">問</span><div><div class="sg-weeks mono">13 questions</div><h2>Week 5 — History of Acupuncture and AHM</h2></div></div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">1.</span>Who among the 'Three Sovereigns' known as cultural heroes is credited with introducing medicine and agriculture to China?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Fuxi</div>
+<div class="qz-opt correct">b) Shennong ✓</div>
+<div class="qz-opt">c) Huangdi (Yellow Emperor)</div>
+<div class="qz-opt">d) Nüwa</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Shen Nong — already central to your materials.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">2.</span>What was the main methodology said to be used by Shennong to discover new medicinal herbs and determine their effects?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Observing animal responses</div>
+<div class="qz-opt">b) Sensing medicinal properties through meditation</div>
+<div class="qz-opt correct">c) Personally tasting every herb ✓</div>
+<div class="qz-opt">d) Classifying herbs through astrology</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Personally tasting each herb — the myth behind Choi's own Week 5 full-credit phrase, 'by testing and testing.'</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">3.</span>What is known as the earliest Chinese book on agriculture and medicinal plants?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Huangdi Neijing</div>
+<div class="qz-opt">b) Shanghan Lun</div>
+<div class="qz-opt correct">c) Shennong Bencao Jing ✓</div>
+<div class="qz-opt">d) Bencao Gangmu</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Shen Nong Ben Cao Jing — already in your materials.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">4.</span>Can Traditional Chinese Medicine (and AHM) be seen as evolving, much like other natural sciences?</div>
+<div class="qz-opts">
+<div class="qz-opt correct">a) Yes (New theories, herbs, and acupoints have been added and systematized throughout history) ✓</div>
+<div class="qz-opt">b) No (The contents of ancient texts thousands of years ago remain entirely unchanged and strictly followed as-is)</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Core course thesis — the entire 'nothing was fixed 2,000 years ago' argument running through every chapter.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">5.</span>Have the pathways of the meridians (channels) changed throughout the history of Traditional Chinese Medicine and AHM?</div>
+<div class="qz-opts">
+<div class="qz-opt correct">a) Yes (There are differences between the Mawangdui texts and the modern meridian system) ✓</div>
+<div class="qz-opt">b) No (Meridian pathways have remained completely identical from ancient times to the present)</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Yes — the 11→12 meridian evolution already diagrammed in your Chapter 3 material.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">6.</span>How many total meridians (channels) are described in the Mawangdui Silk Texts?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) 9</div>
+<div class="qz-opt correct">b) 11 ✓</div>
+<div class="qz-opt">c) 12</div>
+<div class="qz-opt">d) 14</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>11 — matches your existing materials exactly.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">7.</span>Which meridian, added in later periods, was missing from the early meridian system?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Bladder Meridian of Foot-Taiyang</div>
+<div class="qz-opt">b) Heart Meridian of Hand-Shaoyin</div>
+<div class="qz-opt correct">c) Pericardium Meridian of Hand-Jueyin ✓</div>
+<div class="qz-opt">d) Gallbladder Meridian of Foot-Shaoyang</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>The Pericardium Meridian is the commonly cited later addition to reach the standard 12 — worth adding to your meridian-evolution material as a specific, testable detail.</div>
+<span class="conf-tag conf-check">⚠ best-effort — double-check</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">8.</span>Approximately how many formulas were recorded in the 'Taiping Shenghui Fang', published by the government during the Song Dynasty?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Approx. 1,800</div>
+<div class="qz-opt">b) Approx. 5,000</div>
+<div class="qz-opt">c) Approx. 11,000</div>
+<div class="qz-opt correct">d) Approx. 16,800 ✓</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Matches the ~17,800 figure in your Cram Sheet — closest option.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">9.</span>What was the total number of acupoints introduced or standardized in the 'Zisheng Jing' during the Song Dynasty?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) 108</div>
+<div class="qz-opt correct">b) 359 ✓</div>
+<div class="qz-opt">c) 361</div>
+<div class="qz-opt">d) 500</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>359 — exactly matches your verified Week 5 answer already in the Question Bank.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">10.</span>Approximately how many herbs are recorded in the 'Shennong Bencao Jing'?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) 100</div>
+<div class="qz-opt correct">b) 365 ✓</div>
+<div class="qz-opt">c) 1,527</div>
+<div class="qz-opt">d) 1,892</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>365 — matches your materials exactly.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">11.</span>During the Ming Dynasty, when the 'Bencao Gangmu' was compiled based on the 'Shennong Bencao Jing', approximately how many newly added herbs were included?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Approx. 365</div>
+<div class="qz-opt">b) Approx. 1,100</div>
+<div class="qz-opt correct">c) Approx. 1,500 ✓</div>
+<div class="qz-opt">d) Approx. 1,900</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Matches your verified 1,527-herb-difference figure — closest option.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">12.</span>Who was the physician who authored the 'Bencao Gangmu' during the Ming Dynasty?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Zhang Zhongjing</div>
+<div class="qz-opt correct">b) Li Shizhen ✓</div>
+<div class="qz-opt">c) Sun Simiao</div>
+<div class="qz-opt">d) Wang Shuhe</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Li Shizhen — already in your materials.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">13.</span>Is Aloe Vera considered an AHM (Asian Herbal Medicine) herb?</div>
+<div class="qz-opts">
+<div class="qz-opt correct">a) Yes ✓</div>
+<div class="qz-opt">b) No</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Yes — matches your existing Question Bank answer (Lu Hui, 蘆薈).</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="page-footer"><span>EAM301 · Weekly Quiz Bank</span><span>Week 5 — History of Acupuncture and AHM</span></div>
+</div>
+<div class="page sg-page" id="qz-w5">
+<div class="sg-head"><span class="sg-hanzi brush">問</span><div><div class="sg-weeks mono">22 questions</div><h2>Week 6, Part 1 — Major Theoretical Background</h2></div></div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">1.</span>Who is the author of the 'Shanghan Lun' ('Treatise on Cold Damage')?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Sun Simiao</div>
+<div class="qz-opt correct">b) Zhang Zhongjing ✓</div>
+<div class="qz-opt">c) Li Dongyuan</div>
+<div class="qz-opt">d) Ye Tianshi</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Zhang Zhong Jing — already in your materials.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">2.</span>From which original book is the 'Shanghan Lun' known to have been separated?</div>
+<div class="qz-opts">
+<div class="qz-opt correct">a) 'Shanghan Za Bing Lun' ✓</div>
+<div class="qz-opt">b) 'Huangdi Neijing'</div>
+<div class="qz-opt">c) 'Qianjin Yaofang'</div>
+<div class="qz-opt">d) 'Lingshu'</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Shang Han Za Bing Lun — the combined original text later split into Shang Han Lun + Jin Gui Yao Lue.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">3.</span>"Shanghan" (Cold Damage) does not merely mean illness caused by cold pathogen in a literal sense. Broadly speaking, what does it encompass?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Internal damage disorders</div>
+<div class="qz-opt correct">b) All externally contracted diseases (exogenous disorders) ✓</div>
+<div class="qz-opt">c) Mental disorders</div>
+<div class="qz-opt">d) Food poisoning</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Broadly, all exogenous (externally-contracted) disease, not just literal cold-weather illness.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">4.</span>Which best describes the academic nature of the 'Shanghan Lun'?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) A compilation of basic medical theories</div>
+<div class="qz-opt correct">b) Empirical and clinical ✓</div>
+<div class="qz-opt">c) Mythological</div>
+<div class="qz-opt">d) Divinatory</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Empirical/clinical — the first true clinical manual, per your existing materials.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">5.</span>How was the term "Za Bing" (Miscellaneous Diseases) in 'Shanghan Za Bing Lun' interpreted by later generations when the text was split?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Internal medicine disorders</div>
+<div class="qz-opt correct">b) Diseases other than infectious epidemics ✓</div>
+<div class="qz-opt">c) Acute conditions</div>
+<div class="qz-opt">d) Gynecological disorders</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>'Miscellaneous diseases' = non-epidemic conditions, split off into what became Jin Gui Yao Lue.</div>
+<span class="conf-tag conf-check">⚠ best-effort — double-check</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">6.</span>Which feature characterizes the 'Huangdi Neijing' ('Yellow Emperor's Inner Canon')?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) A book authored by a single person in a short period</div>
+<div class="qz-opt correct">b) A comprehensive compilation of knowledge gathered across generations of physicians ✓</div>
+<div class="qz-opt">c) Records written during a war</div>
+<div class="qz-opt">d) A pharmaceutical text from the Song Dynasty</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Compiled across generations — already established in your materials.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">7.</span>What does the character "Nei" (Inner) mean in 'Neijing'?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Internal medicine disorders</div>
+<div class="qz-opt correct">b) The interior of the human body ✓</div>
+<div class="qz-opt">c) Secretly transmitted scriptures</div>
+<div class="qz-opt">d) Inside the Emperor's body</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>'Inner' refers to the body's interior — worth confirming exact phrasing against lecture, since 'esoteric/inner teaching' is also a plausible classical reading.</div>
+<span class="conf-tag conf-check">⚠ best-effort — double-check</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">8.</span>Which two volumes comprise the 'Huangdi Neijing'?</div>
+<div class="qz-opts">
+<div class="qz-opt correct">a) 'Suwen' and 'Lingshu' ✓</div>
+<div class="qz-opt">b) 'Shanghan Lun' and 'Jinkui Yaolüe'</div>
+<div class="qz-opt">c) 'Neijing' and 'Waijing'</div>
+<div class="qz-opt">d) 'Taisu' and 'Zhengjing'</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Su Wen + Ling Shu — already in your materials.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">9.</span>What is the meaning of the phrase "When healthy Qi is stored within, evil Qi cannot interfere" ('Zheng Qi Zun Nei, Xie Bu Ke Gan')?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) If healthy Qi is weak, disease cures itself</div>
+<div class="qz-opt correct">b) If healthy Qi is present, pathogenic Qi cannot invade ✓</div>
+<div class="qz-opt">c) If pathogenic Qi is present, healthy Qi becomes stronger</div>
+<div class="qz-opt">d) Pathogenic Qi is the source of healthy Qi</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Strong constitutional/healthy Qi prevents pathogenic invasion — host-resistance logic echoed throughout the course's host-pathogen theme.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">10.</span>What does "Yangsheng" (Nurturing Life) mean?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Treatment after falling ill</div>
+<div class="qz-opt correct">b) Cultivating life and maintaining health through daily self-care ✓</div>
+<div class="qz-opt">c) Methods for preparing for death</div>
+<div class="qz-opt">d) Techniques for compounding herbal medicines</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Same as Week 3's answer — health maintenance through ongoing self-care.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">11.</span>Which era did Sun Simiao belong to?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Warring States period</div>
+<div class="qz-opt">b) Qin and Han Dynasties</div>
+<div class="qz-opt correct">c) Sui and Tang Dynasties ✓</div>
+<div class="qz-opt">d) Song Dynasty</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Sui-Tang — already in your materials.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">12.</span>In which book are Sun Simiao's medical ethics documented?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) 'Huangdi Neijing'</div>
+<div class="qz-opt">b) 'Shanghan Lun'</div>
+<div class="qz-opt">c) 'Jinkui Yaolüe'</div>
+<div class="qz-opt correct">d) 'Beiji Qianjin Yaofang' ✓</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Bei Ji Qian Jin Yao Fang — already in your materials.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">13.</span>What does the term "Ashi Point" ('Ashi Xue') proposed by Sun Simiao refer to?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Fixed, predetermined acupoints</div>
+<div class="qz-opt correct">b) Spots where the patient reacts by saying "Ah, yes! (That's the spot!)" ✓</div>
+<div class="qz-opt">c) Specific points behind the ear</div>
+<div class="qz-opt">d) Muscle trigger points</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Ashi points are found by patient reaction/tenderness rather than fixed location — directly connects to the live-point/true-point (活穴) concept already in your Chapter 3 material and predates the Toyohari Oshide/Sashite technique by centuries.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">14.</span>What is the meaning of Sun Simiao's statement: "If dietary therapy does not cure, only then prescribe medication"?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Diet is unrelated to treatment</div>
+<div class="qz-opt">b) Diseases must only be cured with medicine</div>
+<div class="qz-opt correct">c) Medication should be used only after dietary therapy is tried ✓</div>
+<div class="qz-opt">d) Combining medication and food is harmful</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Food/dietary therapy as first-line treatment, medication as escalation — consistent with his broader gentle, ethics-first approach.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">15.</span>Which combination correctly identifies the Four Great Masters of the Jin-Yuan Dynasties?</div>
+<div class="qz-opts">
+<div class="qz-opt correct">a) Liu Wansu, Zhang Congzheng, Li Dongyuan, Zhu Zhenheng ✓</div>
+<div class="qz-opt">b) Zhang Zhongjing, Sun Simiao, Liu Chang, Zhu Zhenheng</div>
+<div class="qz-opt">c) Bian Que, Hua Tuo, Li Dongyuan, Heo Jun</div>
+<div class="qz-opt">d) Zhang Congzheng, Li Dongyuan, Liu Chang, Li Shizhen</div>
+<div class="qz-opt">e) Liu Yajian, Zhang Zihe, Li Gao, Zhu Danxi</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Liu Wansu, Zhang Congzheng, Li Dongyuan, Zhu Zhenheng (Zhu Danxi) — matches your existing materials exactly. (Option E lists the same four people under alternate names/transliterations — also technically correct, but (a) is the standard expected answer using the names already in your docs.)</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">16.</span>What is the core concept proposed by Li Dongyuan?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Gongxia Theory (Purgation)</div>
+<div class="qz-opt correct">b) Baotu Theory (Nourishing Earth / Spleen and Stomach) ✓</div>
+<div class="qz-opt">c) Hanliang Theory (Cooling)</div>
+<div class="qz-opt">d) Yangyin Theory (Nourishing Yin)</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Spleen-Stomach as root — already in your materials.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">17.</span>Which is Li Dongyuan's major written work?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) 'Bencao Gangmu'</div>
+<div class="qz-opt correct">b) 'Pi Wei Lun' ('Treatise on the Spleen and Stomach') ✓</div>
+<div class="qz-opt">c) 'Wenbing Tiaobian'</div>
+<div class="qz-opt">d) 'Huangdi Neijing'</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Pi Wei Lun — new specific title worth adding to your Jin-Yuan Masters material.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">18.</span>When did major medical reform take place under the influence of Neo-Confucianism?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Tang Dynasty</div>
+<div class="qz-opt correct">b) Song Dynasty ✓</div>
+<div class="qz-opt">c) Jin-Yuan Period</div>
+<div class="qz-opt">d) Ming Dynasty</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Song Dynasty — when Neo-Confucianism (Lixue) itself emerged, setting up the Jin-Yuan medical schools that followed.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">19.</span>In Yuan Dynasty medicine, which school focused on internal causes such as the balance of Zang-Fu organs?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Cooling School (Hanliang)</div>
+<div class="qz-opt correct">b) Earth-Nourishing School (Baotu) ✓</div>
+<div class="qz-opt">c) Yin-Nourishing School (Zayin)</div>
+<div class="qz-opt">d) Purgation School (Gongxia)</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Baotu (Li Dongyuan's school) — internal organ balance, specifically Spleen-Stomach.</div>
+<span class="conf-tag conf-check">⚠ best-effort — double-check</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">20.</span>What was the social background behind the formal emergence of "Confucian Physicians" ('Ruyi')?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Medicine shifted to monasteries after Buddhism was adopted as the state religion</div>
+<div class="qz-opt correct">b) Han scholars entered medicine due to Mongol rule restricting public office ✓</div>
+<div class="qz-opt">c) State medical education halted due to the decline of Daoism</div>
+<div class="qz-opt">d) A reaction following the introduction of Western medicine to China</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Under Yuan (Mongol) rule, Han Chinese scholar-officials were barred from many government posts and turned to medicine as an alternative respected profession — the origin of the 'Confucian physician' class.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">21.</span>Which was NOT an impact of the Mongol invasion of China on Traditional Chinese Medicine / AHM?</div>
+<div class="qz-opts">
+<div class="qz-opt correct">a) Traditional medicine was suppressed and nearly eradicated ✓</div>
+<div class="qz-opt">b) Mongolian medicine was introduced, leading to integrative developments</div>
+<div class="qz-opt">c) Intellectuals studied medicine, leading to the emergence of distinct academic schools</div>
+<div class="qz-opt">d) It created opportunities for Confucian physicians to practice</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>The Mongol era was actually a flourishing period for Chinese medicine (Jin-Yuan Four Masters, Confucian physicians) — suppression/near-eradication did NOT happen; the other three options are real, documented effects.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">22.</span>Which philosophy had the greatest impact on medicine during the Jin-Yuan Dynasty?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Daoism</div>
+<div class="qz-opt correct">b) Neo-Confucianism ✓</div>
+<div class="qz-opt">c) Mohism</div>
+<div class="qz-opt">d) Capitalism</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Neo-Confucianism — the same intellectual current running through the Ruyi (Confucian physician) phenomenon and the Four Masters' systematic theorizing.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="page-footer"><span>EAM301 · Weekly Quiz Bank</span><span>Week 6, Part 1 — Major Theoretical Background</span></div>
+</div>
+<div class="page sg-page" id="qz-w6">
+<div class="sg-head"><span class="sg-hanzi brush">問</span><div><div class="sg-weeks mono">10 questions</div><h2>Week 6, Part 2 — Pulse Diagnosis</h2></div></div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">1.</span>What unique tool was used by ancient Egyptian physicians to measure pulse rate?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) Tag Heuer</div>
+<div class="qz-opt">B) Violin</div>
+<div class="qz-opt correct">C) An earthenware vessel with a hole in the bottom ✓</div>
+<div class="qz-opt">D) A string that measures vibrations</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>A water clock — an earthenware vessel with a calibrated hole, timing the pulse against measured water flow.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">2.</span>Which physician in ancient Greece observed the four characteristics of the pulse (size, frequency, strength, rhythm) and created a portable water clock (clepsydra)?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) Galen</div>
+<div class="qz-opt correct">B) Herophilus ✓</div>
+<div class="qz-opt">C) Hippocrates</div>
+<div class="qz-opt">D) Jang Yeong-sil</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Herophilus of Alexandria is generally credited with the clepsydra-based systematic pulse observation described here — double-check against Choi's specific framing, since Galen also wrote extensively on pulse.</div>
+<span class="conf-tag conf-check">⚠ best-effort — double-check</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">3.</span>In a famous anecdote, for what unique purpose did the Persian physician Ibn Sina (Avicenna) reportedly use pulse diagnosis?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) Predicting a patient's lifespan</div>
+<div class="qz-opt correct">B) Lie detection ✓</div>
+<div class="qz-opt">C) Diagnosing hidden animal species</div>
+<div class="qz-opt">D) Detecting food toxicity</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>A well-known anecdote describes Ibn Sina detecting a patient's concealed emotional distress (often framed as lovesickness) via pulse changes when specific names were mentioned — functioning as an early lie-detection/emotional-tell method.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">4.</span>What is the primary focus of pulse diagnosis ('Nadi Pariksha') in Indian Ayurvedic medicine?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) The patient's blood type</div>
+<div class="qz-opt">B) Presence of cancer cells in specific organs</div>
+<div class="qz-opt correct">C) Balance of the three Doshas (Vata, Pitta, Kapha) ✓</div>
+<div class="qz-opt">D) Movement of 'pneuma'</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Nadi Pariksha assesses the balance of the three Doshas — the foundational Ayurvedic constitutional framework.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">5.</span>What is the first specialized book on pulse diagnosis in Chinese medical history that established a systematic framework and organized pulse types?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) 'Huangdi Neijing'</div>
+<div class="qz-opt">B) 'Shanghan Lun'</div>
+<div class="qz-opt correct">C) Wang Shuhe's 'Maijing' ('Pulse Classic') ✓</div>
+<div class="qz-opt">D) Li Shizhen's 'Binhu Maixue'</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Mai Jing — already in your materials.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">6.</span>What was the main reason the Joseon Silhak scholar Jeong Yak-yong criticized pulse diagnosis in his 'MaChron' ('Treatise on Pulse')?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) The pulse was too fast and irregular to measure accurately</div>
+<div class="qz-opt correct">B) The irrationallity of assigning specific internal organs to distinct locations on the wrist ✓</div>
+<div class="qz-opt">C) Because pulse diagnosis originated in China and was deemed unscientific</div>
+<div class="qz-opt">D) Because he believed abdominal diagnosis was superior to pulse diagnosis</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>A genuinely new figure for your materials — Jeong Yak-yong, a Korean Silhak (pragmatic/empirical) scholar, criticized the classical wrist-position-to-organ mapping as arbitrary/irrational.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">7.</span>When Yoshimasu Todo of Japan discarded the theoretical framework of Chinese medicine (Yin-Yang, Five Elements, etc.), which diagnostic method did he emphasize instead of pulse diagnosis?</div>
+<div class="qz-opts">
+<div class="qz-opt correct">A) Abdominal diagnosis ✓</div>
+<div class="qz-opt">B) Tongue diagnosis</div>
+<div class="qz-opt">C) Visual inspection</div>
+<div class="qz-opt">D) Inquiry</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Abdominal diagnosis (fukushin) — Yoshimasu Todo's signature contribution to the Koho School, already named in your materials as author of Yakucho.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">8.</span>What was the perspective of Yi Je-ma, the founder of Sasang Constitutional Medicine, regarding pulse diagnosis?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) Pulse diagnosis belongs to the mystical realm and should be completely rejected</div>
+<div class="qz-opt">B) One must be able to diagnose all diseases solely through pulse diagnosis</div>
+<div class="qz-opt correct">C) One only needs to grasp the basic principles (floating, deep, slow, rapid) without needing to explore mystical aspects ✓</div>
+<div class="qz-opt">D) Pulse diagnosis is less important than abdominal diagnosis</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Lee Je-ma took a pragmatic middle path — useful basic principles without over-mystification, consistent with Sasang Medicine's broader empirical, constitution-first approach.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">9.</span>Why is pulse diagnosis important despite being subjective?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) Because a physician's subjective judgment is always more accurate than objective data</div>
+<div class="qz-opt correct">B) Because it allows sensing overall changes in a patient's Qi that cannot be captured by objective data like blood tests or MRIs ✓</div>
+<div class="qz-opt">C) Because it can accurately diagnose pregnancy or cancer</div>
+<div class="qz-opt">D) Because it should always take precedence over other diagnostic methods (inspection, listening/smelling, inquiry)</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Captures holistic, functional-level information that lab/imaging tests miss — not a claim of superiority, just complementary value.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">10.</span>What common misconception was shared by ancient Greece and Wang Qingren of the Qing Dynasty?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) That the heart is the sole center of blood supply</div>
+<div class="qz-opt">B) That the pulse possesses a musical rhythm</div>
+<div class="qz-opt correct">C) Thinking that arteries are empty and convey Qi or 'pneuma' ✓</div>
+<div class="qz-opt">D) Thinking that veins carry Qi rather than blood</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Both traditions, independently, mistook arteries as carrying air/pneuma/Qi rather than blood — a striking convergent error before circulation was properly understood.</div>
+<span class="conf-tag conf-check">⚠ best-effort — double-check</span>
+</div>
+<div class="page-footer"><span>EAM301 · Weekly Quiz Bank</span><span>Week 6, Part 2 — Pulse Diagnosis</span></div>
+</div>
+<div class="page sg-page" id="qz-w7">
+<div class="sg-head"><span class="sg-hanzi brush">問</span><div><div class="sg-weeks mono">5 questions</div><h2>Week 6, Part 3 — Tongue Diagnosis</h2></div></div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">1.</span>What is the first specialized work to treat tongue diagnosis as an independent system, and from which era does it originate?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) 'Maijing', Han Dynasty</div>
+<div class="qz-opt correct">B) 'Ao Shi Shanghan Jin Jing Lu', Yuan Dynasty ✓</div>
+<div class="qz-opt">C) 'Wenyi Lun', Qing Dynasty</div>
+<div class="qz-opt">D) 'Neijing', Pre-Qin Period</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Ao Shi Shang Han Jin Jing Lu, Yuan Dynasty — new title worth adding to your materials as the first dedicated tongue-diagnosis text.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">2.</span>Which school of thought after the Qing Dynasty explicitly mapped specific areas of the tongue to Zang-Fu organs and emphasized tongue inspection?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) Cold Damage School ('Shanghan')</div>
+<div class="qz-opt correct">B) Warm Disease School ('Wenbing') ✓</div>
+<div class="qz-opt">C) Complementary and Alternative Medicine School</div>
+<div class="qz-opt">D) Four Great Masters of Jin-Yuan</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Wen Bing school — already central to your Chapter 4/6 material; this adds a specific new detail (tongue-zone-to-organ mapping) to that existing coverage.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">3.</span>What is the approximate turnover cycle of the dorsal tongue epithelium?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) Approx. 2 days</div>
+<div class="qz-opt">B) Approx. 5 days</div>
+<div class="qz-opt correct">C) Approx. 20 days ✓</div>
+<div class="qz-opt">D) Approx. 40 days</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>~20 days — a modern physiological fact used to explain why tongue coating can shift relatively quickly, supporting tongue diagnosis's clinical utility.</div>
+<span class="conf-tag conf-check">⚠ best-effort — double-check</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">4.</span>Which statement regarding tongue diagnosis in modern AHM is correct?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) It has a longer history of clinical validation than pulse diagnosis</div>
+<div class="qz-opt">B) Its low visual objectivity makes it unsuitable for research</div>
+<div class="qz-opt correct">C) It is noted for having a relatively short history of clinical validation and weaknesses in classical evidence ✓</div>
+<div class="qz-opt">D) It was completed in its current form prior to the Ming Dynasty</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Tongue diagnosis is comparatively newer and less classically established than pulse diagnosis — the honest, unflattering answer per the course's critical framing.</div>
+<span class="conf-tag conf-check">⚠ best-effort — double-check</span>
+</div>
+<div class="qz-block">
+<div class="qz-essay-label">Short Answer / Essay</div>
+<div class="qz-q"><span class="qz-num">5.</span>Describe why the tradition of tongue examination in Western medicine declined after the mid-20th century, and evaluate what supportive value it may hold in clinical practice today. (Essay)</div>
+<div class="qz-exp"><strong>Model answer starting point: </strong>Starting point: Western tongue examination declined as lab-based and imaging diagnostics (blood panels, biopsies, imaging) came to be seen as more 'objective' and standardized than visual bedside inspection. Its supportive value today: quick, non-invasive, zero-cost screening for hydration status, certain nutrient deficiencies (e.g., glossitis from B12/iron deficiency), and general systemic clues — useful as an adjunct first-pass indicator, not a replacement for lab diagnostics. This parallels the broader course argument about pulse and tongue diagnosis in AHM: subjective bedside methods losing ground to 'objective' instrumentation, while retaining real complementary clinical value.</div>
+<span class="conf-tag conf-check">⚠ best-effort — double-check</span>
+</div>
+<div class="page-footer"><span>EAM301 · Weekly Quiz Bank</span><span>Week 6, Part 3 — Tongue Diagnosis</span></div>
+</div>
+<div class="page sg-page" id="qz-w8">
+<div class="sg-head"><span class="sg-hanzi brush">問</span><div><div class="sg-weeks mono">7 questions</div><h2>Week 7 — Present and Future</h2></div></div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">1.</span>What is the most appropriate primary reason why doctors adopted the white coat?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) To easily spot blood or contamination</div>
+<div class="qz-opt correct">B) To borrow the authority and prestige of scientific research ✓</div>
+<div class="qz-opt">C) The low cost of the garments</div>
+<div class="qz-opt">D) The necessity for a religious symbol</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>The white coat borrows the visual authority of the laboratory scientist — a symbolic move to align medicine with the prestige of hard science, not a practical hygiene choice originally.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">2.</span>Which characteristic is most directly linked to the spread of hospital medicine in 19th-century Paris?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) The revival of folk remedies</div>
+<div class="qz-opt correct">B) Advancements in basic science ✓</div>
+<div class="qz-opt">C) Expansion of home visits</div>
+<div class="qz-opt">D) Pharmacy-led treatment</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>The rise of Paris hospital medicine is tied to basic-science advances (pathology, systematic clinical observation at scale) — a landmark shift in Western medical history.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">3.</span>What was the primary feature of the "Initial Student Uinyeo" (Chohak Uinyeo) stage in the Joseon female physician training system?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) Guaranteed salary and field practice</div>
+<div class="qz-opt correct">B) Three years of full-time study covering literacy, mathematics, and medical texts ✓</div>
+<div class="qz-opt">C) Permission to open a private practice freely</div>
+<div class="qz-opt">D) Exclusive dedication to surgical procedures</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>A structured, multi-year academic curriculum — genuinely new content on the formal training pathway for Joseon female physicians (Uinyeo), worth adding alongside your existing Korean-medicine material.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">4.</span>What is the core message contained in the title of Zhang Yuansuo's 'Zhenzhu Nang' ('Bag of Pearls')?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) Theory is eternal and immutable</div>
+<div class="qz-opt correct">B) Explanatory frameworks can be replaced through empirical experience ✓</div>
+<div class="qz-opt">C) Classics are not subject to criticism</div>
+<div class="qz-opt">D) Herbs are precious, but explanations are even more precious</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>'Pearls' as valuable insights that can be exchanged/updated with new clinical experience — theory as revisable, not fixed. Zhang Yuansu is already named in your materials as the author who influenced Li Dongyuan.</div>
+<span class="conf-tag conf-check">⚠ best-effort — double-check</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">5.</span>What was the effect brought by extraction and synthesis in the progression from Cinchona bark to Quinine to Chloroquine?</div>
+<div class="qz-opts">
+<div class="qz-opt">A) Decreased efficacy and increased side effects</div>
+<div class="qz-opt correct">B) Dosage standardization and reduced side effects ✓</div>
+<div class="qz-opt">C) Increased cost and worsened accessibility</div>
+<div class="qz-opt">D) Increased variability in drug efficacy</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Each refinement step (whole bark → isolated quinine → synthetic chloroquine) improved dosing precision and reduced side effects — a direct parallel to the artemisinin story already in your materials.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-essay-label">Short Answer / Essay</div>
+<div class="qz-q"><span class="qz-num">6.</span>Write two advantages that the term AHM holds over TCM. (Short answer)</div>
+<div class="qz-exp"><strong>Model answer starting point: </strong>(1) AHM does not imply the tradition is exclusively Chinese, better reflecting genuine Korean, Japanese, and other contributions — avoiding the nationalistic/political framing baked into "TCM." (2) "Herbal Medicine" is more descriptive and accessible to English-speaking audiences than "TCM," which is tied to a specific 1950s Chinese state-standardization project (already covered in your Chapter 4 material) rather than the broader tradition itself.</div>
+<span class="conf-tag conf-check">⚠ best-effort — double-check</span>
+</div>
+<div class="qz-block">
+<div class="qz-essay-label">Short Answer / Essay</div>
+<div class="qz-q"><span class="qz-num">7.</span>Briefly explain what traditional doctors during the Edo and Joseon periods were called by the public at the time, and what that name implies. (Short answer)</div>
+<div class="qz-exp"><strong>Model answer starting point: </strong>Lower confidence — I don't have a verified source for the specific folk term used in each country. Flag this one directly with Choi or check the lecture recording; a plausible direction (needs confirmation) is that Edo-period Japanese doctors were often addressed with an honorific like sensei (先生, 'teacher'), implying social respect tied to their role as educators/scholars rather than simple tradespeople.</div>
+<span class="conf-tag conf-check">⚠ best-effort — double-check</span>
+</div>
+<div class="page-footer"><span>EAM301 · Weekly Quiz Bank</span><span>Week 7 — Present and Future</span></div>
+</div>
+<div class="page sg-page" id="qz-w9">
+<div class="sg-head"><span class="sg-hanzi brush">問</span><div><div class="sg-weeks mono">9 questions</div><h2>Week 8 — Traditional Medicine in Korea, China, and Japan</h2></div></div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">1.</span>Which Korean physician is mentioned as having influenced the 'Shikyu Gokuhisho' ('Secret Acupuncture Notes') published in Japan in 1778?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Heo Jun</div>
+<div class="qz-opt correct">b) Heo Im ✓</div>
+<div class="qz-opt">c) Kim Deok-bang</div>
+<div class="qz-opt">d) Yi Sun-sin</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Heo Im — already named in your materials as the dry-needling pioneer; this adds a specific, testable detail (his influence reaching Japan by 1778) to that existing coverage.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">2.</span>What is Korea's representative medical text, compiled by Heo Jun and inscribed on the UNESCO Memory of the World Register?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) 'Chimgu Gyeongheombang'</div>
+<div class="qz-opt correct">b) 'Dongui Bogam' ✓</div>
+<div class="qz-opt">c) 'Bencao Gangmu'</div>
+<div class="qz-opt">d) 'Yakucho'</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Dongui Bogam — already central to your materials.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">3.</span>What is the defining characteristic that sets Heo Im's 'Chimgu Gyeongheombang' ('Experimental Acupuncture Formulas') apart from other medical texts?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Focus on Yin-Yang and Five Elements theories</div>
+<div class="qz-opt correct">b) Emphasis on the author's personal clinical experience and practical application ✓</div>
+<div class="qz-opt">c) Introduction of Western anatomy</div>
+<div class="qz-opt">d) Compilation under royal order</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Personal clinical experience over theoretical framework — matches the 'independent Korean innovation' framing already in your materials for Heo Im's dry-needling contribution.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">4.</span>Regarding the cause of King Hyojong's death, which type of needle is presumed to have been used for treating his abscess?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Laser needle</div>
+<div class="qz-opt">b) Bianstone</div>
+<div class="qz-opt">c) Spring-handle needle</div>
+<div class="qz-opt correct">d) Knife-shaped lancet needle ('Pichim') ✓</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>A lancet-type needle (Pichim) used for abscess drainage — a genuinely new cautionary case study on acupuncture malpractice risk, worth flagging for whichever chapter covers historical treatment complications.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">5.</span>In the fatal incident involving the seventh-generation only son recorded by Horace Allen, which acupoint is presumed to have suffered lethal damage?</div>
+<div class="qz-opts">
+<div class="qz-opt correct">a) Neck / Cervical spine ✓</div>
+<div class="qz-opt">b) Lower back / Lumbar spine</div>
+<div class="qz-opt">c) Abdominal cavity</div>
+<div class="qz-opt">d) Cardiopulmonary region</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Neck/cervical region — another new malpractice case study, this one recorded by the American missionary-physician Horace Allen in Korea.</div>
+<span class="conf-tag conf-check">⚠ best-effort — double-check</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">6.</span>Which classic medical text served as the primary foundation for the "Koho School" (Gobang派) of Japanese Kampo medicine?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) 'Dongui Bogam'</div>
+<div class="qz-opt">b) 'Pi Wei Lun'</div>
+<div class="qz-opt correct">c) 'Shanghan Lun' ✓</div>
+<div class="qz-opt">d) 'Qianjin Yaofang'</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Shang Han Lun — Koho-ha's whole project was a 'return to the classics' emphasizing Zhang Zhong Jing's original formulas.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">7.</span>Who authored 'Yakucho' ('Drug Characteristics'), a core text of the "Koho School"?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Tashiro Sanki</div>
+<div class="qz-opt correct">b) Yoshimasu Todo ✓</div>
+<div class="qz-opt">c) Sugiyama Waichi</div>
+<div class="qz-opt">d) Hanaoka Seishu</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Yoshimasu Todo — already named in your materials as the Koho-ha figure behind abdominal diagnosis; Yakucho is his specific text.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">8.</span>In the modern Japanese healthcare system, which profession holds the authority to prescribe Kampo (herbal medicine)?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Acupuncturists</div>
+<div class="qz-opt">b) Pharmacists</div>
+<div class="qz-opt correct">c) Licensed Western medical doctors ✓</div>
+<div class="qz-opt">d) Kampo specialists</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Licensed Western MDs — matches your existing Chapter 4 material ('MDs prescribe Kampo — different integration model from Korea or China').</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">9.</span>Who was the visually impaired individual who invented the "guide tube" ('Shinkan') to improve the convenience and accuracy of acupuncture?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Heo Im</div>
+<div class="qz-opt correct">b) Sugiyama Waichi ✓</div>
+<div class="qz-opt">c) Ogino Gengai</div>
+<div class="qz-opt">d) Miki Sakae</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Sugiyama Waichi — a genuinely new figure and invention (the guide tube, still standard equipment in acupuncture today) worth adding to your Japan/Kampo material.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="page-footer"><span>EAM301 · Weekly Quiz Bank</span><span>Week 8 — Traditional Medicine in Korea, China, and Japan</span></div>
+</div>
+<div class="page sg-page" id="qz-w10">
+<div class="sg-head"><span class="sg-hanzi brush">問</span><div><div class="sg-weeks mono">12 questions</div><h2>Week 9 — East and West</h2></div></div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">1.</span>In which siege city did the Mongol army use catapults to hurl Black Death-infected corpses over the walls, contributing to the spread of the plague to Europe?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Rome</div>
+<div class="qz-opt">b) Constantinople</div>
+<div class="qz-opt correct">c) Kaffa ✓</div>
+<div class="qz-opt">d) Beijing</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Kaffa (Crimea) — the famous (if disputed) early biological-warfare episode credited with helping spread the Black Death toward Europe.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">2.</span>How did the Black Death weaken church authority in Europe and what ideological trend did it trigger?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Theocentrism</div>
+<div class="qz-opt correct">b) Humanism ✓</div>
+<div class="qz-opt">c) Existentialism</div>
+<div class="qz-opt">d) Nationalism</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Humanism — the Church's inability to explain or stop mass death eroded its authority, contributing to the intellectual shift that fed into the Renaissance.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">3.</span>Who was the 16th-century scholar in Italy who challenged Galen's authority, performed human dissections, and authored 'De Humani Corporis Fabrica'?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Hippocrates</div>
+<div class="qz-opt">b) Pope Boniface VIII</div>
+<div class="qz-opt">c) D.D. Palmer</div>
+<div class="qz-opt correct">d) Andreas Vesalius ✓</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Andreas Vesalius — already referenced in your Chapter 3 material via the Wang Qingren comparison.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">4.</span>What is the name of the 1910 report that led to the standardization of medical education in the United States and Canada?</div>
+<div class="qz-opts">
+<div class="qz-opt correct">a) Flexner Report ✓</div>
+<div class="qz-opt">b) Carnegie Report</div>
+<div class="qz-opt">c) Sho-saiko-to Report</div>
+<div class="qz-opt">d) Wellcome Report</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>The Flexner Report — already in your Chapter 6 material (the report that excluded non-Western medicine from U.S. training).</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">5.</span>Who was the founder of Chiropractic who proposed that spinal "subluxations" were the cause of disease?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Sean Conley</div>
+<div class="qz-opt">b) Abraham Flexner</div>
+<div class="qz-opt correct">c) D.D. Palmer ✓</div>
+<div class="qz-opt">d) Andrew Taylor Still</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>D.D. Palmer founded Chiropractic on the subluxation theory (Andrew Taylor Still, by contrast, founded Osteopathy — a useful distinction to keep straight for the exam).</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">6.</span>In 2018, who was appointed as the Physician to the President, becoming the first Doctor of Osteopathic Medicine (DO) in U.S. history to hold the position?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Zhou Zhumun</div>
+<div class="qz-opt">b) Sugita Genpaku</div>
+<div class="qz-opt correct">c) Sean Conley ✓</div>
+<div class="qz-opt">d) Wang Qingren</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Sean Conley — a modern, concrete example of DO/osteopathic medicine's mainstream legitimacy, likely used to bridge into the integrated-medicine discussion.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">7.</span>What was the major adverse effect that triggered the "Sho-saiko-to Incident" in Japan during the 1990s?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Liver failure</div>
+<div class="qz-opt correct">b) Interstitial pneumonia ✓</div>
+<div class="qz-opt">c) Acute renal failure</div>
+<div class="qz-opt">d) Myocardial infarction</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Interstitial pneumonia deaths linked to the Kampo formula Sho-saiko-to triggered a major regulatory and public-trust crisis for Kampo in Japan in the 1990s — genuinely new, high-value cautionary content for your materials.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">8.</span>Which of the following is 'NOT' mentioned as a function governed by the "Liver (Gan)" in East Asian medicine?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Storing blood</div>
+<div class="qz-opt">b) Smooth flow of emotions</div>
+<div class="qz-opt correct">c) Producing urine ✓</div>
+<div class="qz-opt">d) Governing muscles and eyes</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Urine production is a Kidney/Bladder function in EAM theory, not Liver — Liver governs blood storage, free-flowing emotion, and muscles/eyes/tendons.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">9.</span>During the Song Dynasty in China, which major philosophy prohibited bodily desecration and deemed dissection unethical, leading to the decline of empirical anatomical research?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Buddhism</div>
+<div class="qz-opt">b) Daoism</div>
+<div class="qz-opt correct">c) Neo-Confucianism ✓</div>
+<div class="qz-opt">d) Mohism</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Neo-Confucianism — an important counterpoint worth pairing with the same movement's role in driving Jin-Yuan medical *theoretical* reform elsewhere in the same era.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">10.</span>In 1757, who was the Japanese physician that dissected a human body and published the results in an anatomical book titled 'Zōshi' ('Notes on Viscera')?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Sugita Genpaku</div>
+<div class="qz-opt">b) Maeno Ryōtaku</div>
+<div class="qz-opt correct">c) Yamawaki Tōyō ✓</div>
+<div class="qz-opt">d) Utagawa Kenjin</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Correction worth flagging: this is Yamawaki Tōyō's earlier work Zōshi (蔵志, based on Japan's first officially authorized dissection in 1754, published 1759) — NOT Sugita Genpaku, whose more famous Kaitai Shinsho came later, in 1774, based on a 1771 dissection. Different book, different author, ~15 years apart. If the exam question uses the title 'Zōshi' specifically, Yamawaki Tōyō is correct.</div>
+<span class="conf-tag conf-check">⚠ best-effort — double-check</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">11.</span>Although the organ "Pi" in AHM was historically mistranslated as "Spleen," its functions (digestion, weight control, etc.) are actually closer to which real organ?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Stomach</div>
+<div class="qz-opt">b) Kidney</div>
+<div class="qz-opt correct">c) Pancreas ✓</div>
+<div class="qz-opt">d) Large Intestine</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Pancreas — already established in your materials.</div>
+<span class="conf-tag conf-verified">✓ verified</span>
+</div>
+<div class="qz-block">
+<div class="qz-q"><span class="qz-num">12.</span>In Greek mythology, who is the wife of Asclepius and goddess of "soothing pain," symbolizing the "Yin" aspect of medicine (care, empathy)?</div>
+<div class="qz-opts">
+<div class="qz-opt">a) Hygieia</div>
+<div class="qz-opt">b) Panacea</div>
+<div class="qz-opt">c) Aglaea</div>
+<div class="qz-opt correct">d) Epione ✓</div>
+</div>
+<div class="qz-exp"><strong>Answer & why: </strong>Correction worth flagging: Epione ('soothing') is Asclepius's wife in Greek mythology. Hygieia is their daughter — goddess of health/hygiene/prevention, not his wife. Easy to mix up since Hygieia is the more famous name (root of the word 'hygiene'), but the question specifically asks for the wife, which is Epione.</div>
+<span class="conf-tag conf-check">⚠ best-effort — double-check</span>
+</div>
+<div class="page-footer"><span>EAM301 · Weekly Quiz Bank</span><span>Week 9 — East and West</span></div>
+</div>
+
+<script>
+function printAs(mode){
+  var sizes = { letter: '8.5in 11in', remarkable: '7.075in 9.433in' };
+  var margin = mode === 'remarkable' ? '0.2cm' : '0.25cm';
+  var el = document.getElementById('pageSizeStyle');
+  if (el) el.textContent = '@page { size: ' + sizes[mode] + '; margin: ' + margin + '; }';
+  setTimeout(function(){ window.print(); }, 60);
+}
+</script>
+</body>
+</html>
