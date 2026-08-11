@@ -230,12 +230,11 @@ body { background: #fff; color: #2a2418; }
   .page {
     box-shadow:none !important; border:none !important; background:#fff !important; border-radius:0; max-width:100%; width:auto;
     margin:0; padding:1.0cm 1.3cm; box-sizing: border-box;
-    page-break-after: always; break-after: page;
     display: block;
   }
-  .page:last-child { page-break-after: avoid; break-after: avoid; }
+  .page:not(:first-of-type) { border-top: 1.5px dashed #c9a84c; padding-top: 1.3cm !important; margin-top: 0.5cm; }
   .page-footer { margin-top: 1rem; }
-  .callout, .q-block .question, .co2-col, .gloss-item, .checklist-item, .mn-item,
+  .gloss-item, .checklist-item, .mn-item,
   table, tr, .fill-box, .reading-item, li, .hdr { page-break-inside: avoid; }
   h1, h2, h3 { page-break-after: avoid; }
   p, .sg-body { orphans: 3; widows: 3; }
@@ -292,7 +291,7 @@ body { background: #fff; color: #2a2418; }
 .res-item strong { color: var(--text); }
 .res-note { display: block; font-size: 0.76rem; color: var(--muted); margin-top: 0.15rem; font-style: italic; }
 @media print {
-  .qa-block, .res-item, .res-section { page-break-inside: avoid; }
+  .res-item, .res-section { page-break-inside: avoid; }
 }
 </style>
 <style id="pageSizeStyle">@page { size: letter; margin: 0.25cm; }</style>
