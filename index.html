@@ -146,6 +146,10 @@ td strong{color:var(--text)}
 .sq-a{display:none;padding:.75rem .95rem;background:rgba(24,160,128,.07);border-radius:10px;
   font-size:.8rem;color:var(--glight);border-left:2px solid var(--teal);line-height:1.7;margin-top:.5rem}
 .sq-a.show{display:block;animation:fadeIn .2s}
+.mini-toggle{display:inline-block;cursor:pointer;color:var(--teal);font-size:.66rem;font-family:'JetBrains Mono',monospace;margin-top:.2rem;user-select:none}
+.mini-toggle:hover{color:var(--glight)}
+.mini-a{display:none;font-size:.78rem;color:var(--muted);margin-top:.35rem;padding:.5rem .65rem;background:rgba(24,160,128,.07);border-left:2px solid var(--teal);border-radius:6px;line-height:1.55}
+.mini-a.show{display:block;animation:fadeIn .2s}
 .bshow{padding:.32rem .85rem;border-radius:8px;font-size:.7rem;background:transparent;
   border:1px solid var(--border);color:var(--muted);cursor:pointer;font-family:'JetBrains Mono',monospace;transition:all .15s}
 .bshow:hover{border-color:var(--teal);color:var(--teal)}
@@ -540,10 +544,10 @@ Transcribed from the authoritative JPG image. The syllabus text has errors — t
       <li>Introduction to Mythos vs. Logos framework</li>
     </ul></div>
     <div class="ac ac-teal"><h4>⚔️ Socratic Prep</h4><ul>
-      <li>What does "Naked History" mean to Prof. Choi?</li>
-      <li>Why is it important to distinguish myth from history in medicine?</li>
-      <li>What is your personal motivation for studying EAM?</li>
-      <li>What is the difference between Mythos and Logos in medicine?</li>
+      <li>What does "Naked History" mean to Prof. Choi?<br><span class="mini-toggle" onclick="toggleMini('m1',this)">▼ show answer</span><div class="mini-a" id="m1">Stripping away mythology, hagiography, and official narrative to see what actually happened — who really wrote a text, who funded it, what political motive shaped its attribution. His own father was a history teacher; this method is personal to him.</div></li>
+      <li>Why is it important to distinguish myth from history in medicine?<br><span class="mini-toggle" onclick="toggleMini('m2',this)">▼ show answer</span><div class="mini-a" id="m2">Myths can obscure the real empirical work behind a discovery (compare the Shen Nong myth to the real trial-and-error process) and can freeze theory as "divinely given" rather than open to revision. Separating the two lets you see EAM as a developing human science, not a fixed revelation.</div></li>
+      <li>What is your personal motivation for studying EAM?<br><span class="mini-toggle" onclick="toggleMini('m3',this)">▼ show answer</span><div class="mini-a" id="m3">Open/personal question — no single correct answer, but Choi wants a genuine answer connecting your own reason to the "unbroken chain of practitioners" framing, not a generic one.</div></li>
+      <li>What is the difference between Mythos and Logos in medicine?<br><span class="mini-toggle" onclick="toggleMini('m4',this)">▼ show answer</span><div class="mini-a" id="m4">Mythos = medicine explained through legendary/divine culture-heroes and cosmological stories (Fu Xi, Shen Nong, Yellow Emperor). Logos = medicine explained through systematic, textual, argument-based theory. The course tracks the shift from one to the other.</div></li>
     </ul></div>
   </div>
 </div>
@@ -563,10 +567,10 @@ Transcribed from the authoritative JPG image. The syllabus text has errors — t
       <li>Dynasty mnemonic: "Happy Sloths Travel Slowly, Yearning Meditative Quietness"</li>
     </ul></div>
     <div class="ac ac-teal"><h4>⚔️ Socratic Prep</h4><ul>
-      <li>Who were the Three Sovereigns and what did each contribute?</li>
-      <li>Why attribute medical texts to legendary figures?</li>
-      <li>How did cosmological thinking shape early medical theory?</li>
-      <li>What is the political function of mythological attribution?</li>
+      <li>Who were the Three Sovereigns and what did each contribute?<br><span class="mini-toggle" onclick="toggleMini('m5',this)">▼ show answer</span><div class="mini-a" id="m5">Fu Xi (bagua/trigrams — cosmological foundation), Shen Nong (herbal medicine — tasted hundreds of plants), Yellow Emperor (Nei Jing — dialogue with Qi Bo). All three are legendary, not real historical individuals.</div></li>
+      <li>Why attribute medical texts to legendary figures?<br><span class="mini-toggle" onclick="toggleMini('m6',this)">▼ show answer</span><div class="mini-a" id="m6">Political legitimation — Han court scholars needed imperial-level authority for newly systematized texts, so attributing them to mythic culture-heroes gave unquestionable authority rather than admitting recent compilation.</div></li>
+      <li>How did cosmological thinking shape early medical theory?<br><span class="mini-toggle" onclick="toggleMini('m7',this)">▼ show answer</span><div class="mini-a" id="m7">Macrocosm-microcosm logic (Pan Gu's body becoming the universe) meant the human body was modeled on nature's own structures — seasons, Five Phases, yin-yang — giving medicine one unified cosmological framework instead of isolated anatomical facts.</div></li>
+      <li>What is the political function of mythological attribution?<br><span class="mini-toggle" onclick="toggleMini('m8',this)">▼ show answer</span><div class="mini-a" id="m8">Legitimizes new or compiled knowledge, unifies disparate folk practices under one authoritative narrative, and ties medicine directly to state power.</div></li>
     </ul></div>
   </div>
   <div class="ac ac-jade"><h4>🗡️ Key Figures This Week</h4>
@@ -591,10 +595,10 @@ Transcribed from the authoritative JPG image. The syllabus text has errors — t
       <li><strong>Bian Que 扁鵲:</strong> legendary physician, first to use pulse diagnosis, 4 diagnostic methods</li>
     </ul></div>
     <div class="ac ac-teal"><h4>⚔️ Socratic Prep</h4><ul>
-      <li>How did Taoist philosophy shape medical thinking?</li>
-      <li>What is the significance of Bian Que's diagnostic methods?</li>
-      <li>How did political chaos drive medical innovation?</li>
-      <li>What is the Logos shift from shamanic/mythological medicine?</li>
+      <li>How did Taoist philosophy shape medical thinking?<br><span class="mini-toggle" onclick="toggleMini('m9',this)">▼ show answer</span><div class="mini-a" id="m9">Naturalistic observation over supernatural explanation, wu wei (non-forcing) favoring the body's own healing capacity, and yin-yang framed as dynamic, complementary balance rather than moral opposites.</div></li>
+      <li>What is the significance of Bian Que's diagnostic methods?<br><span class="mini-toggle" onclick="toggleMini('m10',this)">▼ show answer</span><div class="mini-a" id="m10">He systematized the Four Diagnostic Methods (look 望 / listen-smell 聞 / ask 問 / pulse 切) still used today — the shift toward observation-based, replicable diagnosis instead of divination.</div></li>
+      <li>How did political chaos drive medical innovation?<br><span class="mini-toggle" onclick="toggleMini('m11',this)">▼ show answer</span><div class="mini-a" id="m11">Warring States instability broke down centralized control of knowledge, letting competing philosophical schools ("Hundred Schools of Thought") flourish and cross-pollinate with medical theory.</div></li>
+      <li>What is the Logos shift from shamanic/mythological medicine?<br><span class="mini-toggle" onclick="toggleMini('m12',this)">▼ show answer</span><div class="mini-a" id="m12">Medicine moves from spirit-possession/divination explanations toward systematic, text-based theory that could be argued about, revised, and taught — an epistemic shift, not a technological one.</div></li>
     </ul></div>
   </div>
   <div class="ac ac-jade"><h4>🗡️ Key Figures</h4>
@@ -642,10 +646,10 @@ Transcribed from the authoritative JPG image. The syllabus text has errors — t
       </div>
     </div>
     <div class="ac ac-teal"><h4>⚔️ Socratic Prep</h4><ul>
-      <li>Who actually wrote the Nei Jing? Why attribute it to Yellow Emperor?</li>
-      <li>What does Mawangdui prove about the development of acupuncture?</li>
-      <li>How does Yin-Yang theory explain disease?</li>
-      <li>What is Bi Lei Qu Xiang and how does it work?</li>
+      <li>Who actually wrote the Nei Jing? Why attribute it to Yellow Emperor?<br><span class="mini-toggle" onclick="toggleMini('m13',this)">▼ show answer</span><div class="mini-a" id="m13">Han court scholars compiled it over generations, not one author at one time. Attributing it to the Yellow Emperor gave it unquestioned imperial authority rather than admitting it was a contemporary political compilation.</div></li>
+      <li>What does Mawangdui prove about the development of acupuncture?<br><span class="mini-toggle" onclick="toggleMini('m14',this)">▼ show answer</span><div class="mini-a" id="m14">That meridian theory developed gradually — the Mawangdui texts describe only ~11 channels, no named acupoints, and only 2–3 organ-linked meridians — not a complete system revealed from the start.</div></li>
+      <li>How does Yin-Yang theory explain disease?<br><span class="mini-toggle" onclick="toggleMini('m15',this)">▼ show answer</span><div class="mini-a" id="m15">Disease is a loss of dynamic equilibrium between yin and yang forces in the body, not simply an external invading "thing" — treatment works by restoring relative balance, not just eliminating a pathogen.</div></li>
+      <li>What is Bi Lei Qu Xiang and how does it work?<br><span class="mini-toggle" onclick="toggleMini('m16',this)">▼ show answer</span><div class="mini-a" id="m16">Analogical reasoning — inferring the properties of an unknown thing (an herb, a condition) by comparing its appearance, smell, or behavior to something already understood. AHM's core epistemological method.</div></li>
     </ul></div>
   </div>
 </div>
@@ -664,10 +668,10 @@ Transcribed from the authoritative JPG image. The syllabus text has errors — t
       <li><strong>Sun Si Miao 孫思邈:</strong> "King of Medicine" 藥王, first medical ethics text, lived ~100 years, Bei Ji Qian Jin Yao Fang</li>
     </ul></div>
     <div class="ac ac-teal"><h4>⚔️ Socratic Prep</h4><ul>
-      <li>What drove Zhang Zhong Jing to write Shang Han Lun?</li>
-      <li>What was Hua Tuo's contribution and why was he executed?</li>
-      <li>What makes Sun Si Miao's medical ethics historically significant?</li>
-      <li>How did the Six Stages framework change clinical medicine?</li>
+      <li>What drove Zhang Zhong Jing to write Shang Han Lun?<br><span class="mini-toggle" onclick="toggleMini('m17',this)">▼ show answer</span><div class="mini-a" id="m17">An epidemic (possibly typhoid) killed two-thirds of his 200+ person clan within a decade. Grief drove him to systematize clinical treatment (the Six Stages) rather than rely on cosmological theory alone — moving medicine from theory to bedside protocol.</div></li>
+      <li>What was Hua Tuo's contribution and why was he executed?<br><span class="mini-toggle" onclick="toggleMini('m18',this)">▼ show answer</span><div class="mini-a" id="m18">First Chinese surgeon; invented mafeisan, an anesthetic compound, for abdominal surgery. Executed by warlord Cao Cao in 208 CE after refusing to become his permanent personal physician — burned his surgical manuscripts before death, setting Chinese surgical tradition back centuries.</div></li>
+      <li>What makes Sun Si Miao's medical ethics historically significant?<br><span class="mini-toggle" onclick="toggleMini('m19',this)">▼ show answer</span><div class="mini-a" id="m19">He wrote the first Chinese medical ethics text, insisting a physician treat all patients equally regardless of wealth, status, or appearance — a genuinely novel formal statement, not just an implicit clinical norm.</div></li>
+      <li>How did the Six Stages framework change clinical medicine?<br><span class="mini-toggle" onclick="toggleMini('m20',this)">▼ show answer</span><div class="mini-a" id="m20">It moved medicine from purely cosmological explanation to a staged, symptom-based clinical protocol describing how disease progresses through the body and how to treat each stage — the first true clinical manual, not just theory.</div></li>
     </ul></div>
   </div>
   <div class="ac ac-jade"><h4>🗡️ Key Figures</h4>
@@ -773,10 +777,10 @@ Transcribed from the authoritative JPG image. The syllabus text has errors — t
       <li>Ming Dynasty medical developments — continuation from Jin/Yuan reforms</li>
     </ul></div>
     <div class="ac ac-gold"><h4>⚔️ Socratic Prep</h4><ul>
-      <li>What was the role of female practitioners in historical Chinese medicine?</li>
-      <li>How did the Jin-Yuan Masters differ from each other?</li>
-      <li>What is dry-needling and why is Heo Im significant?</li>
-      <li>How did Korean medicine adapt and innovate Chinese techniques?</li>
+      <li>What was the role of female practitioners in historical Chinese medicine?<br><span class="mini-toggle" onclick="toggleMini('m21',this)">▼ show answer</span><div class="mini-a" id="m21">Historically underdocumented but present, especially in areas like gynecology and midwifery where male physicians had limited access to female patients — worth flagging any specific named examples Choi references in class.</div></li>
+      <li>How did the Jin-Yuan Masters differ from each other?<br><span class="mini-toggle" onclick="toggleMini('m22',this)">▼ show answer</span><div class="mini-a" id="m22">Same era, four incompatible clinical philosophies: Liu Wansu (Fire/Heat — cool everything), Zhang Congzheng (expel pathogens first), Li Dongyuan (Spleen-Stomach is root), Zhu Danxi (Yin deficiency is universal). Proof theory was not fixed even within a single century.</div></li>
+      <li>What is dry-needling and why is Heo Im significant?<br><span class="mini-toggle" onclick="toggleMini('m23',this)">▼ show answer</span><div class="mini-a" id="m23">Heo Im pioneered a dry-needling technique in Korea, systematized in the Chimgubogam — representing independent Korean innovation in acupuncture technique, not passive reception of Chinese method.</div></li>
+      <li>How did Korean medicine adapt and innovate Chinese techniques?<br><span class="mini-toggle" onclick="toggleMini('m24',this)">▼ show answer</span><div class="mini-a" id="m24">It kept the Chinese theoretical framework but developed distinct clinical tools of its own — Heo Im's needling, Dongui Bogam's Korean-herb substitution, Sasang's constitutional typing. Adaptation, not replication.</div></li>
     </ul></div>
   </div>
   <div class="ac ac-jade"><h4>🗡️ Key Figures</h4>
@@ -800,10 +804,10 @@ Transcribed from the authoritative JPG image. The syllabus text has errors — t
       <li><strong>Li Shi Zhen 李時珍:</strong> Ben Cao Gang Mu — 27 years, 1,892 medicinals, Pi/pancreas</li>
     </ul></div>
     <div class="ac ac-gold"><h4>⚔️ Socratic Prep</h4><ul>
-      <li>How does Wen Bing differ from Shang Han Lun in theory and treatment?</li>
-      <li>What does the artemisinin Nobel Prize reveal about classical texts?</li>
-      <li>Why did Eastern and Western medicine converge on Blood Stasis?</li>
-      <li>What is the Koho-ha vs. Kokan Igaku split about?</li>
+      <li>How does Wen Bing differ from Shang Han Lun in theory and treatment?<br><span class="mini-toggle" onclick="toggleMini('m25',this)">▼ show answer</span><div class="mini-a" id="m25">Shang Han Lun treats cold-induced disease with warm/acrid herbs via the Six Stages; Wen Bing treats warm/febrile epidemic disease with cool/bitter herbs via the Four Levels (Wei/Qi/Ying/Xue) — developed because Shang Han protocols failed against southern epidemic disease.</div></li>
+      <li>What does the artemisinin Nobel Prize reveal about classical texts?<br><span class="mini-toggle" onclick="toggleMini('m26',this)">▼ show answer</span><div class="mini-a" id="m26">That classical texts contain real, extractable empirical knowledge — Ge Hong's cold-extraction method for qinghao, read 1,700 years later by Tu Youyou, won the 2015 Nobel Prize. Proof that empiricism, not mysticism, underlies real cures in these texts.</div></li>
+      <li>Why did Eastern and Western medicine converge on Blood Stasis?<br><span class="mini-toggle" onclick="toggleMini('m27',this)">▼ show answer</span><div class="mini-a" id="m27">Both traditions independently identified circulatory/stagnation-related pathology as a disease mechanism through direct clinical observation — convergent empirical discovery, not one tradition influencing the other.</div></li>
+      <li>What is the Koho-ha vs. Kokan Igaku split about?<br><span class="mini-toggle" onclick="toggleMini('m28',this)">▼ show answer</span><div class="mini-a" id="m28">A Japanese debate over how to modernize Kampo: Koho-ha favored returning to classical Shang Han Lun-style formulas; Kokan Igaku favored blending with Western/modern medical theory — the "Worship or Ignore" tension playing out concretely in Japan.</div></li>
     </ul></div>
   </div>
 </div>
@@ -824,10 +828,10 @@ Transcribed from the authoritative JPG image. The syllabus text has errors — t
       <li>"Worship or Ignore?" — the EBM vs. EAM tension</li>
     </ul></div>
     <div class="ac ac-gold"><h4>⚔️ Socratic Prep</h4><ul>
-      <li>Why did every East Asian country show abolition AND revival?</li>
-      <li>What is Prof. Choi's position on EBM and EAM?</li>
-      <li>Why is Dongui Bogam a departure from Chinese tradition?</li>
-      <li>What makes Sasang uniquely Korean?</li>
+      <li>Why did every East Asian country show abolition AND revival?<br><span class="mini-toggle" onclick="toggleMini('m40',this)">▼ show answer</span><div class="mini-a" id="m40">A consistent pattern: Western-educated modernizers dismissed traditional medicine as "unscientific" and tried to abolish it; popular demand plus nationalist identity-building then forced its revival everywhere — China (1929 abolition → 1950s Mao mandate), Korea (colonial suppression → post-independence revival), Japan (Meiji suppression → Kampo revival).</div></li>
+      <li>What is Prof. Choi's position on EBM and EAM?<br><span class="mini-toggle" onclick="toggleMini('m29',this)">▼ show answer</span><div class="mini-a" id="m29">Likely a "both/and," not "either/or" — avoiding the false binary of "Worship or Ignore" and integrating EAM theory with modern evidence-based research where possible, without discarding the classical framework wholesale. Confirm his exact phrasing from your own class notes.</div></li>
+      <li>Why is Dongui Bogam a departure from Chinese tradition?<br><span class="mini-toggle" onclick="toggleMini('m30',this)">▼ show answer</span><div class="mini-a" id="m30">It substitutes Korean herbs for imported Chinese medicinals, a direct, practical response to the Imjin War's supply collapse — independence in practice, not just in theory.</div></li>
+      <li>What makes Sasang uniquely Korean?<br><span class="mini-toggle" onclick="toggleMini('m31',this)">▼ show answer</span><div class="mini-a" id="m31">Lee Je-ma's four-constitution framework is NOT derived from any Chinese theoretical source — an independently developed Korean system that predates Western personalized medicine by over a century.</div></li>
     </ul></div>
   </div>
 </div>
@@ -1314,10 +1318,10 @@ Prof. Choi opens by asking: why strip away mythology and examine history "naked"
   <li>Understanding WHY AHM developed = understanding how to USE it</li>
 </ul></div>
 <div class="ac ac-teal"><h4>⚔️ Exam Questions</h4><ul>
-  <li>"What is 'naked' about this history?" — Define the methodology</li>
-  <li>"Why does it matter that texts were attributed to legendary figures?"</li>
-  <li>"What is your personal connection to this healing tradition?"</li>
-  <li>"What does it mean to be a link in an unbroken chain?"</li>
+  <li>"What is 'naked' about this history?" — Define the methodology<br><span class="mini-toggle" onclick="toggleMini('m32',this)">▼ show answer</span><div class="mini-a" id="m32">Removing mythological and legendary attribution to see the real, human, political process behind how a text was written and authorized — reading past the "divinely given" framing to the actual compilers and their motives.</div></li>
+  <li>"Why does it matter that texts were attributed to legendary figures?"<br><span class="mini-toggle" onclick="toggleMini('m33',this)">▼ show answer</span><div class="mini-a" id="m33">It reveals medicine's history as intertwined with political legitimation, not pure objective science — and trains you to read any "ancient wisdom" claim critically rather than at face value.</div></li>
+  <li>"What is your personal connection to this healing tradition?"<br><span class="mini-toggle" onclick="toggleMini('m34',this)">▼ show answer</span><div class="mini-a" id="m34">Open/personal — answer honestly, tying your reason for studying EAM to the "unbroken chain of practitioners" framing Choi uses.</div></li>
+  <li>"What does it mean to be a link in an unbroken chain?"<br><span class="mini-toggle" onclick="toggleMini('m35',this)">▼ show answer</span><div class="mini-a" id="m35">You inherit a living tradition shaped by real practitioners' choices across centuries — and your own practice will, in turn, shape what gets passed on next.</div></li>
 </ul></div>
 </div>
 
@@ -1415,10 +1419,10 @@ The "Naked History" lens = archaeology of ideas. We dig under the official story
   <li><strong>Dynasty mnemonic:</strong> "Happy Sloths Travel Slowly, Yearning Meditative Quietness" = Han·Sui·Tang·Song·Yuan·Ming·Qing</li>
 </ul></div>
 <div class="ac ac-teal"><h4>⚔️ Exam Questions</h4><ul>
-  <li>"Who were the Three Sovereigns and what did each contribute to medicine?"</li>
-  <li>"Why attribute medical texts to legendary emperors — what does this tell us?"</li>
-  <li>"What is the Mythos period and how does it differ from Logos medicine?"</li>
-  <li>"How did Pan Gu cosmology shape medical theory?"</li>
+  <li>"Who were the Three Sovereigns and what did each contribute to medicine?"<br><span class="mini-toggle" onclick="toggleMini('m36',this)">▼ show answer</span><div class="mini-a" id="m36">Fu Xi (bagua/trigrams — cosmological foundation), Shen Nong (herbal medicine — tasted hundreds of plants), Yellow Emperor (Nei Jing — dialogue with Qi Bo). All three are legendary attributions, not real historical individuals.</div></li>
+  <li>"Why attribute medical texts to legendary emperors — what does this tell us?"<br><span class="mini-toggle" onclick="toggleMini('m37',this)">▼ show answer</span><div class="mini-a" id="m37">It tells us these texts needed imperial-level authority to be accepted — Han court scholars used mythic culture-heroes to legitimize newly compiled, systematized knowledge rather than presenting it as contemporary work.</div></li>
+  <li>"What is the Mythos period and how does it differ from Logos medicine?"<br><span class="mini-toggle" onclick="toggleMini('m38',this)">▼ show answer</span><div class="mini-a" id="m38">Mythos = medicine explained through legendary/divine figures and cosmological stories. Logos = medicine explained through systematic, textual, argument-based theory. The course tracks this shift across the dynasties.</div></li>
+  <li>"How did Pan Gu cosmology shape medical theory?"<br><span class="mini-toggle" onclick="toggleMini('m39',this)">▼ show answer</span><div class="mini-a" id="m39">Pan Gu's body becoming the universe established a macrocosm-microcosm framework — the human body modeled on nature's own structure — that underlies Yin-Yang and Five Phase medical theory.</div></li>
 </ul></div>
 </div>
 
@@ -1901,6 +1905,12 @@ function toggleSoc(id,btn){
   const el=document.getElementById(id);
   el.classList.toggle('show');
   btn.textContent=el.classList.contains('show')?'🗡️ Hide':'⚔️ Reveal';
+}
+
+function toggleMini(id,el){
+  const a=document.getElementById(id);
+  a.classList.toggle('show');
+  el.textContent = a.classList.contains('show') ? '▲ hide answer' : '▼ show answer';
 }
 
 // ═══ READING LIST ═══
