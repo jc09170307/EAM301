@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EAM301 · Cram Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Long+Cang&family=ZCOOL+XiaoWei&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@500;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+\
+:root {
+  /* Warm "night market / rice paper" palette — light by default */
+  --ink: #FFF8EC;
+  --ink-2: #FFEFD6;
+  --gold: #C9821A;
+  --gold-light: #A66A15;
+  --gold-dim: rgba(201,130,26,0.10);
+  --cinnabar: #D64541;
+  --cinnabar-light: #B23330;
+  --jade: #2F8F72;
+  --jade-light: #1F6E56;
+  --bamboo: #6FA050;
+  --plum: #B85C86;
+  --text: #2E2418;
+  --text-dim: #5B4A36;
+  --muted: #8A7860;
+  --border: rgba(201,130,26,0.28);
+  --card: rgba(201,130,26,0.055);
+  font-synthesis: none;
+}
+body.dark {
+  --ink: #1B1410;
+  --ink-2: #241A14;
+  --gold: #F0B349;
+  --gold-light: #F5C878;
+  --gold-dim: rgba(240,179,73,0.15);
+  --cinnabar: #FF6B5B;
+  --cinnabar-light: #FF9186;
+  --jade: #5FCBA6;
+  --jade-light: #8AD9BC;
+  --bamboo: #9AC97A;
+  --plum: #E893BC;
+  --text: #F5E9D6;
+  --text-dim: #C9B79C;
+  --muted: #9C8A70;
+  --border: rgba(240,179,73,0.24);
+  --card: rgba(255,255,255,0.045);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--ink);
+  background-image:
+    radial-gradient(ellipse 900px 500px at 15% -10%, var(--gold-dim), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 100% 20%, rgba(47,143,114,0.06), transparent 60%);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  line-height: 1.6;
+}
+h1, h2, h3, h4 { font-family: 'Dela Gothic One', 'Noto Serif SC', cursive; font-weight: 700; letter-spacing: 0.01em; margin: 0 0 0.5rem; }
+.brush { font-family: 'Ma Shan Zheng', cursive; }
+.hanzi { font-family: 'Noto Serif SC', serif; font-weight: 700; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+
+.seal {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; flex-shrink: 0;
+  background: var(--cinnabar); color: #fff;
+  font-family: 'Noto Serif SC', serif; font-size: 15px; font-weight: 700;
+  border-radius: 6px; transform: rotate(-4deg);
+  box-shadow: 0 2px 6px rgba(214,69,65,0.35);
+  border: 1.5px solid rgba(255,255,255,0.35);
+}
+
+.brush-divider { width: 100%; height: 14px; opacity: 0.6; margin: 1.2rem 0; }
+.brush-divider path { stroke: var(--gold); stroke-width: 2; fill: none; stroke-linecap: round; }
+
+.bamboo-wrap { display: flex; align-items: center; gap: 2px; margin: 0.6rem 0 1rem; }
+.bamboo-node {
+  flex: 1; height: 22px; background: rgba(111,160,80,0.12);
+  border: 1px solid rgba(111,160,80,0.35); border-radius: 5px;
+  position: relative; overflow: hidden;
+}
+.bamboo-node.filled { background: linear-gradient(180deg, var(--bamboo), var(--jade)); border-color: var(--bamboo); }
+.bamboo-node::after {
+  content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px;
+  background: rgba(0,0,0,0.12);
+}
+
+.taiji-toggle {
+  width: 30px; height: 30px; border-radius: 50%; cursor: pointer; flex-shrink: 0;
+  background: linear-gradient(90deg, #fff 50%, #1a1a1a 50%);
+  border: 2px solid var(--gold); position: relative; overflow: hidden;
+}
+.taiji-toggle::before, .taiji-toggle::after {
+  content: ''; position: absolute; width: 15px; height: 15px; border-radius: 50%; left: 7.5px;
+}
+.taiji-toggle::before { background: #fff; top: -0.5px; }
+.taiji-toggle::after { background: #1a1a1a; bottom: -0.5px; }
+
+.callout { display: flex; gap: 0.75rem; padding: 0.9rem 1rem; border-radius: 12px; margin-bottom: 1rem; border: 1px solid; }
+.callout.sifu { background: var(--gold-dim); border-color: var(--gold); }
+.callout.exam { background: rgba(214,69,65,0.09); border-color: var(--cinnabar); }
+.callout.jade { background: rgba(47,143,114,0.09); border-color: var(--jade); }
+.callout-icon { font-size: 1.3rem; flex-shrink: 0; }
+.callout-body strong { color: var(--gold-light); display: block; margin-bottom: 0.25rem; font-family: 'Dela Gothic One', 'Noto Serif SC', cursive; font-size: 0.86rem; letter-spacing: 0.01em; }
+.callout.exam .callout-body strong { color: var(--cinnabar-light); }
+.callout.jade .callout-body strong { color: var(--jade-light); }
+.callout-body { font-size: 0.86rem; color: var(--text-dim); }
+
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 1.1rem 1.2rem; margin-bottom: 1rem; }
+.rank-badge {
+  display: inline-block; font-family: 'Noto Serif SC', serif; font-size: 0.72rem;
+  padding: 0.15rem 0.55rem; border-radius: 20px; border: 1px solid var(--gold);
+  color: var(--gold-light); background: var(--gold-dim); letter-spacing: 0.02em;
+}
+
+table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+th { font-family: 'Dela Gothic One', 'Noto Serif SC', cursive; font-size: 0.75rem; letter-spacing: 0.03em; text-transform: uppercase; padding: 0.6rem 0.7rem; text-align: left; background: var(--gold-dim); color: var(--gold-light); border-bottom: 2px solid var(--gold); }
+td { padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--border); color: var(--text-dim); vertical-align: top; }
+tr:nth-child(even) td { background: rgba(0,0,0,0.015); }
+
+/* ── Timeline (shared by Study App and Workbook) ── */
+.timeline { position: relative; padding-left: 2rem; margin-bottom: 1.2rem; }
+.timeline::before { content:''; position:absolute; left:0.6rem; top:0; bottom:0; width:2px; background: linear-gradient(to bottom, var(--gold), transparent); }
+.tl-item { position: relative; margin-bottom: 1.1rem; }
+.tl-dot { position:absolute; left:-1.55rem; top:0.3rem; width:10px; height:10px; border-radius:50%; background:var(--gold); border:2px solid var(--ink); }
+.tl-dot.korea { background: var(--jade); }
+.tl-date { font-size: 0.68rem; color: var(--gold); margin-bottom:0.15rem; }
+.tl-date.korea { color: var(--jade-light); }
+.tl-title { font-size: 0.86rem; font-weight:600; color: var(--text); margin-bottom:0.15rem; }
+.tl-desc { font-size: 0.79rem; color: var(--text-dim); line-height:1.55; }
+
+body { background: #fff; color: #2a2418; }
+.controls { position: sticky; top:0; z-index:20; background: var(--ink); padding: 0.8rem 1.2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; }
+.ctrl-btn { background: var(--gold); color:#1a1408; border:none; padding:0.55rem 1.1rem; border-radius:8px; font-weight:700; cursor:pointer; font-family:'Inter',sans-serif; }
+.ctrl-label { color: var(--text-dim); font-size:0.75rem; }
+.ctrl-back { color: var(--gold-light); font-size:0.75rem; text-decoration:none; border:1px solid var(--border); padding:0.35rem 0.7rem; border-radius:20px; }
+.ctrl-back:hover { border-color: var(--gold); }
+
+.page {
+  max-width: 800px; margin: 1.5rem auto; background: #fdfaf1;
+  border: 1px solid #d8cfae; border-radius: 4px; padding: 2cm 2cm 1.4cm;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35); color: #2a2418;
+  overflow-wrap: break-word;
+  display: flex; flex-direction: column;
+}
+.page h2 { color: #6b4f1a; font-family:'Dela Gothic One','Noto Serif SC',cursive; }
+.page h4 { color: #6b4f1a; font-family:'Dela Gothic One','Noto Serif SC',cursive; }
+.page .keypoints { color:#4a4230; }
+.page table td { color:#4a4230; border-bottom-color:#e3d9b8; }
+.page table th { background:#eee0b8; color:#6b4f1a; border-bottom-color:#c9a84c; }
+
+.toc-cover { text-align:center; }
+.toc-cover .hanzi { font-size: 3rem; color: #b7472a; display:block; margin-bottom:0.4rem; }
+.toc-cover h1 { font-size: 1.9rem; color:#6b4f1a; margin-bottom:0.3rem; }
+.toc-cover .sub { color: #7a715e; font-size:0.9rem; margin-bottom:1.2rem; }
+.taiji-deco { width:70px; height:70px; margin: 0.6rem auto 1.4rem; color:#c9a84c; opacity:0.75; }
+
+.toc { display:flex; flex-direction:column; gap:0.5rem; border:1px solid #e3d9b8; border-radius:12px; padding:1rem 1.2rem; margin-top:1.2rem; background: rgba(201,168,76,0.06); }
+.toc-item { color: #4a4230; text-decoration:none; font-size:0.88rem; display:flex; gap:0.6rem; align-items:center; padding:0.3rem 0; border-bottom: 1px dashed #e3d9b8; }
+.toc-item:last-child { border-bottom:none; }
+.toc-item .hanzi { color: #b7472a; width:1.4rem; font-size:1.1rem; }
+
+.sg-head { display:flex; gap:1rem; align-items:center; margin-bottom:0.9rem; border-bottom:2px solid #c9a84c; padding-bottom:0.9rem; }
+.sg-hanzi { font-size: 2.4rem; color: #b7472a; }
+.sg-weeks { font-size:0.68rem; color:#8a7860; text-transform:uppercase; letter-spacing:0.06em; }
+.sg-subtitle { font-size:0.82rem; color:#5a5142; margin-top:0.15rem; }
+.sg-body { font-size:0.92rem; color: #4a4230; line-height:1.75; margin-bottom:1rem; }
+.sg-page h4 { font-size:0.82rem; color: #a66a15; text-transform:uppercase; letter-spacing:0.04em; margin-top:1rem; }
+
+.mnemonic-block { display:flex; align-items:center; gap:1.2rem; justify-content:center; margin: 1rem 0 1.2rem; }
+.sloth-icon { width:64px; height:64px; color:#a83a2e; flex-shrink:0; }
+.mnemonic-phrase { font-size:1.4rem; color:#a83a2e; text-align:center; line-height:1.35; }
+.mn-row { display:grid; grid-template-columns: repeat(7, 1fr); gap: 0.4rem; }
+.wuxing-page-wrap { max-width: 380px; margin: 0.8rem auto; text-align:center; }
+.wuxing-page-wrap svg { width: 100%; height: auto; }
+.wx-green { color:#3d5e34; font-weight:700; }
+.wx-red { color:#a83a2e; font-weight:700; }
+.mn-item { background:#fff; border:1px solid #e3d9b8; border-radius:8px; padding:0.5rem 0.2rem; text-align:center; page-break-inside: avoid; }
+.mn-word { font-size:0.68rem; font-weight:700; color:#a83a2e; }
+.mn-dyn { font-size:0.62rem; color:#4a4230; margin-top:0.15rem; }
+.mn-dates { font-size:0.55rem; color:#8a7860; margin-top:0.1rem; }
+
+.gloss-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 0.8rem 1.2rem; margin-top:0.6rem; }
+.gloss-item { border-left: 2px solid #2f8f72; padding-left: 0.7rem; page-break-inside: avoid; }
+.gloss-term { font-size: 1rem; color: #1f6e56; }
+.gloss-def { font-size: 0.78rem; color: #4a4230; margin-top:0.15rem; }
+
+.page-footer { margin-top:1.5rem; display:flex; justify-content:space-between; font-size:0.62rem; color:#9a8f6e; border-top:1px solid #d8cfae; padding-top:0.35rem; font-family:'JetBrains Mono',monospace; }
+
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { background:#fff; font-size: 14px; }
+  .controls { display:none; }
+  .page {
+    box-shadow:none; border-radius:0; max-width:100%; width:auto;
+    margin:0; padding:1.1cm 1.4cm; box-sizing: border-box;
+    min-height: 10.65in;
+    page-break-after: always; break-after: page;
+    display: block;
+  }
+  .page:last-child { page-break-after: avoid; break-after: avoid; }
+  .page-footer { margin-top: 1rem; }
+  .sg-head, .mn-item, .gloss-item, table, li { page-break-inside: avoid; }
+  h2, h4 { page-break-after: avoid; }
+  p { orphans: 3; widows: 3; }
+  .sg-head { padding-bottom: 0.5rem; margin-bottom: 0.55rem; }
+  .sg-hanzi { font-size: 2.3rem; }
+  .sg-page h2 { font-size: 1.35rem; }
+  .sg-subtitle { font-size: 0.88rem; }
+  .sg-weeks { font-size: 0.7rem; }
+  .sg-body { font-size: 0.88rem; line-height: 1.58; margin-bottom: 0.7rem; }
+  .sg-page h4 { font-size: 0.85rem; margin-top: 0.9rem; }
+  .keypoints { font-size: 0.86rem; margin: 0.45rem 0; }
+  .keypoints li { margin-bottom: 0.3rem; }
+  table { font-size: 0.85rem; }
+  td, th { padding: 0.45rem 0.6rem; }
+  .gloss-grid { gap: 0.7rem 1.1rem; }
+  .gloss-term { font-size: 1rem; }
+  .gloss-def { font-size: 0.82rem; }
+  .mnemonic-block { margin: 0.8rem 0 1.1rem; gap: 1rem; }
+  .sloth-icon { width: 60px; height: 60px; }
+  .mnemonic-phrase { font-size: 1.4rem; }
+  .mn-row { gap: 0.4rem; }
+  .mn-item { padding: 0.5rem 0.2rem; }
+  .page-footer { margin-top: 1rem; padding-top: 0.35rem; }
+  .toc-cover .taiji-deco { width: 46px; height: 46px; margin: 0.4rem auto 0.7rem; }
+  .toc-cover .hanzi { font-size: 2.2rem; }
+  .toc-cover h1 { font-size: 1.5rem; margin-bottom: 0.15rem; }
+  .toc-cover .sub { font-size: 0.78rem; margin-bottom: 0.6rem; }
+  .toc-cover .callout { padding: 0.6rem 0.8rem; margin-bottom: 0.6rem; }
+  .toc-cover .callout-body { font-size: 0.78rem; line-height: 1.4; }
+  .toc { padding: 0.7rem 0.9rem; margin-top: 0.6rem; gap: 0.3rem; }
+  .toc-item { font-size: 0.8rem; padding: 0.2rem 0; }
+  table { font-size: 0.78rem; }
+  td, th { padding: 0.35rem 0.5rem; }
+}
+@media (max-width:600px) {
+  .gloss-grid { grid-template-columns:1fr; }
+  .mn-row { grid-template-columns: repeat(2,1fr); }
+  .mnemonic-block { flex-direction:column; }
+}
+</style>
+<style id="pageSizeStyle">@page { size: letter; margin: 0.25cm; }</style>
+</head>
+<body>
+
+<div class="controls">
+  <button class="ctrl-btn" onclick="printAs('letter')">🖨️ Print — Letter</button>
+  <button class="ctrl-btn" onclick="printAs('remarkable')">📱 Print — reMarkable</button>
+  <span class="ctrl-label brush" style="font-size:1rem;color:var(--gold-light)">通貫 EAM301 Cram Sheet</span>
+  <a href="index.html" class="ctrl-back">← Back to Study App</a>
+</div>
+
+<div class="page toc-cover">
+  <span class="hanzi brush">通貫</span>
+  <h1>EAM301 · Cumulative Cram Sheet</h1>
+  <div class="sub">Numbers, Timeline & Cross-Chapter Threads — Last 24 Hours Before the Exam</div>
+  <svg class="taiji-deco" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="2"/><path d="M50,4 A46,46 0 0,1 50,96 A23,23 0 0,1 50,50 A23,23 0 0,0 50,4" fill="currentColor"/><circle cx="50" cy="27" r="6" fill="var(--ink,#fff)"/><circle cx="50" cy="73" r="6" fill="currentColor"/></svg>
+  <div class="callout exam" style="text-align:left">
+    <div class="callout-icon">⚖️</div>
+    <div class="callout-body"><strong>Why this document exists</strong>This is not a sixth copy of the chapter material — it's the one document built purely for the argument Choi keeps making across chapters: that nothing in EAM (point counts, meridian counts, formula counts) was fixed once and handed down. Everything on this sheet is a number or a thread that <em>crosses</em> chapter boundaries — the exact pattern he rewards on essay answers.</div>
+  </div>
+  <div class="toc">
+    <a href="#cs-timeline" class="toc-item"><span class="hanzi">一</span>Master Timeline — Dynasty by Dynasty, Number by Number</a>
+    <a href="#cs-numbers" class="toc-item"><span class="hanzi">二</span>Quick-Fact Numbers Table</a>
+    <a href="#cs-credit" class="toc-item"><span class="hanzi">三</span>Full-Credit Answer Phrases (Verbatim)</a>
+    <a href="#cs-threads" class="toc-item"><span class="hanzi">四</span>Cross-Chapter Connection Threads</a>
+  </div>
+</div>
+
+<div class="page sg-page" id="cs-timeline">
+  <div class="sg-head">
+    <span class="sg-hanzi brush">歷史</span>
+    <div><div class="sg-weeks mono">Han → Qing</div><h2>Master Timeline — Numbers Overlaid on Dynasties</h2></div>
+  </div>
+  <p class="sg-body">One line, all chapters. The pattern to notice: every "fixed" number in EAM history has an earlier and a later version — that's the argument, not a side detail.</p>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">~150 BC · Western Han</div><div class="tl-title">Mawangdui manuscripts</div><div class="tl-desc"><strong>11 meridians</strong>, moxibustion only (no needling), no named acupoints, only 2–3 meridians linked to organs.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Han Dynasty</div><div class="tl-title">Huang Di Nei Jing · Shen Nong Ben Cao Jing</div><div class="tl-desc">Nei Jing standardizes <strong>12 meridians</strong>. Shen Nong Ben Cao Jing catalogues <strong>365 medicinals</strong> (symbolic — days of the year) in three toxicity grades.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Jin Dynasty (~3rd c.)</div><div class="tl-title">ABC of Acupuncture (Huangfu Mi)</div><div class="tl-desc">Acupoint count: <strong>349</strong>.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Tang / Sui, ~1,500 yrs ago</div><div class="tl-title">Sun Simiao · Qian Jin Yao Fang</div><div class="tl-desc">First articulates the <strong>true point</strong> concept — points found by palpating tenderness/nodules, not measured. Root of Japanese Toyohari's live-point method today.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Song Dynasty</div><div class="tl-title">Ji Sheng Jing · Zheng Lei Ben Cao → Taiping Shenghui Fang</div><div class="tl-desc">Acupoints: <strong>359</strong>. Formula count escalates from ~2,800 (Zheng Lei Ben Cao) through ~5,000 (Qian Jin Yao Fang lineage) to <strong>17,800+</strong> (Taiping Shenghui Fang).</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Ming Dynasty</div><div class="tl-title">Reorganization + Ben Cao Gang Mu</div><div class="tl-desc">Individual organ-named points (liver point, kidney point) folded into the <strong>Bladder meridian</strong> — creates its unique forked pathway. Li Shizhen's Ben Cao Gang Mu expands the herbal canon to <strong>1,892 medicinals</strong> (+1,527 over Shen Nong Ben Cao Jing).</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Qing Dynasty</div><div class="tl-title">Acupoint count settles — sort of</div><div class="tl-desc">Point count around <strong>361</strong> — but even within Qing texts, the number still wasn't universal. Wen Bing Tiao Bian (Wu Jutong) formalizes the Four Levels (Wei/Qi/Ying/Xue) alongside the older Six Stages model.</div></div>
+    <div class="tl-item"><div class="tl-dot korea"></div><div class="tl-date">20th century</div><div class="tl-title">Standardization era</div><div class="tl-desc">"Traditional anatomical chart" is invented in China — never existed before this. 1959: China formalizes the national "TCM" curriculum (15 fused subjects). Point totals keep drifting (new points like the tongue point continue to be added even today).</div></div>
+  </div>
+  <div class="page-footer"><span>EAM301 · Cram Sheet</span><span>Timeline</span></div>
+</div>
+
+<div class="page sg-page" id="cs-numbers">
+  <div class="sg-head">
+    <span class="sg-hanzi brush">數字</span>
+    <div><div class="sg-weeks mono">Reference</div><h2>Quick-Fact Numbers Table</h2></div>
+  </div>
+  <p class="sg-body">Choi explicitly says these are testable — memorize the number <em>and</em> which text/era it belongs to, since he sometimes asks for the difference between two of them.</p>
+  <table>
+    <tr><th>What</th><th>Number</th><th>Source / Era</th></tr>
+    <tr><td>Meridians, earliest known count</td><td>11</td><td>Mawangdui manuscripts, ~150 BC</td></tr>
+    <tr><td>Meridians, standard count</td><td>12</td><td>Huang Di Nei Jing, Han Dynasty</td></tr>
+    <tr><td>Acupoints</td><td>365</td><td>Nei Jing — symbolic, matches days of the year</td></tr>
+    <tr><td>Acupoints</td><td>349</td><td>ABC of Acupuncture, Jin Dynasty</td></tr>
+    <tr><td>Acupoints</td><td>359</td><td>Ji Sheng Jing, Song Dynasty</td></tr>
+    <tr><td>Acupoints</td><td>361</td><td>Qing Dynasty texts (still not universal)</td></tr>
+    <tr><td>Herbs (medicinals)</td><td>365</td><td>Shen Nong Ben Cao Jing, Han Dynasty</td></tr>
+    <tr><td>Herbs (medicinals)</td><td>1,892</td><td>Ben Cao Gang Mu, Ming Dynasty (Li Shizhen)</td></tr>
+    <tr><td>Herb count difference</td><td>1,527</td><td>Ben Cao Gang Mu minus Shen Nong Ben Cao Jing</td></tr>
+    <tr><td>Formulas</td><td>~2,800</td><td>Zheng Lei Ben Cao</td></tr>
+    <tr><td>Formulas</td><td>~5,000</td><td>Qian Jin Yao Fang lineage</td></tr>
+    <tr><td>Formulas</td><td>17,800+</td><td>Taiping Shenghui Fang, Song Dynasty (government-published)</td></tr>
+    <tr><td>Ren-12 needling depth</td><td>8 poon</td><td>Ancient text — matches modern skin-to-peritoneum measurement in Asian population</td></tr>
+    <tr><td>TCM curriculum standardized</td><td>1959</td><td>China — 15 fused traditional + modern subjects</td></tr>
+  </table>
+  <div class="page-footer"><span>EAM301 · Cram Sheet</span><span>Numbers</span></div>
+</div>
+
+<div class="page sg-page" id="cs-credit">
+  <div class="sg-head">
+    <span class="sg-hanzi brush">滿分</span>
+    <div><div class="sg-weeks mono">Reference</div><h2>Full-Credit Answer Phrases (Verbatim)</h2></div>
+  </div>
+  <p class="sg-body">Choi occasionally tells the class exactly what phrase earns full credit. When he does, that phrasing — not a paraphrase — is the safest answer to write down.</p>
+  <div class="callout exam">
+    <div class="callout-icon">🌿</div>
+    <div class="callout-body"><strong>"How did Shen Nong discover medicinal herbs?"</strong>Full credit: <strong>"by testing and testing."</strong> (Week 5 — confirmed by Choi directly to a student in class.)</div>
+  </div>
+  <div class="callout exam">
+    <div class="callout-icon">🔢</div>
+    <div class="callout-body"><strong>"How many points from Song Dynasty Ji Sheng Jing?"</strong>Answer: <strong>359</strong>. (Week 5.)</div>
+  </div>
+  <div class="callout exam">
+    <div class="callout-icon">🐾</div>
+    <div class="callout-body"><strong>"Tuna vs. Sloth / Joker vs. Batman — which is yang?"</strong>No single fixed answer — the point is that yin-yang is relative to the comparison axis, never a binary category. (Week 4.)</div>
+  </div>
+  <div class="callout exam">
+    <div class="callout-icon">🖐️</div>
+    <div class="callout-body"><strong>"Is there a traditional anatomical chart in Chinese medicine history?"</strong>No — <strong>"there is no such a thing... this is something made in 20th century in China."</strong> (Week 5.)</div>
+  </div>
+  <div class="page-footer"><span>EAM301 · Cram Sheet</span><span>Full-Credit Phrases</span></div>
+</div>
+
+<div class="page sg-page" id="cs-threads">
+  <div class="sg-head">
+    <span class="sg-hanzi brush">連結</span>
+    <div><div class="sg-weeks mono">Reference</div><h2>Cross-Chapter Connection Threads</h2></div>
+  </div>
+  <p class="sg-body">Choi rewards essay answers that show a term or idea crossing chapter boundaries. These are the threads confirmed live in lecture so far — cite the earlier appearance when the topic resurfaces.</p>
+  <h4>Thread 1 — Six Stages / Gradation Terms</h4>
+  <p class="sg-body" style="margin-bottom:0.6rem">First named in <strong>Chapter 2</strong> (Week 4) as Xiao Yang / Tai Yang / Xiao Yin / Tai Yin — Choi's own yin-yang gradation vocabulary, planted before it's "supposed" to appear. Resurfaces formally in <strong>Chapter 3</strong> as Zhang Zhong Jing's Six Stages framework in the Shang Han Lun. Resurfaces again in <strong>Chapter 6</strong> as the older model being partly superseded by Wu Jutong's Four Levels (Wei/Qi/Ying/Xue) in Wen Bing theory.</p>
+  <h4>Thread 2 — "Nothing Was Fixed 2,000 Years Ago"</h4>
+  <p class="sg-body" style="margin-bottom:0.6rem">Runs through <strong>Chapter 1</strong> (Shen Nong myth = compressed empirical trial-and-error, not divine knowledge), <strong>Chapter 3</strong> (meridian count 11→12, acupoint count 365→349→359→361, Ming-era reorganization of the Bladder meridian), and <strong>Chapter 4</strong> ("TCM" itself is a 1959 standardization, not an ancient monolith). Same argument, four different data sets.</p>
+  <h4>Thread 3 — Analogical Inference (Bi Lei Qu Xiang)</h4>
+  <p class="sg-body" style="margin-bottom:0.6rem">Named explicitly in <strong>Chapter 2</strong> as AHM's core epistemological method. Applied concretely in <strong>Chapter 1</strong>'s Week 5 material to herbal medicine's origin story (sour taste → collects energy, by observed/verified effect) and to the worldwide doctrine-of-signatures pattern (kidney beans, walnuts). Same reasoning method, different chapters.</p>
+  <h4>Thread 4 — True Point / Live Point</h4>
+  <p class="sg-body">Concept originates with Sun Simiao in the <strong>Chapter 3</strong> Tang-Dynasty material, survives into modern Japanese Toyohari practice (Oshide/Sashite technique) — directly undercuts the "traditional anatomical chart" idea attacked in the same chapter's Week 5 material.</p>
+  <div class="page-footer"><span>EAM301 · Cram Sheet</span><span>Cross-Chapter Threads</span></div>
+</div>
+
+<script>
+function printAs(mode){
+  var sizes = { letter: '8.5in 11in', remarkable: '7.075in 9.433in' };
+  var margin = mode === 'remarkable' ? '0.2cm' : '0.25cm';
+  var el = document.getElementById('pageSizeStyle');
+  if (el) el.textContent = '@page { size: ' + sizes[mode] + '; margin: ' + margin + '; }';
+  setTimeout(function(){ window.print(); }, 60);
+}
+</script>
+</body>
+</html>
